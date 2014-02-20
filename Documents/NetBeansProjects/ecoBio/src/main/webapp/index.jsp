@@ -8,6 +8,6 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>CRICRI</h1>
+        <h1>CRICRI test</h1>
     </body>
 </html>
