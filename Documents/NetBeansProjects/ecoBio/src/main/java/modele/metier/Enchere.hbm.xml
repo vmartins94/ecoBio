@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 19 f?vr. 2014 17:18:59 by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="modele.metier.Enchere" table="enchere" catalog="ecobio">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="produit" class="modele.metier.Produit" fetch="select">
+            <column name="produitId" not-null="true" />
+        </many-to-one>
+        <property name="dateDebut" type="timestamp">
+            <column name="dateDebut" length="19" not-null="true" />
+        </property>
+        <property name="prix" type="float">
+            <column name="prix" precision="12" scale="0" not-null="true" />
+        </property>
+        <property name="quantite" type="java.lang.Integer">
+            <column name="quantite" />
+        </property>
+        <property name="dateFin" type="timestamp">
+            <column name="dateFin" length="19" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

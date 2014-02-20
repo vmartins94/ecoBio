@@ -1,0 +1,213 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<faces-config version="2.2"
+    xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
+
+   <!-- **********************************DECLARATION BEANS************************************* -->
+   <managed-bean>
+        <description>Utilisateur connecté</description>
+        <managed-bean-name>connectedUser</managed-bean-name>
+        <managed-bean-class>modele.metier.User</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+   </managed-bean>
+   <managed-bean>
+        <description>Nouvel utilisateur à insérer dans la DB</description>
+        <managed-bean-name>newUser</managed-bean-name>
+        <managed-bean-class>modele.metier.User</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+   </managed-bean>
+   <managed-bean>
+        <description>Panier de l'utilisateur</description>
+        <managed-bean-name>currentCart</managed-bean-name>
+        <managed-bean-class>manager.ManagerPanier</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+   </managed-bean>
+   <managed-bean>
+        <description>Nouvelle commande à insérer dans la DB</description>
+        <managed-bean-name>newCommande</managed-bean-name>
+        <managed-bean-class>modele.metier.Commande</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+   </managed-bean>
+   <!-- **********************************END DECLARATION BEANS********************************* -->
+   
+   <!-- **********************************DECLARATION MANAGER*********************************** -->
+   <managed-bean>
+        <description>ManagerUser</description>
+        <managed-bean-name>managerUser</managed-bean-name>
+        <managed-bean-class>manager.ManagerUser</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+        <managed-property>
+            <description>Association du panier current à l'utilisateur</description>
+            <property-name>monPanier</property-name>
+            <value>#{currentCart}</value>
+        </managed-property>
+   </managed-bean>
+   <managed-bean>
+        <description>ManagerProduit</description>
+        <managed-bean-name>managerProduit</managed-bean-name>
+        <managed-bean-class>manager.ManagerProduit</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+   </managed-bean>
+   <managed-bean>
+        <description>ManagerCommande</description>
+        <managed-bean-name>managerCommande</managed-bean-name>
+        <managed-bean-class>manager.ManagerCommande</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+        <managed-property>
+            <property-name>maCommande</property-name>
+            <value>#{newCommande}</value>
+        </managed-property>
+   </managed-bean>
+   <!-- **********************************END DECLARATION MANAGER******************************* -->
+   
+   <!-- **********************************NAVIGATION RULES************************************** -->
+   <navigation-rule>
+        <from-view-id>index.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>pageAchat</from-outcome>
+            <to-view-id>xhtml/pageAchat.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+   <!-- **********************************END NAVIGATION RULES********************************** -->
+   
+   <!-- **********************************MENU NAVIGATION*************************************** -->
+   <navigation-rule>
+        <from-view-id>xhtml/*</from-view-id>
+        <navigation-case>
+            <from-outcome>achat</from-outcome>
+            <to-view-id>xhtml/pageAchat.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>creerEvenement</from-outcome>
+            <to-view-id>xhtml/pageCreerEvenement.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>mesCommandes</from-outcome>
+            <to-view-id>xhtml/pageMesCommandes.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>monEspacePerso</from-outcome>
+            <to-view-id>xhtml/pageMonEspacePerso.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>monPanier</from-outcome>
+            <to-view-id>xhtml/pageMonPanier.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>participerEvenement</from-outcome>
+            <to-view-id>xhtml/pageParticiperEvenement.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>vente</from-outcome>
+            <to-view-id>xhtml/pageVente.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+   <!-- **********************************END MENU NAVIGATION*********************************** -->
+   
+   <!-- **********************************LOGIN NAVIGATION************************************** -->
+   <!-- Echec de la connexion : redirection vers la page index-->
+      <navigation-rule>
+       <from-view-id>xhtml/*</from-view-id>
+       <navigation-case>
+           <from-outcome>authentification_echec</from-outcome>
+           <to-view-id>index.xhtml</to-view-id>
+       </navigation-case>
+    </navigation-rule>
+    
+   <!-- USER ADMIN : peut importe ou il se trouve il sera rediriger vers la back office-->
+   <navigation-rule>
+       <from-view-id>xhtml/*</from-view-id>
+       <navigation-case>
+           <from-outcome>authentification_success_admin</from-outcome>
+           <to-view-id>xhtml/pageAdmin.xhtml</to-view-id>
+       </navigation-case>
+       <navigation-case>
+           <from-outcome>authentification_echec</from-outcome>
+           <to-view-id>index.xhtml</to-view-id>
+       </navigation-case>
+    </navigation-rule>
+   <!-- USER LAMBDA : il reste sur la page courante en cas de succes de connection -->
+   <!-- Connexion depuis la page achat -->
+   <navigation-rule>
+       <from-view-id>xhtml/pageAchat.xhtml</from-view-id>
+       <navigation-case>
+           <from-outcome>authentification_success_user</from-outcome>
+           <to-view-id>xhtml/pageAchat.xhtml</to-view-id>
+       </navigation-case>
+   </navigation-rule>
+   <!-- Connexion depuis la page création event -->
+    <navigation-rule>
+       <from-view-id>xhtml/pageCreerEvenement.xhtml</from-view-id>
+       <navigation-case>
+           <from-outcome>authentification_success_user</from-outcome>
+           <to-view-id>xhtml/pageCreerEvenement.xhtml</to-view-id>
+       </navigation-case>
+    </navigation-rule>
+   
+   <!-- **********************************END MENU NAVIGATION*********************************** -->
+   
+<!--     
+  <managed-bean>
+        <description>Commande</description>
+        <managed-bean-name>commande</managed-bean-name>
+        <managed-bean-class>modele.metier.Commande</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+   </managed-bean>     
+  <managed-bean>
+        <description>Produit</description>
+        <managed-bean-name>produit</managed-bean-name>
+        <managed-bean-class>modele.metier.Produit</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+   </managed-bean>     
+  <managed-bean>
+        <description>CommandeHasProduit</description>
+        <managed-bean-name>commandeHasProduit</managed-bean-name>
+        <managed-bean-class>modele.metier.CommandeHasProduit</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+   </managed-bean>     
+ CALL SERVICE 
+  <managed-bean>
+        <description>ManagerUser</description>
+        <managed-bean-name>ManagerUser</managed-bean-name>
+        <managed-bean-class>manager.ManagerUser</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+        <managed-property>
+            <property-name>user</property-name>
+            <value>#{user}</value>
+        </managed-property>
+   </managed-bean>
+  <managed-bean>
+        <description>ManagerProduit</description>
+        <managed-bean-name>ManagerProduit</managed-bean-name>
+        <managed-bean-class>manager.ManageProduit</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+        <managed-property>
+            <property-name>produit</property-name>
+            <value>#{produit}</value>
+        </managed-property>
+   </managed-bean>
+  <managed-bean>
+        <description>ManagerCommande</description>
+        <managed-bean-name>ManagerCommande</managed-bean-name>
+        <managed-bean-class>manager.ManagerCommande</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+        <managed-property>
+            <property-name>commande</property-name>
+            <value>#{commande}</value>
+        </managed-property>
+   </managed-bean>
+  <managed-bean>
+        <description>ManagerCommandeHasProduit</description>
+        <managed-bean-name>ManagerCommandeHasProduit</managed-bean-name>
+        <managed-bean-class>manager.ManagerCommandeHasProduit</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+        <managed-property>
+            <property-name>commandeProduit</property-name>
+            <value>#{commandeHasProduit}</value>
+        </managed-property>
+   </managed-bean>-->
+
+
+
+</faces-config>

@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        Menu
+        <h:form>
+            <h:commandLink value="Passer une commande" action="achat"/><br/>
+            <h:commandLink value="Créer un évènement" action="creerEvenement"/><br/>
+            <h:commandLink value="Consulter mes commandes" action="mesCommandes"/><br/>
+            <h:commandLink value="Mon espace perso" action="monEspacePerso"/><br/>
+            <h:commandLink value="Mon panier" action="monPanier"/><br/>
+            <h:commandLink value="Participer à un évènement" action="participerEvenement"/><br/>
+            <h:commandLink value="Ventre des produits" action="vente"/><br/>
+            <br/><br/>
+            
+            <h:outputText value="Login : "/>
+            <h:inputText value="#{connectedUser.login}"/><br/>
+            <h:outputText value="Mot de passe : "/>
+            <!--<h:inputText value="{connectedUser.password}"/><br/>-->
+            <h:commandButton value="Se connecter" action="#{managerUser.verifAuthentification()}"/>
+        </h:form>
+    </h:body>
+</html>
+

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 19 f?vr. 2014 17:18:59 by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="modele.metier.CommandeHasProduit" table="commande_has_produit" catalog="ecobio">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="produit" class="modele.metier.Produit" fetch="select">
+            <column name="produitId" not-null="true" />
+        </many-to-one>
+        <many-to-one name="commande" class="modele.metier.Commande" fetch="select">
+            <column name="commandeId" not-null="true" />
+        </many-to-one>
+        <property name="quantite" type="java.lang.Integer">
+            <column name="quantite" />
+        </property>
+    </class>
+</hibernate-mapping>

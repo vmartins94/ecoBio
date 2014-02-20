@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd">
+<hibernate-reverse-engineering>
+  <schema-selection match-catalog="ecobio"/>
+  <table-filter match-name="user"/>
+  <table-filter match-name="commande"/>
+  <table-filter match-name="enchere"/>
+  <table-filter match-name="etat"/>
+  <table-filter match-name="type"/>
+  <table-filter match-name="user_has_evenement"/>
+  <table-filter match-name="produit_has_user"/>
+  <table-filter match-name="saison"/>
+  <table-filter match-name="type_has_saison"/>
+  <table-filter match-name="produit"/>
+  <table-filter match-name="evenement"/>
+  <table-filter match-name="commande_has_produit"/>
+</hibernate-reverse-engineering>

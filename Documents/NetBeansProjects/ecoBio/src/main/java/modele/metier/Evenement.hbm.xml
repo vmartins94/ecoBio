@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 19 f?vr. 2014 17:18:59 by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="modele.metier.Evenement" table="evenement" catalog="ecobio">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="user" class="modele.metier.User" fetch="select">
+            <column name="userId" not-null="true" />
+        </many-to-one>
+        <property name="titre" type="string">
+            <column name="titre" length="45" not-null="true" />
+        </property>
+        <property name="cp" type="int">
+            <column name="cp" not-null="true" />
+        </property>
+        <property name="rue" type="string">
+            <column name="rue" length="45" not-null="true" />
+        </property>
+        <property name="prix" type="java.lang.Integer">
+            <column name="prix" />
+        </property>
+        <property name="nbParticipant" type="java.lang.Integer">
+            <column name="nbParticipant" />
+        </property>
+        <property name="description" type="string">
+            <column name="description" length="45" not-null="true" />
+        </property>
+        <property name="adresse" type="string">
+            <column name="adresse" length="45" not-null="true" />
+        </property>
+        <property name="ville" type="string">
+            <column name="ville" length="45" not-null="true" />
+        </property>
+        <property name="dateDebut" type="timestamp">
+            <column name="dateDebut" length="19" not-null="true" />
+        </property>
+        <property name="dateFin" type="timestamp">
+            <column name="dateFin" length="19" not-null="true" />
+        </property>
+        <set name="users" table="user_has_evenement" inverse="false" lazy="true" fetch="select">
+            <key>
+                <column name="evenementId" not-null="true" />
+            </key>
+            <many-to-many entity-name="modele.metier.User">
+                <column name="userId" not-null="true" />
+            </many-to-many>
+        </set>
+    </class>
+</hibernate-mapping>
