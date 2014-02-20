@@ -2,20 +2,107 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
-    <h:head>
-        <title>Facelet Title</title>
-    </h:head>
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+
     <h:body>
-        page achat
-        <ui:include src="menu.xhtml"/>
-        
-        <h:form>
-            <h:commandButton value="Press to Open Popup"  onclick="openWin('popupProduit.xhtml?type=unix')"/>
-            
-        <br/> 
-        
-        </h:form>
+
+        <ui:composition template="/xhtml/Layout.xhtml">
+            <ui:define name="content">
+
+                <div class="container">
+                    <h4 id="h4RechercheParCritere">Rechercher par critere :</h4>
+                    <div class ="row">
+                        <hr></hr>
+                        <div class="col-md-4">
+                            <h4 id="titreMetier">Categorie :</h4>
+
+                            <h:form>
+                                <h:selectManyCheckbox value="#{user.favNumber1}">
+                                    <f:selectItem itemValue="1" itemLabel="Number1 - 1" />
+                                    <f:selectItem itemValue="2" itemLabel="Number1 - 2" />
+                                    <f:selectItem itemValue="3" itemLabel="Number1 - 3" />
+                                    <f:selectItem itemValue="4" itemLabel="Number1 - 4" />
+                                    <f:selectItem itemValue="5" itemLabel="Number1 - 5" />
+                                </h:selectManyCheckbox>
+                            </h:form>
+
+                        </div>
+                        <div id="traitgauche"></div>
+                        <div class="col-md-4">
+                            <h4 id="titreMetier">Saison :</h4>
+                            <h:form>
+                                <h:selectManyCheckbox value="#{user.favNumber1}">
+                                    <f:selectItem itemValue="1" itemLabel="Number1 - 1" />
+                                    <f:selectItem itemValue="2" itemLabel="Number1 - 2" />
+                                    <f:selectItem itemValue="3" itemLabel="Number1 - 3" />
+                                    <f:selectItem itemValue="4" itemLabel="Number1 - 4" />
+                                    <f:selectItem itemValue="5" itemLabel="Number1 - 5" />
+                                </h:selectManyCheckbox>
+                            </h:form>
+                        </div>   
+
+                        <div id="traitgauche"></div>
+
+                        <h4 id="titreMetier">Prix :</h4>
+                        <h:form>
+                            <h3>Range Slider</h3>
+                            <h:panelGrid columns="1" style="margin-bottom:10px">                    
+                                <h:outputText id="displayRange" value="Between #{sliderBean.number6} and #{sliderBean.number7}"/>                    
+                                <p:slider for="txt6,txt7" display="displayRange" style="width:400px" range="true" 
+                                          displayTemplate="Between {min} and {max}"/>
+                            </h:panelGrid>
+                            <h:inputHidden id="txt6" value="#{sliderBean.number6}" />
+                            <h:inputHidden id="txt7" value="#{sliderBean.number7}" />
+
+                            <p:commandButton value="Submit" update="display" oncomplete="PF('dlg').show()" />
+
+                            <p:dialog header="Slider Values" widgetVar="dlg" 
+                                      showEffect="bounce" hideEffect="fade" width="200">
+
+                                <h:panelGrid id="display" columns="1" cellpadding="5">
+                                    <h:outputText value="Number 1: #{sliderBean.number1}" />
+
+                                    <h:outputText value="Number 2: #{sliderBean.number2}" />
+
+                                    <h:outputText value="Number 3: #{sliderBean.number3}" />
+
+                                    <h:outputText value="Number 4: #{sliderBean.number4}" />
+
+                                    <h:outputText value="Number 5: #{sliderBean.number5}" />
+
+                                    <h:outputText value="Range: [#{sliderBean.number6},#{sliderBean.number7}]" />
+                                </h:panelGrid>
+
+                            </p:dialog>
+                        </h:form>
+
+                    </div>
+                    <hr></hr>
+                </div>
+
+                <div class="serviceBlock">
+                    <div class="container">
+                        <h3>Les dernieres ventes de fruits et legumes</h3>
+                        <div class="row">
+                            <ui:repeat var="a" value="" varStatus="status">
+                                <div class="col-md-4">
+                                    <div class="clearfix">
+                                        <i class="fa fa-compress"></i>
+                                        <div class="desc">
+                                            <h4 id="titreMetier">Titre</h4>
+                                            <p>descriptif </p>
+                                        </div>
+                                    </div>
+                                </div> 
+                            </ui:repeat>
+                        </div>
+                    </div>
+                </div> 
+
+            </ui:define>
+        </ui:composition>
     </h:body>
 </html>
-

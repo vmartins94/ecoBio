@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      >
+    <body>
+	    <ui:composition>
+ 
+		   <!-- footerBottomSection -->	
+            <div class="footerBottomSection">
+                <div class="container">
+                    &copy; 2014, Allright reserved. <a href="#">Terms and Condition</a> | <a href="#">Privacy Policy</a> 
+                    <div class="pull-right"> <a href="index.html">ECO-BIO.COM</a></div>
+                </div>
+            </div>
+            <!-- JS Global Compulsory -->			
+            <script type="text/javascript" src="../assets/custom/js/jquery-1.8.2.min.js"></script>
+            <script type="text/javascript" src="../assets/custom/js/modernizr.custom.js"></script>		
+            <script type="text/javascript" src="../assets/bootstrap/js/bootstrap.min.js"></script>	
+
+            <!-- JS Implementing Plugins -->           
+            <script type="text/javascript" src="../assets/custom/js/jquery.flexslider-min.js"></script>
+            <script type="text/javascript" src="../assets/custom/js/modernizr.js"></script>
+            <script type="text/javascript" src="../assets/custom/js/jquery.cslider.js"></script> 
+            <script type="text/javascript" src="../assets/custom/js/back-to-top.js"></script>
+            <script type="text/javascript" src="../assets/custom/js/jquery.sticky.js"></script>
+
+            <!-- JS Page Level -->           
+            <script type="text/javascript" src="../assets/custom/js/app.js"></script>
+            <script type="text/javascript" src="../assets/custom/js/index.js"></script>
+
+
+            <script type="text/javascript">
+                jQuery(document).ready(function() {
+                    App.init();
+                    App.initSliders();
+                    Index.initParallaxSlider();
+                });
+            </script>
+
+ 
+	    </ui:composition>
+    </body>
+</html>

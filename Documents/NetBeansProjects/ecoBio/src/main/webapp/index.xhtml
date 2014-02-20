@@ -1,296 +1,144 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
-    <head>
-        <meta charset="utf-8"></meta>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
-        <meta name="description" content=""></meta>
-        <meta name="author" content=""></meta>
-        <title>Bootstrap business-plate template </title>
-
-        <!-- Bootstrap core CSS -->
-        <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet"></link>   
-
-        <!-- Just for debugging purposes. Don't actually copy this line! -->
-        <!--[if lt IE 9]><script src="themes/assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-
-        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!--[if lt IE 9]>
-          <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-          <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
-
-        <!-- CSS Implementing Plugins -->
-        <link rel="stylesheet" href="assets/custom/css/flexslider.css" type="text/css" media="screen"> </link>   	
-        <link rel="stylesheet" href="assets/custom/css/parallax-slider.css" type="text/css"></link>  
-        <link rel="stylesheet" href="assets/font-awesome-4.0.3/css/font-awesome.min.css" type="text/css"></link>  
-
-        <!-- Custom styles for this template -->
-
-        <link href="assets/custom/css/business-plate.css" rel="stylesheet"></link>  
-        <link rel="shortcut icon" href="assets/custom/ico/favicon.ico"></link>  
-    </head>
-    <body>
-
-
-        
-        
-                <h:form>
-            <!--<h:commandLink value="Acheter" action="pageAchat"/>-->
-            <h:commandButton value="Générer la facture" action="{managerCommande.genererFacture()}"/>
-              
-<!--                <h:outputLink id="lnk" value="#">  
-        <h:outputText value="PrimeFaces" />  
-    </h:outputLink>  
-    <p:tooltip for="lnk">  
-        <p:graphicImage value="/images/prime_logo.png" />  
-    </p:tooltip>  -->
-
-        </h:form>
-        
-        
-        
-        
-        
-        <!-- topHeaderSection -->	
-        <div class="topHeaderSection">		
-            <div class="header">			
-                <div class="container">
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        <a class="navbar-brand" href="index.html" id="nomSite">ECO-BIO.COM<br></br>Achat/vente de Fruits et Legumes<!--<img src="assets/custom/img/logo.png" alt="My web solution" />--></a>
-                    </div>
-                    <div class="navbar-collapse collapse">
-                        <ul class="nav navbar-nav">
-                        </ul>
-                        <ul class="nav navbar-nav navbar-right">
-                            <li class="active" ><a href="#" id="menu" >Accueil</a></li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="menu">Achat <b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#" >Achat fruits et legumes</a></li>
-                                    <li><a href="#">Achat par enchere fruits et legumes</a></li>
-                                    <li><a href="#">Achat produits defectueux</a></li>
-                                    <li><a href="#">Achat par enchere produits defectueux</a></li>
-                                </ul>
-                            </li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="menu">Vente <b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#">Vendre fruits et legumes</a></li>
-                                    <li><a href="#">Vendre par enchere fruits et legumes</a></li>
-                                    <li><a href="#">Vendre produits defectueux</a></li>
-                                    <li><a href="#">Vendre par enchere produits defectueux</a></li>
-                                </ul>
-                            </li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="menu">Evenement <b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#">Creer un evenement</a></li>
-                                    <li><a href="#">Rejoindre un evenement</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#contact" id="menu">Contact</a></li>
-                            <li><a href="#contact" id="menu">Login</a></li>
-                        </ul>                     
-                    </div><!--/.nav-collapse -->
-                </div>
-            </div>
-        </div>
-
-        <!-- bannerSection -->
-        <div class="bannerSection">
-            <div class="slider-inner">
-                <div id="da-slider" class="da-slider">
-                    <div class="da-slide">
-                        <h2><i>Vente</i>  <i>Achat </i>  <i>Fruits et Legumes</i></h2>
-                        <p><i>Achat direct</i>  <i>Enchere</i>  <i>Livraison</i></p>
-                        <div class="da-img"><img src="assets/custom/img/fruit1.png" alt="" /></div>
-                    </div>
-
-                    <div class="da-slide">
-                        <h2><i>Participer aux Evenements</i>  <i> </i>  <i></i></h2>
-                        <p><i>Marche</i>  <i>Porte ouverte</i></p>
-                        <div class="da-img"><img src="assets/custom/img/evenement.png" alt="" /></div>
-                    </div>
-
-
-
-                    <div class="da-slide">
-                        <h2><i>Achat vente de produit defectueux</i> </h2>
-                        <p><i>Eviter le gachis</i> <i>Ecologique /Economique</i></p>
-                        <div class="da-img">
-                            <img src="assets/custom/img/ecologie2.png" alt="" />
-                        </div>
-                    </div>
-                    <nav class="da-arrows">
-                        <span class="da-arrows-prev"></span>
-                        <span class="da-arrows-next"></span>		
-                    </nav>
-                </div><!--/da-slider-->
-            </div><!--/slider-->
-            <!--=== End Slider ===-->
-
-
-        </div>
-        <!-- highlightSection -->
-        <!--   <div class="highlightSection">
-               <div class="container">
-                   <div class="row">
-                       <div class="col-md-8">
-                           <h2>Bienvuenu sur le site ECO-BIO<br></br><br></br>
-                               *Ce site est à destination des agriculteurs / particuliers voulant vendre des fruits et légumes
-                               <br></br><br></br>*Et bien entendu, à toutes personnes souhaitant acheter ces aliments
-                               <br></br><br></br>*Ainsi qu'a l'achat/vente de produits défectueux</h2>
-                      
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
    
-                       </div>
-                       <div class="col-md-4 align-right"> 
-                           <h3></h3>
-                           <a class="btn btn btn-brand" href="#">read more</a>
-   
-                       </div>
-                   </div>
-               </div>
-           </div> -->
-        <div class="serviceBlock">
-            <div class="container">
-                <h3>Les dernieres ventes de fruits et legumes</h3>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="clearfix">
-                            <i class="fa fa-compress"></i>
-                            <div class="desc">
-                                <h4 id="titreMetier">Titre vente</h4>
-                                <p>Descriptif vente </p>
+    <h:body>
+        <ui:composition template="/xhtml/LayoutWithHeaderIndex.xhtml">
+            <ui:define name="content">
+                <!-- bannerSection -->
+                <div class="bannerSection">
+                    <div class="slider-inner">
+                        <div id="da-slider" class="da-slider">
+                            <div class="da-slide">
+                                <h2><i>Vente</i>  <i>Achat </i>  <i>Fruits et Legumes</i></h2>
+                                <p><i>Achat direct</i>  <i>Enchere</i>  <i>Livraison</i></p>
+                                <div class="da-img"><img src="assets/custom/img/fruit1.png" alt="" /></div>
+                            </div>
+
+                            <div class="da-slide">
+                                <h2><i>Participer aux Evenements</i>  <i> </i>  <i></i></h2>
+                                <p><i>Marche</i>  <i>Porte ouverte</i></p>
+                                <div class="da-img"><img src="assets/custom/img/evenement.png" alt="" /></div>
+                            </div>
+
+                            <div class="da-slide">
+                                <h2><i>Achat vente de produit defectueux</i> </h2>
+                                <p><i>Eviter le gachis</i> <i>Ecologique /Economique</i></p>
+                                <div class="da-img">
+                                    <img src="assets/custom/img/ecologie2.png" alt="" />
+                                </div>
+                            </div>
+                            <nav class="da-arrows">
+                                <span class="da-arrows-prev"></span>
+                                <span class="da-arrows-next"></span>		
+                            </nav>
+                        </div><!--/da-slider-->
+                    </div><!--/slider-->
+                    <!--=== End Slider ===-->
+                </div>
+
+                <div class="serviceBlock">
+                    <div class="container">
+                        <h3>Les dernieres ventes de fruits et legumes</h3>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="clearfix">
+                                    <i class="fa fa-compress"></i>
+                                    <div class="desc">
+                                        <h4 id="titreMetier">Titre vente</h4>
+                                        <p>Descriptif vente </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="clearfix">
+                                    <i class="fa fa-code"></i>
+                                    <div class="desc">
+                                        <h4 id="titreMetier">Titre vente</h4>
+                                        <p>Descriptif vente </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="clearfix">
+                                    <i class="fa fa-thumbs-up"></i>
+                                    <div class="desc">
+                                        <h4 id="titreMetier">Titre vente</h4>
+                                        <p>Descriptif vente </p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="clearfix">
-                            <i class="fa fa-code"></i>
-                            <div class="desc">
-                                <h4 id="titreMetier">Titre vente</h4>
-                                <p>Descriptif vente </p>
+                        <hr>
+                            <div class="row">
+                                <h3>Les dernieres ventes de produits defecteux </h3>
+                                <div class="col-md-4">
+                                    <div class="clearfix">
+                                        <i class="fa fa-desktop"></i>
+                                        <div class="desc">
+                                            <h4 id="titreMetier">Titre vente</h4>
+                                            <p>Descriptif vente </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="clearfix">
+                                        <i class="fa fa-html5"></i> 
+                                        <div class="desc">
+                                            <h4 id="titreMetier">Titre vente</h4>
+                                            <p>Descriptif vente </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="clearfix">
+                                        <i class="fa fa-css3"></i>
+                                        <div class="desc">
+                                            <h4 id="titreMetier">Titre vente</h4>
+                                            <p>Descriptif vente </p>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="clearfix">
-                            <i class="fa fa-thumbs-up"></i>
-                            <div class="desc">
-                                <h4 id="titreMetier">Titre vente</h4>
-                                <p>Descriptif vente </p>
+                        </hr>
+                        <hr></hr>
+                        <div class="row">
+                            <h3>Les derniers evenements</h3>
+                            <div class="col-md-4">
+                                <div class="clearfix">
+                                    <i class="fa fa-github"></i>
+                                    <div class="desc">
+                                        <h4 id="titreMetier">Titre evenement</h4>
+                                        <p>Descriptif evenement</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="clearfix">
+                                    <i class="fa fa-android"></i>
+                                    <div class="desc">
+                                        <h4 id="titreMetier">Titre evenement</h4>
+                                        <p>Descriptif evenement</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="clearfix">
+                                    <i class="fa fa-tablet"></i>
+                                    <div class="desc">
+                                        <h4 id="titreMetier">Titre evenement</h4>
+                                        <p>Descriptif evenement</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <hr>
-                    <div class="row">
-                        <h3>Les dernieres ventes de produits defecteux </h3>
-                        <div class="col-md-4">
-                            <div class="clearfix">
-                                <i class="fa fa-desktop"></i>
-                                <div class="desc">
-                                    <h4 id="titreMetier">Titre vente</h4>
-                                    <p>Descriptif vente </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="clearfix">
-                                <i class="fa fa-html5"></i> 
-                                <div class="desc">
-                                    <h4 id="titreMetier">Titre vente</h4>
-                                    <p>Descriptif vente </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="clearfix">
-                                <i class="fa fa-css3"></i>
-                                <div class="desc">
-                                    <h4 id="titreMetier">Titre vente</h4>
-                                    <p>Descriptif vente </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </hr>
-                <hr></hr>
-                <div class="row">
-                    <h3>Les derniers evenements</h3>
-                    <div class="col-md-4">
-                        <div class="clearfix">
-                            <i class="fa fa-github"></i>
-                            <div class="desc">
-                                <h4 id="titreMetier">Titre evenement</h4>
-                                <p>Descriptif evenement</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="clearfix">
-                            <i class="fa fa-android"></i>
-                            <div class="desc">
-                                <h4 id="titreMetier">Titre evenement</h4>
-                                <p>Descriptif evenement</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="clearfix">
-                            <i class="fa fa-tablet"></i>
-                            <div class="desc">
-                                <h4 id="titreMetier">Titre evenement</h4>
-                                <p>Descriptif evenement</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- footerBottomSection -->	
-	<div class="footerBottomSection">
-		<div class="container">
-			&copy; 2014, Allright reserved. <a href="#">Terms and Condition</a> | <a href="#">Privacy Policy</a> 
-			<div class="pull-right"> <a href="index.html">ECO-BIO.COM</a></div>
-		</div>
-	</div>
-        <!-- JS Global Compulsory -->			
-        <script type="text/javascript" src="assets/custom/js/jquery-1.8.2.min.js"></script>
-        <script type="text/javascript" src="assets/custom/js/modernizr.custom.js"></script>		
-        <script type="text/javascript" src="assets/bootstrap/js/bootstrap.min.js"></script>	
-
-        <!-- JS Implementing Plugins -->           
-        <script type="text/javascript" src="assets/custom/js/jquery.flexslider-min.js"></script>
-        <script type="text/javascript" src="assets/custom/js/modernizr.js"></script>
-        <script type="text/javascript" src="assets/custom/js/jquery.cslider.js"></script> 
-        <script type="text/javascript" src="assets/custom/js/back-to-top.js"></script>
-        <script type="text/javascript" src="assets/custom/js/jquery.sticky.js"></script>
-
-        <!-- JS Page Level -->           
-        <script type="text/javascript" src="assets/custom/js/app.js"></script>
-        <script type="text/javascript" src="assets/custom/js/index.js"></script>
-
-
-        <script type="text/javascript">
-            jQuery(document).ready(function() {
-                App.init();
-                App.initSliders();
-                Index.initParallaxSlider();
-            });
-        </script>
-    </body>
+            </ui:define>
+        </ui:composition>
+    </h:body>
 </html>
 
