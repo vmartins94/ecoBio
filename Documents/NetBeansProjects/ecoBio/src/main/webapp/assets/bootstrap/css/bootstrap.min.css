@@ -336,12 +336,32 @@ html {
 
 }
 
+#h4RechercheParCritere{
+
+    margin-top: 50px;
+}
+
 body {
     font-family:Helvetica,Arial,sans-serif;
     font-size: 14px;
     line-height: 1.428571429;
     color: #333;
     background-color: #fff;
+}
+
+#traitgauche
+{
+    border : 1px solid #eee;
+    float :left;
+    margin-right: 20px;
+    margin-left: 20px;
+    height: 100px;
+}
+#selection tr{
+
+    float: left;
+    width: 33%;
+
 }
 
 input,
@@ -444,11 +464,40 @@ h6,
 }
 
 #titreMetier{
-    
+
     font-family: Helvetica,Arial,sans-serif;
-    
-    
-    
+
+
+
+}
+// #lienAchat{
+//    text-decoration: none;
+//  font-family: Touch Of Nature Normal;
+
+//}
+
+.lienAchat{
+
+    margin-left: 20px;
+    font-family: Helvetica,Arial,sans-serif;
+    color :#333;
+
+}
+
+.lienAchat:hover{
+
+
+    text-decoration: none;
+
+}
+
+#lesCriteres{
+
+    position: relative;
+    right: 0;
+    top: 50%;
+    width: 8em;
+    margin-top: -2.5em;
 }
 
 
