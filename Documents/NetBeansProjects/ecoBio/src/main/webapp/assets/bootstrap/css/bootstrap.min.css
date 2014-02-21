@@ -364,11 +364,34 @@ body {
 
 }
 
+.menuLogin{
+
+    margin-left: 8px;
+    padding-top: 6px;
+    //margin-bottom: 20px;
+    font-family: Touch Of Nature Normal;
+    color :#888;
+
+}
+
+.menuLogin:hover{
+
+    text-decoration: none;
+
+}
+
 #pageEspacePerso{
-    
-      background-color: #fff;
-    
-    
+
+    background-color: #fff;
+    width:80%;
+    height: 200px;
+    padding-bottom: 20px;
+    padding-top: 50px;
+    position: relative;
+    margin: 0 auto;
+    overflow:hidden;  
+    box-shadow: 3px 3px 3px rgba(239,234,194,10), -2px 1px #fff;
+    background: #efeac2
 }
 
 input,
