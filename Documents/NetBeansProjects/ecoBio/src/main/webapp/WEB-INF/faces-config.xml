@@ -65,7 +65,7 @@
     <navigation-rule>
         <from-view-id>index.xhtml</from-view-id>
         <navigation-case>
-            <from-outcome>pageAchat</from-outcome>
+            <from-outcome>achat</from-outcome>
             <to-view-id>xhtml/pageAchat.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
