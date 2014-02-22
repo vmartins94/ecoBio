@@ -177,12 +177,15 @@ public class ManagerCommande implements IManager<Commande>, Serializable {
         //Recuperation des objets
         Produit produit = (Produit) daoP.selectById(5);
         maCommande = dao.selectById(2);
-        // creation objet
+        // creation objet et insertion dans la base  ok 
         CommandeHasProduit commandehasProduit = new CommandeHasProduit(produit, maCommande, 2);
+        dao.insertTableAsso(commandehasProduit);
+        
         // creation d'une liste de type commandeHasProduit
         Set<CommandeHasProduit> commandeHasProduit = new HashSet<CommandeHasProduit>();
         commandeHasProduit.add(commandehasProduit);
         //mise a jour de la commande
+        maCommande.setPrixTotal(Float.valueOf(25));
         maCommande.setCommandeHasProduits(commandeHasProduit);
         dao.update(maCommande);
 
