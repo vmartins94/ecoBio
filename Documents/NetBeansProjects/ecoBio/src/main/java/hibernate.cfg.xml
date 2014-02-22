@@ -6,15 +6,15 @@
     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/ecobio?zeroDateTimeBehavior=convertToNull</property>
     <property name="hibernate.connection.username">root</property>
-    <mapping resource="modele/metier/CommandeHasProduit.hbm.xml"/>
-    <mapping resource="modele/metier/Commande.hbm.xml"/>
-    <mapping resource="modele/metier/Enchere.hbm.xml"/>
-    <mapping resource="modele/metier/User.hbm.xml"/>
     <mapping resource="modele/metier/Produit.hbm.xml"/>
-    <mapping resource="modele/metier/Evenement.hbm.xml"/>
+    <mapping resource="modele/metier/Enchere.hbm.xml"/>
+    <mapping resource="modele/metier/Commande.hbm.xml"/>
+    <mapping resource="modele/metier/CommandeHasProduit.hbm.xml"/>
     <mapping resource="modele/metier/Type.hbm.xml"/>
+    <mapping resource="modele/metier/Evenement.hbm.xml"/>
     <mapping resource="modele/metier/ProduitHasUser.hbm.xml"/>
-    <mapping resource="modele/metier/Etat.hbm.xml"/>
     <mapping resource="modele/metier/Saison.hbm.xml"/>
+    <mapping resource="modele/metier/User.hbm.xml"/>
+    <mapping resource="modele/metier/Etat.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

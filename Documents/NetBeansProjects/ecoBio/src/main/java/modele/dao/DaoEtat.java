@@ -8,43 +8,23 @@ package modele.dao;
 import hibernate.util.NewHibernateUtil;
 import java.util.ArrayList;
 import java.util.List;
-import modele.metier.User;
-import org.hibernate.Criteria;
+import modele.metier.Etat;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.criterion.Restrictions;
 
 /**
  *
- * @author Virginie
+ * @author v.martins
  */
-public class DaoUser implements IDao<User> {
+public class DaoEtat implements IDao<Etat> {
 
     @Override
-    public List<User> selectAll() {
-        Session session = NewHibernateUtil.getSessionFactory().openSession();
-        List<User> listeUser = new ArrayList();
-        try {
-            Transaction tx = session.beginTransaction();
-            Query queryAllUser = session.createQuery("From User");
-            listeUser = queryAllUser.list();
-
-        } catch (HibernateException e) {
-            e.getMessage();
-        } finally {
-            session.close();
-        }
-        return listeUser;
-    }
-
-    @Override
-    public boolean insert(User objet) {
+    public boolean insert(Etat objet) {
         boolean execution = false;
         Session session = NewHibernateUtil.getSessionFactory().openSession();
         try {
-
             Transaction tx = session.beginTransaction();
             session.save(objet);
             tx.commit();
@@ -55,20 +35,49 @@ public class DaoUser implements IDao<User> {
             session.close();
         }
         return execution;
-
     }
 
     @Override
-    public boolean update(User objet) {
+    public List<Etat> selectAll() {
+        Session session = NewHibernateUtil.getSessionFactory().openSession();
+        List<Etat> listeEtat = new ArrayList<Etat>();
+        try {
+            Transaction tx = session.beginTransaction();
+            Query queryEtat = session.createQuery("From Etat");
+            listeEtat = queryEtat.list();
+        } catch (HibernateException e) {
+            e.getMessage();
+        } finally {
+            session.close();
+        }
+        return listeEtat;
+    }
 
+    @Override
+    public Etat selectById(int id) {
+        Session session = NewHibernateUtil.getSessionFactory().openSession();
+        Etat etat = null;
+        try {
+            Transaction tx = session.beginTransaction();
+            Query queryEtat = session.createQuery("From Etat where id=?");
+            queryEtat.setInteger(0, id);
+            etat = (Etat) queryEtat.uniqueResult();
+        } catch (HibernateException e) {
+            e.getMessage();
+        } finally {
+            session.close();
+        }
+        return etat;
+    }
+
+    @Override
+    public boolean update(Etat objet) {
         boolean execution = false;
         Session session = NewHibernateUtil.getSessionFactory().openSession();
         try {
-
             Transaction tx = session.beginTransaction();
             session.update(objet);
             tx.commit();
-            execution = true;
         } catch (HibernateException e) {
             e.getMessage();
         } finally {
@@ -79,25 +88,7 @@ public class DaoUser implements IDao<User> {
     }
 
     @Override
-    public User selectById(int id) {
-        Session session =  NewHibernateUtil.getSessionFactory().openSession();
-        User user = null;
-        try {
-            Transaction tx = session.beginTransaction();
-            Query queryUser = session.createQuery("From User where id=:id");
-            queryUser.setInteger("id", id);
-            user = (User) queryUser.uniqueResult();
-        } catch (HibernateException e) {
-            e.getMessage();
-        } finally {
-            session.close();
-        }
-
-        return user;
-    }
-
-    @Override
-    public boolean delete(User objet) {
+    public boolean delete(Etat objet) {
         boolean execution = false;
         Session session = NewHibernateUtil.getSessionFactory().openSession();
         try {
@@ -112,29 +103,6 @@ public class DaoUser implements IDao<User> {
         }
         return execution;
 
-    }
-
-    /**
-     * Cette méthode permet de récuperer un utilisateur en fonction d'un mot de
-     * passe et login
-     *
-     * @param user
-     * @return
-     */
-    public User getUserByLoginPassword(User user) {
-
-        Session session = NewHibernateUtil.getSessionFactory().openSession();
-        try{
-        Transaction tx = session.beginTransaction();
-        Criteria criteria = session.createCriteria(User.class);
-        criteria.add(Restrictions.eq("login", user)).add(Restrictions.eq("password", user));
-        user = (User) criteria.uniqueResult();
-        }catch(HibernateException e){
-            e.getMessage();
-        }finally{
-            session.close();
-        }
-        return user;
     }
 
 }

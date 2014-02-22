@@ -16,8 +16,8 @@ public interface IDao<T> {
     
     public boolean insert(T objet);
     public List<T> selectAll();
-    public List<T> selectById();
+    public T selectById(int id);
     public boolean update(T objet);
-    public boolean delete();
+    public boolean delete(T objet);
     
 }

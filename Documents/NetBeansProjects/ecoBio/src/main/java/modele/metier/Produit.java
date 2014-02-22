@@ -1,5 +1,7 @@
 package modele.metier;
-// Generated 19 fevr. 2014 17:18:57 by Hibernate Tools 3.6.0
+
+// Generated 22 fevr. 2014 10:53:47 by Hibernate Tools 3.6.0
+
 
 
 import java.util.HashSet;
@@ -14,32 +16,32 @@ public class Produit  implements java.io.Serializable {
      private Integer id;
      private Type type;
      private String nom;
-     private String prix;
+     private int prix;
      private String image;
      private String description;
      private Set produitHasUsers = new HashSet(0);
-     private Set commandeHasProduits = new HashSet(0);
      private Set encheres = new HashSet(0);
+     private Set commandeHasProduits = new HashSet(0);
 
     public Produit() {
     }
 
 	
-    public Produit(Type type, String prix, String image, String description) {
+    public Produit(Type type, int prix, String image, String description) {
         this.type = type;
         this.prix = prix;
         this.image = image;
         this.description = description;
     }
-    public Produit(Type type, String nom, String prix, String image, String description, Set produitHasUsers, Set commandeHasProduits, Set encheres) {
+    public Produit(Type type, String nom, int prix, String image, String description, Set produitHasUsers, Set encheres, Set commandeHasProduits) {
        this.type = type;
        this.nom = nom;
        this.prix = prix;
        this.image = image;
        this.description = description;
        this.produitHasUsers = produitHasUsers;
-       this.commandeHasProduits = commandeHasProduits;
        this.encheres = encheres;
+       this.commandeHasProduits = commandeHasProduits;
     }
    
     public Integer getId() {
@@ -63,11 +65,11 @@ public class Produit  implements java.io.Serializable {
     public void setNom(String nom) {
         this.nom = nom;
     }
-    public String getPrix() {
+    public int getPrix() {
         return this.prix;
     }
     
-    public void setPrix(String prix) {
+    public void setPrix(int prix) {
         this.prix = prix;
     }
     public String getImage() {
@@ -91,19 +93,19 @@ public class Produit  implements java.io.Serializable {
     public void setProduitHasUsers(Set produitHasUsers) {
         this.produitHasUsers = produitHasUsers;
     }
-    public Set getCommandeHasProduits() {
-        return this.commandeHasProduits;
-    }
-    
-    public void setCommandeHasProduits(Set commandeHasProduits) {
-        this.commandeHasProduits = commandeHasProduits;
-    }
     public Set getEncheres() {
         return this.encheres;
     }
     
     public void setEncheres(Set encheres) {
         this.encheres = encheres;
+    }
+    public Set getCommandeHasProduits() {
+        return this.commandeHasProduits;
+    }
+    
+    public void setCommandeHasProduits(Set commandeHasProduits) {
+        this.commandeHasProduits = commandeHasProduits;
     }
 
 
