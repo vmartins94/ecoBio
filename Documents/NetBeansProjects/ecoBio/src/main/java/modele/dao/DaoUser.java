@@ -5,7 +5,7 @@
  */
 package modele.dao;
 
-import hibernate.util.NewHibernateUtil;
+import hibernate.util.HibernateUtil;
 import java.util.ArrayList;
 import java.util.List;
 import modele.metier.User;
@@ -24,7 +24,7 @@ public class DaoUser implements IDao<User> {
 
     @Override
     public List<User> selectAll() {
-        Session session = NewHibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.getSessionFactory().openSession();
         List<User> listeUser = new ArrayList();
         try {
             Transaction tx = session.beginTransaction();
@@ -42,7 +42,7 @@ public class DaoUser implements IDao<User> {
     @Override
     public boolean insert(User objet) {
         boolean execution = false;
-        Session session = NewHibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.getSessionFactory().openSession();
         try {
 
             Transaction tx = session.beginTransaction();
@@ -62,7 +62,7 @@ public class DaoUser implements IDao<User> {
     public boolean update(User objet) {
 
         boolean execution = false;
-        Session session = NewHibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.getSessionFactory().openSession();
         try {
 
             Transaction tx = session.beginTransaction();
@@ -80,7 +80,7 @@ public class DaoUser implements IDao<User> {
 
     @Override
     public User selectById(int id) {
-        Session session =  NewHibernateUtil.getSessionFactory().openSession();
+        Session session =  HibernateUtil.getSessionFactory().openSession();
         User user = null;
         try {
             Transaction tx = session.beginTransaction();
@@ -99,7 +99,7 @@ public class DaoUser implements IDao<User> {
     @Override
     public boolean delete(User objet) {
         boolean execution = false;
-        Session session = NewHibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.getSessionFactory().openSession();
         try {
             Transaction tx = session.beginTransaction();
             session.delete(objet);
@@ -123,7 +123,7 @@ public class DaoUser implements IDao<User> {
      */
     public User getUserByLoginPassword(User user) {
 
-        Session session = NewHibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.getSessionFactory().openSession();
         try{
         Transaction tx = session.beginTransaction();
         Criteria criteria = session.createCriteria(User.class);

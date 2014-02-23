@@ -5,7 +5,7 @@
  */
 package modele.dao;
 
-import hibernate.util.NewHibernateUtil;
+import hibernate.util.HibernateUtil;
 import java.util.ArrayList;
 import java.util.List;
 import modele.metier.Etat;
@@ -23,7 +23,7 @@ public class DaoEtat implements IDao<Etat> {
     @Override
     public boolean insert(Etat objet) {
         boolean execution = false;
-        Session session = NewHibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.getSessionFactory().openSession();
         try {
             Transaction tx = session.beginTransaction();
             session.save(objet);
@@ -39,7 +39,7 @@ public class DaoEtat implements IDao<Etat> {
 
     @Override
     public List<Etat> selectAll() {
-        Session session = NewHibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.getSessionFactory().openSession();
         List<Etat> listeEtat = new ArrayList<Etat>();
         try {
             Transaction tx = session.beginTransaction();
@@ -55,7 +55,7 @@ public class DaoEtat implements IDao<Etat> {
 
     @Override
     public Etat selectById(int id) {
-        Session session = NewHibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.getSessionFactory().openSession();
         Etat etat = null;
         try {
             Transaction tx = session.beginTransaction();
@@ -73,7 +73,7 @@ public class DaoEtat implements IDao<Etat> {
     @Override
     public boolean update(Etat objet) {
         boolean execution = false;
-        Session session = NewHibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.getSessionFactory().openSession();
         try {
             Transaction tx = session.beginTransaction();
             session.update(objet);
@@ -90,7 +90,7 @@ public class DaoEtat implements IDao<Etat> {
     @Override
     public boolean delete(Etat objet) {
         boolean execution = false;
-        Session session = NewHibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.getSessionFactory().openSession();
         try {
             Transaction tx = session.beginTransaction();
             session.delete(objet);

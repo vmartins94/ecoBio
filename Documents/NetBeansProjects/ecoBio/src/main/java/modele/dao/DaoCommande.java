@@ -5,7 +5,7 @@
  */
 package modele.dao;
 
-import hibernate.util.NewHibernateUtil;
+import hibernate.util.HibernateUtil;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -29,7 +29,7 @@ public class DaoCommande implements IDao<Commande> {
 
     @Override
     public List<Commande> selectAll() {
-        Session session = NewHibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.getSessionFactory().openSession();
         List<Commande> listeCommande = new ArrayList();
         try {
             Transaction tx = session.beginTransaction();
@@ -46,7 +46,7 @@ public class DaoCommande implements IDao<Commande> {
 
     @Override
     public boolean insert(Commande commande) {
-        Session session = NewHibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.getSessionFactory().openSession();
         boolean execution = false;
         try {
 
@@ -65,7 +65,7 @@ public class DaoCommande implements IDao<Commande> {
     @Override
     public boolean update(Commande objet) {
         boolean execution = false;
-        Session session =  NewHibernateUtil.getSessionFactory().openSession();
+        Session session =  HibernateUtil.getSessionFactory().openSession();
         try {
             Transaction tx = session.beginTransaction();
             session.update(objet);
@@ -81,7 +81,7 @@ public class DaoCommande implements IDao<Commande> {
 
     @Override
     public Commande selectById(int id) {
-        Session session = NewHibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.getSessionFactory().openSession();
         Commande commande = null;
         try {
 
@@ -101,7 +101,7 @@ public class DaoCommande implements IDao<Commande> {
     @Override
     public boolean delete(Commande objet) {
         boolean execution = false;
-        Session session = NewHibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.getSessionFactory().openSession();
         try {
             Transaction tx = session.beginTransaction();
             session.delete(objet);
@@ -125,7 +125,7 @@ public class DaoCommande implements IDao<Commande> {
      */
     public List<Commande> selectAllMyCommande(User user) {
 
-        Session session = NewHibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.getSessionFactory().openSession();
         List<Commande> listeCommandeByUser = new ArrayList();
         try {
 
@@ -156,7 +156,7 @@ public class DaoCommande implements IDao<Commande> {
      * @return type boolean = true lorsque la requête a bien été executer
      */
     public boolean insertTableAsso(CommandeHasProduit commandeHasProduit) {
-        Session session = NewHibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.getSessionFactory().openSession();
         boolean execution = false;
         try {
             Transaction tx = session.beginTransaction();
@@ -180,7 +180,7 @@ public class DaoCommande implements IDao<Commande> {
     public List<CommandeHasProduit> selectAllCommandeProduitTableAsso() {
 
         List<CommandeHasProduit> listeCommandesProduits = new ArrayList();
-        Session session = NewHibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.getSessionFactory().openSession();
         try {
             Transaction tx = session.beginTransaction();
             Criteria criteria = session.createCriteria(CommandeHasProduit.class);

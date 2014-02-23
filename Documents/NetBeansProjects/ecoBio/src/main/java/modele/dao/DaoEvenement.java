@@ -5,7 +5,7 @@
  */
 package modele.dao;
 
-import hibernate.util.NewHibernateUtil;
+import hibernate.util.HibernateUtil;
 import java.util.ArrayList;
 import java.util.List;
 import modele.metier.Evenement;
@@ -23,7 +23,7 @@ public class DaoEvenement implements IDao<Evenement> {
     @Override
     public boolean insert(Evenement objet) {
         boolean execution = false;
-        Session session = new NewHibernateUtil().getSessionFactory().openSession();
+        Session session = new HibernateUtil().getSessionFactory().openSession();
         try {
             Transaction tx = session.beginTransaction();
             session.save(objet);
@@ -39,7 +39,7 @@ public class DaoEvenement implements IDao<Evenement> {
 
     @Override
     public List<Evenement> selectAll() {
-        Session session = new NewHibernateUtil().getSessionFactory().openSession();
+        Session session = new HibernateUtil().getSessionFactory().openSession();
          List<Evenement> listeEtat= new ArrayList();
         try {
             Transaction tx = session.beginTransaction();
@@ -55,7 +55,7 @@ public class DaoEvenement implements IDao<Evenement> {
 
     @Override
     public Evenement selectById(int id) {
-        Session session = new NewHibernateUtil().getSessionFactory().openSession();
+        Session session = new HibernateUtil().getSessionFactory().openSession();
         Evenement evenement = null;
         try {
             Transaction tx = session.beginTransaction();
@@ -73,7 +73,7 @@ public class DaoEvenement implements IDao<Evenement> {
     @Override
     public boolean update(Evenement objet) {
         boolean execution = false;
-        Session session = NewHibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.getSessionFactory().openSession();
         try {
             Transaction tx = session.beginTransaction();
             session.update(objet);
@@ -91,7 +91,7 @@ public class DaoEvenement implements IDao<Evenement> {
     @Override
     public boolean delete(Evenement objet) {
         boolean execution = false;
-        Session session = NewHibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.getSessionFactory().openSession();
         try {
             Transaction tx = session.beginTransaction();
             session.delete(objet);

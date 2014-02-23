@@ -1,0 +1,178 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <h:body>
+
+        <ui:composition template="/xhtml/Layout.xhtml">
+
+            <ui:define name="content">
+
+                <h:form>
+
+                    <div class="container">
+
+                        <h4 id="h4RechercheParCritere">Administration</h4>
+
+                        <hr></hr>
+
+                        <div class="panel-group" id="accordion">
+
+                            <!-- Etat-->
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Etat</a>
+                                    </h4>
+                                </div>
+                                <div id="collapseOne" class="panel-collapse collapse in">
+                                    <div class="panel-body">
+                                        <div class="col-md-6">
+                                            <div class ="row">
+                                                <div class="col-md-2">
+                                                    <label>Nom : </label>
+                                                </div>
+                                                <div class="col-md-7">
+                                                    <h:inputText class="form-control" value="#{newEtat.nom}" />
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <h:commandButton class="btn btn-default" value="Ajouter" action="#{managerAdmin.createEtat()}"/> 
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="traitgauche"/>
+                                        <div class="col-md-5">
+                                            <div class ="row">
+                                                <h:selectOneListbox value="#{managerAdmin.findAllEtat()}" class="form-control">
+                                                    <f:selectItems value="#{managerAdmin.selectedItemFindAllEtat()}"/>
+                                                </h:selectOneListbox>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Saison -->
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">Saison</a>
+                                    </h4>
+                                </div>
+                                <div id="collapseTwo" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                        <div class="col-md-6">
+                                            <div class ="row">
+                                                <div class="col-md-2">
+                                                    <label>Nom : </label>
+                                                </div>
+                                                <div class="col-md-7">
+                                                    <h:inputText class="form-control" value="#{newSaison.nom}" />
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <h:commandButton class="btn btn-default" value="Ajouter" action="#{managerAdmin.createSaison()}"/> 
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="traitgauche"/>
+                                        <div class="col-md-5">
+                                            <div class ="row">
+                                                <h:selectOneListbox value="#{managerAdmin.findAllSaison()}" class="form-control">
+                                                    <f:selectItems value="#{managerAdmin.selectedItemFindAllSaison()}"/>
+                                                </h:selectOneListbox>
+                                            </div>
+                                        </div> 
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Type de produit -->    
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">Type de produit</a>
+                                    </h4>
+                                </div>
+                                <div id="collapseThree" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                        <div class="col-md-6">
+                                            <div class ="row">
+                                                <div class="col-md-2">
+                                                    <label>Nom : </label>
+                                                </div>
+                                                <div class="col-md-7">
+                                                    <h:inputText class="form-control" value="#{newTypeProduit.nom}" />
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <h:commandButton class="btn btn-default" value="Ajouter" action="#{managerAdmin.createTypeProduit()}"/> 
+                                                </div>
+                                            </div>
+                                            <br/>
+                                            <div class ="row">
+                                                <div class="col-md-2">
+                                                    <label>Saison : </label>
+                                                </div>
+                                                <div class="col-md-7">
+                                                    <h:selectOneListbox value="#{newTypeProduit.saisons}" class="form-control">
+                                                        <f:selectItems value="#{managerAdmin.selectedItemFindAllSaison()}"/>
+                                                    </h:selectOneListbox>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="traitgauche"/>
+                                        <div class="col-md-5">
+                                            <div class ="row">
+                                                <h:selectOneListbox value="#{managerAdmin.findAllTypeProduit()}" class="form-control">
+                                                    <f:selectItems value="#{managerAdmin.selectedItemFindAllType()}"/>
+                                                </h:selectOneListbox>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                                
+                            <!-- User --> 
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseFor">Liste utilisateur</a>
+                                    </h4>
+                                </div>
+                                <div id="collapseFor" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                        <div class="col-md-6">
+                                            <div class ="row">
+                                            </div>
+                                        </div>
+                                        <div id="traitgauche"/>
+                                        <div class="col-md-5">
+                                            <div class ="row">
+                                                <h:selectOneListbox value="{user.favNumber1}" class="form-control">
+                                                    <f:selectItem itemValue="1" itemLabel="Number1 - 1" />
+                                                    <f:selectItem itemValue="1" itemLabel="Number1 - 1" />
+                                                </h:selectOneListbox>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                        </div>
+
+                    <br/>        
+                    </div><!-- END CONTAINER -->
+
+                </h:form>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </h:body>
+
+</html>
+
+

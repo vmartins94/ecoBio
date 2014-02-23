@@ -7,6 +7,12 @@
     <!-- **********************************DECLARATION BEANS************************************* -->
     <managed-bean>
         <description>Utilisateur connecté</description>
+        <managed-bean-name>sliderBean</managed-bean-name>
+        <managed-bean-class>org.primefaces.examples.view.SliderBean</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <description>Utilisateur connecté</description>
         <managed-bean-name>connectedUser</managed-bean-name>
         <managed-bean-class>modele.metier.User</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>
@@ -27,6 +33,24 @@
         <description>Nouvelle commande à insérer dans la DB</description>
         <managed-bean-name>newCommande</managed-bean-name>
         <managed-bean-class>modele.metier.Commande</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <description>Nouvel etat à  insérer dans la DB</description>
+        <managed-bean-name>newEtat</managed-bean-name>
+        <managed-bean-class>modele.metier.Etat</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <description>Nouvelle saison à insérer dans la DB</description>
+        <managed-bean-name>newSaison</managed-bean-name>
+        <managed-bean-class>modele.metier.Saison</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <description>Nouveau type de produit à insérer dans la DB</description>
+        <managed-bean-name>newTypeProduit</managed-bean-name>
+        <managed-bean-class>modele.metier.Type</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
     <!-- **********************************END DECLARATION BEANS********************************* -->
@@ -59,6 +83,20 @@
             <value>#{newCommande}</value>
         </managed-property>
     </managed-bean>
+    <managed-bean>
+        <description>ManagerAdmin</description>
+        <managed-bean-name>managerAdmin</managed-bean-name>
+        <managed-bean-class>manager.ManagerAdmin</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+        <managed-property>
+            <property-name>etat</property-name>
+            <value>#{newEtat}</value>
+            <property-name>saison</property-name>
+            <value>#{newSaison}</value>
+            <property-name>type</property-name>
+            <value>#{newTypeProduit}</value>
+        </managed-property>
+    </managed-bean>
     <!-- **********************************END DECLARATION MANAGER******************************* -->
    
     <!-- **********************************NAVIGATION RULES************************************** -->
@@ -72,10 +110,18 @@
     <navigation-rule>
         <from-view-id>index.xhtml</from-view-id>
         <navigation-case>
+            <from-outcome>admin</from-outcome>
+            <to-view-id>xhtml/back-office/pageAdmin.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>index.xhtml</from-view-id>
+        <navigation-case>
             <from-outcome>monEspacePerso</from-outcome>
             <to-view-id>xhtml/pageMonEspacePerso.xhtml</to-view-id>
         </navigation-case> 
     </navigation-rule>
+
     <!-- **********************************END NAVIGATION RULES********************************** -->
    
     <!-- **********************************MENU NAVIGATION*************************************** -->
@@ -153,68 +199,5 @@
     </navigation-rule>
    
     <!-- **********************************END MENU NAVIGATION*********************************** -->
-   
-    <!--     
-   <managed-bean>
-         <description>Commande</description>
-         <managed-bean-name>commande</managed-bean-name>
-         <managed-bean-class>modele.metier.Commande</managed-bean-class>
-         <managed-bean-scope>session</managed-bean-scope>
-    </managed-bean>     
-   <managed-bean>
-         <description>Produit</description>
-         <managed-bean-name>produit</managed-bean-name>
-         <managed-bean-class>modele.metier.Produit</managed-bean-class>
-         <managed-bean-scope>session</managed-bean-scope>
-    </managed-bean>     
-   <managed-bean>
-         <description>CommandeHasProduit</description>
-         <managed-bean-name>commandeHasProduit</managed-bean-name>
-         <managed-bean-class>modele.metier.CommandeHasProduit</managed-bean-class>
-         <managed-bean-scope>session</managed-bean-scope>
-    </managed-bean>     
-  CALL SERVICE 
-   <managed-bean>
-         <description>ManagerUser</description>
-         <managed-bean-name>ManagerUser</managed-bean-name>
-         <managed-bean-class>manager.ManagerUser</managed-bean-class>
-         <managed-bean-scope>session</managed-bean-scope>
-         <managed-property>
-             <property-name>user</property-name>
-             <value>#{user}</value>
-         </managed-property>
-    </managed-bean>
-   <managed-bean>
-         <description>ManagerProduit</description>
-         <managed-bean-name>ManagerProduit</managed-bean-name>
-         <managed-bean-class>manager.ManageProduit</managed-bean-class>
-         <managed-bean-scope>session</managed-bean-scope>
-         <managed-property>
-             <property-name>produit</property-name>
-             <value>#{produit}</value>
-         </managed-property>
-    </managed-bean>
-   <managed-bean>
-         <description>ManagerCommande</description>
-         <managed-bean-name>ManagerCommande</managed-bean-name>
-         <managed-bean-class>manager.ManagerCommande</managed-bean-class>
-         <managed-bean-scope>session</managed-bean-scope>
-         <managed-property>
-             <property-name>commande</property-name>
-             <value>#{commande}</value>
-         </managed-property>
-    </managed-bean>
-   <managed-bean>
-         <description>ManagerCommandeHasProduit</description>
-         <managed-bean-name>ManagerCommandeHasProduit</managed-bean-name>
-         <managed-bean-class>manager.ManagerCommandeHasProduit</managed-bean-class>
-         <managed-bean-scope>session</managed-bean-scope>
-         <managed-property>
-             <property-name>commandeProduit</property-name>
-             <value>#{commandeHasProduit}</value>
-         </managed-property>
-    </managed-bean>-->
-
-
 
 </faces-config>

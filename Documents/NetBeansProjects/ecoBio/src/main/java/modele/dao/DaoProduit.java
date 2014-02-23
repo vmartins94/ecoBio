@@ -5,7 +5,7 @@
  */
 package modele.dao;
 
-import hibernate.util.NewHibernateUtil;
+import hibernate.util.HibernateUtil;
 import java.util.ArrayList;
 import java.util.List;
 import modele.metier.Produit;
@@ -27,7 +27,7 @@ public class DaoProduit implements IDao<Produit> {
     @Override
     public List<Produit> selectAll() {
 
-        Session session = NewHibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.getSessionFactory().openSession();
         List<Produit> listeProduits = new ArrayList();
         try {
             Transaction tx = session.beginTransaction();
@@ -46,7 +46,7 @@ public class DaoProduit implements IDao<Produit> {
     @Override
     public boolean insert(Produit objet) {
         boolean execution = false;
-        Session session = NewHibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.getSessionFactory().openSession();
         try {
             Transaction tx = session.beginTransaction();
             session.save(objet);
@@ -62,7 +62,7 @@ public class DaoProduit implements IDao<Produit> {
     public boolean update(Produit objet) {
         boolean execution = false;
         try {
-            Session session = NewHibernateUtil.getSessionFactory().openSession();
+            Session session = HibernateUtil.getSessionFactory().openSession();
             Transaction tx = session.beginTransaction();
             session.update(objet);
             tx.commit();
@@ -76,7 +76,7 @@ public class DaoProduit implements IDao<Produit> {
     @Override
     public Produit selectById(int id) {
 
-        Session session = NewHibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.getSessionFactory().openSession();
         Produit produit = null;
         try {
             Transaction tx = session.beginTransaction();
@@ -95,7 +95,7 @@ public class DaoProduit implements IDao<Produit> {
     @Override
     public boolean delete(Produit objet) {
         boolean execution = false;
-        Session session = NewHibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.getSessionFactory().openSession();
         try {
             Transaction tx = session.beginTransaction();
             session.delete(objet);
@@ -118,7 +118,7 @@ public class DaoProduit implements IDao<Produit> {
      */
     public List<ProduitHasUser> listeProduitByUser(User user) {
         List<ProduitHasUser> listeProduitByUser = new ArrayList();
-        Session session = NewHibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.getSessionFactory().openSession();
         try {
             Transaction tx = session.beginTransaction();
             Criteria criteria = session.createCriteria(ProduitHasUser.class);
@@ -141,7 +141,7 @@ public class DaoProduit implements IDao<Produit> {
      */
     public boolean insertProduitByUserTabAsso(ProduitHasUser produitUser) {
         boolean execution = false;
-        Session session =  NewHibernateUtil.getSessionFactory().openSession();
+        Session session =  HibernateUtil.getSessionFactory().openSession();
         try {
             Transaction tx = session.beginTransaction();
             session.save(produitUser);

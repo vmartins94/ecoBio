@@ -6,7 +6,7 @@
 
 package modele.dao;
 
-import hibernate.util.NewHibernateUtil;
+import hibernate.util.HibernateUtil;
 import java.util.ArrayList;
 import java.util.List;
 import modele.metier.Type;
@@ -24,7 +24,7 @@ public class DaoType implements IDao<Type> {
     @Override
     public boolean insert(Type objet) {
       boolean execution = false;
-      Session session =  NewHibernateUtil.getSessionFactory().openSession();
+      Session session =  HibernateUtil.getSessionFactory().openSession();
         try {
             Transaction tx = session.beginTransaction();
             session.save(objet);
@@ -42,7 +42,7 @@ public class DaoType implements IDao<Type> {
 
     @Override
     public List<Type> selectAll() {
-        Session session = NewHibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.getSessionFactory().openSession();
         List<Type> listeType = new ArrayList();
          try{
         Transaction tx = session.beginTransaction();
@@ -60,7 +60,7 @@ public class DaoType implements IDao<Type> {
 
     @Override
     public Type selectById(int id) {
-     Session session = NewHibernateUtil.getSessionFactory().openSession();
+     Session session = HibernateUtil.getSessionFactory().openSession();
       Type type = null;
         try {
             Transaction tx = session.beginTransaction();
@@ -78,7 +78,7 @@ public class DaoType implements IDao<Type> {
     @Override
     public boolean update(Type objet) {
         boolean execution = false;
-        Session session = NewHibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.getSessionFactory().openSession();
         try {
             Transaction tx = session.beginTransaction();
             session.update(objet);
@@ -95,7 +95,7 @@ public class DaoType implements IDao<Type> {
     @Override
     public boolean delete(Type objet) {
     boolean execution = false;
-        Session session = NewHibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.getSessionFactory().openSession();
         try {
             Transaction tx = session.beginTransaction();
             session.delete(objet);
