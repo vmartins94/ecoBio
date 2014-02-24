@@ -1,11 +1,8 @@
 package modele.metier;
-// Generated 24 fevr. 2014 10:17:38 by Hibernate Tools 3.6.0
+// Generated 24 fevr. 2014 12:35:21 by Hibernate Tools 3.6.0
 
-
-import java.util.ArrayList;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -71,10 +68,9 @@ public class Type  implements java.io.Serializable {
         this.produits = produits;
     }
 
-   public List convertirSetEnList(Set set){
-        List list = new ArrayList(set);
-        return list;
-    }
+
+
+
 }
 
 

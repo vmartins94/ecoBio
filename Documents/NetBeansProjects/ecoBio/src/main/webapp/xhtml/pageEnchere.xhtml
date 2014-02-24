@@ -16,13 +16,20 @@
                     <div class="container">
                         <h3>Les dernieres ventes par enchere</h3>
                         <div class="row">
-                            <ui:repeat var="a" value="" varStatus="status">
+                            <ui:repeat var="leProduitEnchere" value="#{managerProduit.listeProduitByEnchere()}" varStatus="status">
                                 <div class="col-md-4">
                                     <div class="clearfix">
                                         <i class="fa fa-compress"></i>
                                         <div class="desc">
-                                            <h4 id="titreMetier">Titre</h4>
-                                            <p>descriptif </p>
+                                            <h4 id="titreMetier">#{leProduitEnchere.nom}</h4>
+                                            <p>#{leProduitEnchere.description}</p>
+                                            <p>Prix: #{leProduitEnchere.prix}</p>
+                                        
+                                            <ui:repeat var="item" value="#{leProduitEnchere.convertirSetEnList(leProduitEnchere.encheres)}">
+                                                <h:outputText value="#{item.dateDebut}"/>
+                                                <h:outputText value="#{item.dateFin}"/>
+                                                <h:outputText value="#{item.prix}"/>
+                                            </ui:repeat>
                                         </div>
                                     </div>
                                 </div> 

@@ -11,12 +11,10 @@ import java.util.List;
 import modele.metier.Produit;
 import modele.metier.ProduitHasUser;
 import modele.metier.User;
-import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.criterion.Restrictions;
 
 /**
  *
@@ -52,7 +50,7 @@ public class DaoProduit implements IDao<Produit> {
             session.save(objet);
             tx.commit();
             execution = true;
-        } catch (Exception e) {
+        } catch (HibernateException e) {
             e.getMessage();
         }
         return execution;
@@ -121,10 +119,6 @@ public class DaoProduit implements IDao<Produit> {
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
             Transaction tx = session.beginTransaction();
-            Criteria criteria = session.createCriteria(ProduitHasUser.class);
-            criteria.add(Restrictions.eq("user", user));
-
-            listeProduitByUser = criteria.list();
             
             Query queryProduitByUser = session.createQuery("From Produit where user=?");
             queryProduitByUser.setEntity(0, user);
@@ -165,7 +159,7 @@ public class DaoProduit implements IDao<Produit> {
      * @return  List de type Produit
      */
     public List<Produit> listeAllProduitByEnchere(){
-        List<Produit> listeAllProduitByEnchere = new ArrayList<Produit>();
+       List<Produit> listeAllProduitByEnchere = new ArrayList<Produit>();
        Session session = HibernateUtil.getSessionFactory().openSession();
         try {
             Transaction tx = session.beginTransaction();

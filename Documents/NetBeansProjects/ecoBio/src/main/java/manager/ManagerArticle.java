@@ -8,6 +8,8 @@ package manager;
 
 import modele.metier.Produit;
 
+
+
 /**
  *
  * @author Chac

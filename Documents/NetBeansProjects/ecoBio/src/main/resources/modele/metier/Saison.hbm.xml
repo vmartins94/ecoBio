@@ -1,14 +1,14 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 24 f?vr. 2014 10:17:41 by Hibernate Tools 3.6.0 -->
+<!-- Generated 24 f?vr. 2014 12:35:21 by Hibernate Tools 3.6.0 -->
 <hibernate-mapping>
     <class name="modele.metier.Saison" table="saison" catalog="ecobio">
         <id name="nom" type="string">
             <column name="nom" length="45" />
             <generator class="assigned" />
         </id>
-        <set name="types" table="type_has_saison" inverse="false" lazy="true" fetch="select">
+        <set name="types" table="type_has_saison" inverse="false" lazy="false" fetch="join">
             <key>
                 <column name="saison_nom" length="45" not-null="true" />
             </key>
