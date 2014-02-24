@@ -1,5 +1,5 @@
 package modele.metier;
-// Generated 22 fev. 2014 10:53:47 by Hibernate Tools 3.6.0
+// Generated 24 fevr. 2014 10:17:38 by Hibernate Tools 3.6.0
 
 
 

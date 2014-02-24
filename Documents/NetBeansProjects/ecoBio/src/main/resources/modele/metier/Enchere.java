@@ -1,5 +1,6 @@
 package modele.metier;
-// Generated 22 fev. 2014 10:53:47 by Hibernate Tools 3.6.0
+// Generated 24 fevr. 2014 10:17:38 by Hibernate Tools 3.6.0
+
 
 import java.util.Date;
 
@@ -13,7 +14,7 @@ public class Enchere  implements java.io.Serializable {
      private Produit produit;
      private Date dateDebut;
      private float prix;
-     private Integer quantite;
+     private Integer intUserId;
      private Date dateFin;
 
     public Enchere() {
@@ -26,11 +27,11 @@ public class Enchere  implements java.io.Serializable {
         this.prix = prix;
         this.dateFin = dateFin;
     }
-    public Enchere(Produit produit, Date dateDebut, float prix, Integer quantite, Date dateFin) {
+    public Enchere(Produit produit, Date dateDebut, float prix, Integer intUserId, Date dateFin) {
        this.produit = produit;
        this.dateDebut = dateDebut;
        this.prix = prix;
-       this.quantite = quantite;
+       this.intUserId = intUserId;
        this.dateFin = dateFin;
     }
    
@@ -62,12 +63,12 @@ public class Enchere  implements java.io.Serializable {
     public void setPrix(float prix) {
         this.prix = prix;
     }
-    public Integer getQuantite() {
-        return this.quantite;
+    public Integer getIntUserId() {
+        return this.intUserId;
     }
     
-    public void setQuantite(Integer quantite) {
-        this.quantite = quantite;
+    public void setIntUserId(Integer intUserId) {
+        this.intUserId = intUserId;
     }
     public Date getDateFin() {
         return this.dateFin;
@@ -76,9 +77,6 @@ public class Enchere  implements java.io.Serializable {
     public void setDateFin(Date dateFin) {
         this.dateFin = dateFin;
     }
-
-
-
 
 }
 

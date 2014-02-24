@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 22 f?vr. 2014 10:53:48 by Hibernate Tools 3.6.0 -->
+<!-- Generated 24 f?vr. 2014 10:17:41 by Hibernate Tools 3.6.0 -->
 <hibernate-mapping>
     <class name="modele.metier.Enchere" table="enchere" catalog="ecobio">
         <id name="id" type="java.lang.Integer">
@@ -17,8 +17,8 @@
         <property name="prix" type="float">
             <column name="prix" precision="12" scale="0" not-null="true" />
         </property>
-        <property name="quantite" type="java.lang.Integer">
-            <column name="quantite" />
+        <property name="intUserId" type="java.lang.Integer">
+            <column name="int_userId" />
         </property>
         <property name="dateFin" type="timestamp">
             <column name="dateFin" length="19" not-null="true" />

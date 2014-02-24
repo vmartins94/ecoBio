@@ -1,9 +1,11 @@
 package modele.metier;
-// Generated 22 fev. 2014 10:53:47 by Hibernate Tools 3.6.0
+// Generated 24 fevr. 2014 10:17:38 by Hibernate Tools 3.6.0
 
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -86,6 +88,12 @@ public class Commande  implements java.io.Serializable {
     
     public void setCommandeHasProduits(Set commandeHasProduits) {
         this.commandeHasProduits = commandeHasProduits;
+    }
+
+
+  public List convertirSetEnList(Set set){
+        List list = new ArrayList(set);
+        return list;
     }
 
 

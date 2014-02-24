@@ -1,8 +1,9 @@
 package modele.metier;
-// Generated 22 fev. 2014 10:53:47 by Hibernate Tools 3.6.0
+// Generated 24 fevr. 2014 10:17:38 by Hibernate Tools 3.6.0
 
-
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -11,7 +12,7 @@ import java.util.Set;
 public class Etat  implements java.io.Serializable {
 
 
-     private int id;
+     private Integer id;
      private String nom;
      private Set commandes = new HashSet(0);
 
@@ -19,21 +20,19 @@ public class Etat  implements java.io.Serializable {
     }
 
 	
-    public Etat(int id, String nom) {
-        this.id = id;
+    public Etat(String nom) {
         this.nom = nom;
     }
-    public Etat(int id, String nom, Set commandes) {
-       this.id = id;
+    public Etat(String nom, Set commandes) {
        this.nom = nom;
        this.commandes = commandes;
     }
    
-    public int getId() {
+    public Integer getId() {
         return this.id;
     }
     
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
     public String getNom() {
@@ -51,7 +50,10 @@ public class Etat  implements java.io.Serializable {
         this.commandes = commandes;
     }
 
-
+  public List convertirSetEnList(Set set){
+        List list = new ArrayList(set);
+        return list;
+    }
 
 
 }

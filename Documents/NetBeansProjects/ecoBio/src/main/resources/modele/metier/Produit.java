@@ -1,10 +1,10 @@
 package modele.metier;
-
-// Generated 22 fevr. 2014 10:53:47 by Hibernate Tools 3.6.0
-
+// Generated 24 fevr. 2014 10:17:38 by Hibernate Tools 3.6.0
 
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -19,6 +19,7 @@ public class Produit  implements java.io.Serializable {
      private int prix;
      private String image;
      private String description;
+     private boolean avecEnchere;
      private Set produitHasUsers = new HashSet(0);
      private Set encheres = new HashSet(0);
      private Set commandeHasProduits = new HashSet(0);
@@ -27,18 +28,20 @@ public class Produit  implements java.io.Serializable {
     }
 
 	
-    public Produit(Type type, int prix, String image, String description) {
+    public Produit(Type type, int prix, String image, String description, boolean avecEnchere) {
         this.type = type;
         this.prix = prix;
         this.image = image;
         this.description = description;
+        this.avecEnchere = avecEnchere;
     }
-    public Produit(Type type, String nom, int prix, String image, String description, Set produitHasUsers, Set encheres, Set commandeHasProduits) {
+    public Produit(Type type, String nom, int prix, String image, String description, boolean avecEnchere, Set produitHasUsers, Set encheres, Set commandeHasProduits) {
        this.type = type;
        this.nom = nom;
        this.prix = prix;
        this.image = image;
        this.description = description;
+       this.avecEnchere = avecEnchere;
        this.produitHasUsers = produitHasUsers;
        this.encheres = encheres;
        this.commandeHasProduits = commandeHasProduits;
@@ -86,6 +89,13 @@ public class Produit  implements java.io.Serializable {
     public void setDescription(String description) {
         this.description = description;
     }
+    public boolean isAvecEnchere() {
+        return this.avecEnchere;
+    }
+    
+    public void setAvecEnchere(boolean avecEnchere) {
+        this.avecEnchere = avecEnchere;
+    }
     public Set getProduitHasUsers() {
         return this.produitHasUsers;
     }
@@ -109,7 +119,10 @@ public class Produit  implements java.io.Serializable {
     }
 
 
-
+  public List convertirSetEnList(Set set){
+        List list = new ArrayList(set);
+        return list;
+    }
 
 }
 

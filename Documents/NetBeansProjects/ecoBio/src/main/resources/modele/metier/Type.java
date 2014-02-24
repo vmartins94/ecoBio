@@ -1,9 +1,11 @@
 package modele.metier;
-// Generated 22 fevr. 2014 10:53:47 by Hibernate Tools 3.6.0
+// Generated 24 fevr. 2014 10:17:38 by Hibernate Tools 3.6.0
 
 
+import java.util.ArrayList;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -14,6 +16,7 @@ public class Type  implements java.io.Serializable {
 
      private Integer id;
      private String nom;
+     private String categorie;
      private Set saisons = new HashSet(0);
      private Set produits = new HashSet(0);
 
@@ -21,11 +24,13 @@ public class Type  implements java.io.Serializable {
     }
 
 	
-    public Type(String nom) {
+    public Type(String nom, String categorie) {
         this.nom = nom;
+        this.categorie = categorie;
     }
-    public Type(String nom, Set saisons, Set produits) {
+    public Type(String nom, String categorie, Set saisons, Set produits) {
        this.nom = nom;
+       this.categorie = categorie;
        this.saisons = saisons;
        this.produits = produits;
     }
@@ -44,6 +49,13 @@ public class Type  implements java.io.Serializable {
     public void setNom(String nom) {
         this.nom = nom;
     }
+    public String getCategorie() {
+        return this.categorie;
+    }
+    
+    public void setCategorie(String categorie) {
+        this.categorie = categorie;
+    }
     public Set getSaisons() {
         return this.saisons;
     }
@@ -59,9 +71,10 @@ public class Type  implements java.io.Serializable {
         this.produits = produits;
     }
 
-
-
-
+   public List convertirSetEnList(Set set){
+        List list = new ArrayList(set);
+        return list;
+    }
 }
 
 
