@@ -1,13 +1,76 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html" 
-      xmlns:ui="http://java.sun.com/jsf/facelets">
-    <h:head>
-        <title>Facelet Title</title>
-    </h:head>
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+
+
     <h:body>
-        page créer evenement
-        <ui:include src="menu.xhtml"/>
+
+        <ui:composition template="/xhtml/Layout.xhtml">
+            <ui:define name="content">
+                <div class="container">
+
+                    <div id="pageVente">
+
+                        <div id="tabs-1"><br></br>
+                            <h4 >Creer un evenement:</h4><br></br>
+
+                            <h:form>
+
+                                <table id="tableau">                                      
+                                    <tr>
+                                        <td id="tableauInfoPerso"><b>Descriptif</b></td>
+                                        <td id="tableauInfoPerso"><b>Lieu</b></td>
+                                    </tr>
+                                </table>
+                                <br></br>
+                                <table id="tableau">                                  
+                                    <td>
+                                        <h:form>
+                                            <h:outputText value="Titre: " />
+                                            <h:outputText value="" /><br></br><br></br>
+                                            <h:outputText value="Description: " />
+                                            <h:outputText value="" /><br></br> <br></br>
+                                            <h:outputText value="Prix: " />
+                                            <h:outputText value="" /><br></br> <br></br> 
+                                            <h:outputText value="Nombre participant: " />
+                                            <h:outputText value="" /><br></br> <br></br> 
+                                            <h:outputText value="Date debut: " />
+                                            <h:outputText value="" /><br></br> <br></br> 
+                                            <h:outputText value="Date fin: " /><br></br> <br></br><br></br>     
+                                            <h:commandButton value="Créer l'évènement"/>
+                                        </h:form >
+                                    </td>
+
+
+                                        <td>
+                                            <h:form>
+                                                <h:outputText value="Rue: " />
+                                                <h:outputText value="" /><br></br><br></br>
+                                                <h:outputText value="Adresse: " />
+                                                <h:outputText value="" /><br></br> <br></br>
+                                                <h:outputText value="ville: " />
+                                            </h:form >
+                                        </td>
+
+
+                                </table>
+
+
+
+
+
+
+
+                            </h:form>
+                        </div>
+                    </div>
+                </div>
+            </ui:define>
+        </ui:composition>
     </h:body>
 </html>

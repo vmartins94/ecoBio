@@ -2,9 +2,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:f="http://java.sun.com/jsf/core">
+
 
 
     <h:body>
@@ -12,14 +13,120 @@
         <ui:composition template="/xhtml/Layout.xhtml">
             <ui:define name="content">
                 <div class="container">
-                    <div id="pageEspacePerso">
 
 
+                    <div id="wrapper">
+
+                        <div id="tabs">
+                            <ul id="ulOnglet">
+                                <li><a href="#tabs-1" title="">Informations personelles</a></li>
+                                <li><a href="#tabs-2" title="">Mes commandes</a></li>
+
+                            </ul>
+
+                            <div id="pageEspacePerso">
+
+                                <div id="tabs-1">
+                                    <h4 >Vos informations personnelles :</h4><br></br>
+
+                                    <h:form>
+
+                                        <table id="tableau">                                      
+                                            <tr>
+                                                <td id="tableauInfoPerso">Vos informations personelles</td>
+                                                <td id="tableauInfoPerso">Adresse de livraison</td>
+                                            </tr>
+                                        </table>
+                                        <br></br>
+                                        <table id="tableau">                                      
+                                            <tr>
+                                                <td id="tableauInfoPerso">
+                                                    <h:outputText value="Nom: " />
+                                                    <h:outputText value="" /><br></br><br></br>
+                                                    <h:outputText value="Prenom: " />
+                                                    <h:outputText value="" /><br></br> <br></br>
+                                                    <h:outputText value="Login: " />
+                                                    <h:outputText value="" />
+                                                    <h:outputText value="Password: " />
+                                                    <h:outputText value="" /><br></br> <br></br> 
+                                                    <h:outputText value="Email: " />
+                                                    <h:outputText value="" /><br></br><br></br>
+                                                     <h:commandButton value="Modifer vos informations personelles"/>
+                                                </td>
+                                                <td id="tableauInfoPerso">
+                                                    <h:outputText value="Rue: " />
+                                                    <h:outputText value="" /><br></br><br></br>
+                                                    <h:outputText value="Cp: " />
+                                                    <h:outputText value="" /><br></br><br></br>
+                                                    <h:outputText value="Ville: " />
+                                                    <h:outputText value="" /><br></br><br></br>
+                                                    <h:commandButton value="Modifer mes données de livraisons"/>
+                                                </td>
+                                            </tr>
+
+                                        </table>
+                                       
+                                    </h:form>
+                                </div>
+
+                                <div id="tabs-2">
+                                    <h4 >Vos commandes :</h4><br></br>
+
+                                    <table id="tableau">                                      
+                                        <tr>
+                                            <td id="tableauCommande">Numero Commande</td>
+                                            <td id="tableauCommande">Nom commande</td>
+                                            <td id="tableauCommande">Descriptif commande</td>
+                                            <td id="tableauCommande">Etat commande</td>
+                                        </tr>
+                                    </table>
+
+                                    <table id="tableau" border="1" frame="rhs" rules="cols">
+                                        <ui:repeat var="a" value="" varStatus="status">
+                                            <tr id="tableauLigne" >
+                                                <td id="tableauCommande">cc</td> 
+                                                <td id="tableauCommande">cc</td> 
+                                                <td id="tableauCommande">cc</td> 
+                                                <td id="tableauCommande">cc</td> 
+                                            </tr> <br></br>
+                                        </ui:repeat>
+                                    </table>
+
+                                </div>
+
+                                <div id="tabs-3">
+                                    <p>Mauris eleifend est et turpis. Duis id erat. Suspendisse potenti. Aliquam vulputate, pede vel vehicula accumsan, mi neque rutrum erat, eu congue orci lorem eget lorem.</p><p> Vestibulum non ante. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce sodales.</p>
+                                </div>
+
+                            </div><!--End tabs container-->
+
+                        </div><!--End tabs-->
+
+
+
+
+                        <!--  <ul class="nav nav-tabs">
+                              <p:tabMenu activeIndex="2">
+                              <li class="active"><a href="#"><p:menuitem value="Overview" url="/ui/tabMenu.jsf" icon="ui-icon-star"/></a></li>
+                              <li><a href="#">Profile</a></li>
+                              <li><a href="#">Message  <li class="active"><a href="#">Mes informations</a></li>s</a></li> 
+                                </p:tabMenu>
+                        </ul> -->
 
 
                     </div>
 
+
+
+                    <hr></hr>
                 </div>
+
+
+
+
+                <!-- </div> -->
+
+
 
 
 

@@ -1,0 +1,509 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 23 févr. 2014, 10:19:54
+    Author     : Sébastien
+*/
+
+p {
+    margin-bottom: 20px;
+}
+
+#ulOnglet{
+    margin-bottom:  0px;
+    margin-left: 74px;
+
+
+}
+
+
+
+#wrapper {
+    width: 100%;
+    margin: 0 auto;
+    margin-top: 30px;
+}
+#tabs,#tabs2,#tabs3,#tabs4,#tabs5 {
+    width: 100%;
+    margin: 0 auto;
+    margin-bottom: 40px;
+}
+
+#tabs li,#tabs2 li,#tabs3 li,#tabs4 li,#tabs5 li {
+    float: left;
+    margin-right: 2px;
+    list-style-type: none; 
+
+}
+#tabs-2, #tabs-1{
+    width:100%;
+}
+#tableauCommande{
+    width :25%;
+    padding-left: 8px;
+} 
+
+#tableauInfoPerso{
+    width :50%;
+    padding-left: 8px;
+} 
+
+#tableau{
+    width: 100%;
+}
+
+
+
+#tabs li a,#tabs2 li a,#tabs3 li a,#tabs4 li a,#tabs5 li a {
+    display: block;
+    padding: 17px 30px;
+    background: #DDD8B2;
+    text-decoration: none;
+    color: #858585;
+    -moz-border-radius: 10px 10px 0 0; 
+    -webkit-border-radius: 10px 10px 0 0; 
+    border-radius: 10px 10px 0 0;        
+    -webkit-border-top-left-radius: 10px; /* pour Chrome */ 
+    -webkit-border-top-right-radius: 10px; /* pour Chrome */ 
+}
+
+#tabs li a:hover,#tabs2 li a:hover,#tabs3 li a:hover,#tabs4 li a:hover,#tabs5 li a:hover {
+    background: rgb(78, 74, 99);
+}
+
+#tabs_container {
+    padding: 40px;
+    overflow: hidden;
+    position: relative;
+    background: white;
+}
+
+#tabs_container div {
+    margin-right: 40px;
+}
+
+.transition {
+    -webkit-transition: all .3s ease-in-out;
+    -moz-transition: all .3s ease-in-out;
+    -o-transition: all .3s ease-in-out;
+    -ms-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
+
+    -webkit-transition-delay: .3s;
+    -moz-transition-delay: .3s;
+    -o-transition-delay: .3s;
+    -ms-transition-delay: .3s;
+    transition-delay: .3s;
+}
+
+.make_transist {
+    -webkit-transition: all .3s ease-in-out;
+    -moz-transition: all .3s ease-in-out;
+    -o-transition: all .3s ease-in-out;
+    -ms-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
+}
+
+.hidescale {
+    -webkit-transform: scale(0.9);
+    -moz-transform: scale(0.9);
+    -o-transform: scale(0.9);
+    -ms-transform: scale(0.9);
+    transform: scale(0.9);
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    filter: alpha(opacity=0);
+    filter: alpha(opacity=0);
+    opacity: 0;
+}
+
+.showscale {
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -o-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+    filter: alpha(opacity=100);
+    opacity: 1;
+
+    -webkit-transition-delay: .3s;
+    -moz-transition-delay: .3s;
+    -o-transition-delay: .3s;
+    -ms-transition-delay: .3s;
+    transition-delay: .3s;
+}
+
+.hideleft {
+    -webkit-transform: translateX(-100%);
+    -moz-transform: translateX(-100%);
+    -o-transform: translateX(-100%);
+    -ms-transform: translateX(-100%);
+    transform: translateX(-100%);
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    filter: alpha(opacity=0);
+    opacity: 0;
+}
+
+.showleft {
+    -webkit-transform: translateX(0px);
+    -moz-transform: translateX(0px);
+    -o-transform: translateX(0px);
+    -ms-transform: translateX(0px);
+    transform: translateX(0px);
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+    filter: alpha(opacity=100);
+    opacity: 1;
+
+    -webkit-transition-delay: .3s;
+    -moz-transition-delay: .3s;
+    -o-transition-delay: .3s;
+    -ms-transition-delay: .3s;
+    transition-delay: .3s;
+}
+
+.hidescaleup {
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -o-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    transform: scale(1.1);
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    filter: alpha(opacity=0);
+    opacity: 0;
+}
+
+.showscaleup {
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -o-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+    filter: alpha(opacity=100);
+    opacity: 1;
+
+    -webkit-transition-delay: .3s;
+    -moz-transition-delay: .3s;
+    -o-transition-delay: .3s;
+    -ms-transition-delay: .3s;
+    transition-delay: .3s;
+}
+
+.hideflip {
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    filter: alpha(opacity=0);
+    opacity: 0;
+
+    -webkit-transform: rotatey(-90deg) scale(1.1);
+    -moz-transform: rotatey(-90deg) scale(1.1);
+    -o-transform: rotatey(-90deg) scale(1.1);
+    -ms-transform: rotatey(-90deg) scale(1.1);
+    transform: rotatey(-90deg) scale(1.1);
+
+    -webkit-transform-origin: 50% 50%;
+    -moz-transform-origin: 50% 50%;
+    -o-transform-origin: 50% 50%;
+    -ms-transform-origin: 50% 50%;
+    transform-origin: 50% 50%;
+}
+
+.showflip {
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+    filter: alpha(opacity=100);
+    opacity: 1;
+
+    -webkit-transition-delay: .3s;
+    -moz-transition-delay: .3s;
+    -o-transition-delay: .3s;
+    -ms-transition-delay: .3s;
+    transition-delay: .3s;
+
+    -webkit-transform: rotatey(0deg) scale(1);
+    -moz-transform: rotatey(0deg) scale(1);
+    -o-transform: rotatey(0deg) scale(1);
+    -ms-transform: rotatey(0deg) scale(1);
+    transform: rotatey(0deg) scale(1);
+
+    -webkit-transform-origin: 50% 50%;
+    -moz-transform-origin: 50% 50%;
+    -o-transform-origin: 50% 50%;
+    -ms-transform-origin: 50% 50%;
+    transform-origin: 50% 50%;
+}
+
+.tabulous_active {
+    background: #efeac2 !important;
+    color: #ff4800 !important;
+}
+
+.tabulousclear {
+    display: block;
+    clear: both;
+}
+
+@font-face {
+    font-family: Touch Of Nature Normal;
+    src: url(Toucon_.ttf);
+}
+
+#nomSite{
+
+    font-family:Touch Of Nature Normal;
+
+}
+
+#menu{
+
+    font-family:Touch Of Nature Normal;
+
+}
+
+#h4RechercheParCritere{
+
+    margin-top: 50px;
+}
+
+#h4vo{
+
+    margin-top: 50px;
+}
+
+#traitgauche
+{
+    border : 1px solid #eee;
+    float :left;
+    margin-right: 20px;
+    margin-left: 20px;
+    height: 100px;
+}
+#selection tr{
+
+    float: left;
+    width: 33%;
+
+}
+
+.menuLogin{
+
+    margin-left: 8px;
+    padding-top: 6px;
+    //margin-bottom: 20px;
+    font-family: Touch Of Nature Normal;
+    color :#888;
+
+}
+
+.menuLogin:hover{
+
+    text-decoration: none;
+
+}
+
+.menuVente{
+
+    margin-right: 8px;
+    padding-top: 6px;
+    font-family: Touch Of Nature Normal;
+    color :#888;
+
+}
+
+.menuVente:hover{
+
+    text-decoration: none;
+
+}
+
+#pageEspacePerso{
+
+
+    width:80%;
+    height: 500px;
+    position: relative;
+    margin: 0 auto;
+    padding-left: 20px;
+    margin-bottom: 30px;
+    overflow:hidden;  
+    box-shadow: 3px 3px 3px rgba(239,234,194,10), -2px 1px #fff;
+    background: #efeac2;
+    border-bottom-right-radius: 45px;
+    border-bottom-left-radius: 45px;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 45px;
+    -moz-border-radius: 45px;
+
+}
+
+#pageVente{
+
+
+    width:80%;
+    height: 500px;
+    position: relative;
+    margin: 0 auto;
+    margin-top :50px;
+    padding-left: 20px;
+    margin-bottom: 100px;
+    overflow:hidden;  
+    box-shadow: 3px 3px 3px rgba(239,234,194,10), -2px 1px #fff;
+    background: #efeac2;
+    border-bottom-right-radius: 45px;
+    border-bottom-left-radius: 45px;
+    border-top-left-radius: 45px;
+    border-top-right-radius: 45px;
+    -moz-border-radius: 45px;
+
+}
+
+
+
+
+
+#divOnglet{
+
+    float:left;
+    width:100%;
+    background:yellow;
+    font-size:93%;
+    line-height:normal;
+}
+
+#divOnglet ul {
+    margin:0;
+    padding:0;
+    list-style:none;
+}
+
+#divOnglet li {
+    float:left;
+    margin:0;
+    padding:0;
+}
+
+#divOnglet a {
+    display:block;
+}
+
+#header li {
+    float:left;
+    background:url("norm_right.gif")
+        no-repeat right top;
+    margin:0;
+    padding:0;
+}
+
+
+.menuOnglet li {
+
+    float : left;
+    height : 21px; /* à modifier suivant la taille de la police pour centrer le texte dans l'onglet */
+    background-color: #F4F9FD;
+    margin : 2px 2px 0 2px !important;  /* Pour les navigateurs autre que IE */
+    margin : 1px 2px 0 2px;  /* Pour IE  */
+    border : 1px solid #9EA0A1;
+}
+.menuOnglet li.active
+{
+    border-bottom: 0px solid #fff;
+    background-color: #fff;
+}
+
+.menuOnglet a
+{
+    display : block;
+    color : #666;
+    text-decoration : none;
+    padding : 4px;
+}
+
+.menuOnglet a:hover
+{
+    background : #fff;
+}
+
+#divOnglet
+{
+    border-bottom : 1px solid #9EA0A1;
+    padding-bottom : 25px;
+}
+
+
+/*
+
+.menuOnglet li a { 
+    display:block; 
+    color:#000000; 
+    font-size:10px; 
+    font-weight:bold; 
+    text-decoration:none; 
+    font-family:arial, verdana, sans-serif; 
+    text-align:center; 
+    margin-right:50px;
+    cursor:pointer; 
+}
+
+.menuOnglet li a b {
+    float:left; 
+    display:block; 
+    padding:0 14px 0 7px;
+}
+
+.menuOnglet li a:hover {
+    color:#fff; 
+    background: url(tuto_304_onglet.jpg);
+}
+
+.menuOnglet li a:hover b {
+    background:url(tuto_304_onglet.jpg) 
+        no-repeat right top;
+}
+
+.menuOnglet li.current a {
+    color:#fff; 
+    background:url(tuto_304_onglet2.jpg);
+}
+.menuOnglet li.current a b {
+    background:url(tuto_304_onglet2.jpg) no-repeat right top;
+}
+*/
+
+#titreMetier{
+
+    font-family: Helvetica,Arial,sans-serif;
+
+
+
+}
+// #lienAchat{
+//    text-decoration: none;
+//  font-family: Touch Of Nature Normal;
+
+//}
+
+.lienAchat{
+
+    margin-left: 20px;
+    font-family: Helvetica,Arial,sans-serif;
+    color :#333;
+
+}
+
+.lienAchat:hover{
+
+
+    text-decoration: none;
+
+}
+
+#lesCriteres{
+
+    position: relative;
+    right: 0;
+    top: 50%;
+    width: 8em;
+    margin-top: -2.5em;
+}
+

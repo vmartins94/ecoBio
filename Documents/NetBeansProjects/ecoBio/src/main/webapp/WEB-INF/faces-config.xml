@@ -121,6 +121,34 @@
             <to-view-id>xhtml/pageMonEspacePerso.xhtml</to-view-id>
         </navigation-case> 
     </navigation-rule>
+    <navigation-rule>
+        <from-view-id>index.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>achatEnchere</from-outcome>
+            <to-view-id>xhtml/pageEnchere.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>index.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>participerEvenement</from-outcome>
+            <to-view-id>xhtml/pageParticiperEvenement.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>index.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>creerEvenement</from-outcome>
+            <to-view-id>xhtml/pageCreerEvenement.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+     <navigation-rule>
+        <from-view-id>index.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>vente</from-outcome>
+            <to-view-id>xhtml/pageVente.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
 
     <!-- **********************************END NAVIGATION RULES********************************** -->
    
@@ -131,6 +159,12 @@
             <from-outcome>achat</from-outcome>
             <to-view-id>xhtml/pageAchat.xhtml</to-view-id>
         </navigation-case>
+        <navigation-rule>
+            <navigation-case>
+                <from-outcome>achatEnchere</from-outcome>
+                <to-view-id>xhtml/pageEnchere.xhtml</to-view-id>
+            </navigation-case>
+        </navigation-rule> 
         <navigation-case>
             <from-outcome>creerEvenement</from-outcome>
             <to-view-id>xhtml/pageCreerEvenement.xhtml</to-view-id>

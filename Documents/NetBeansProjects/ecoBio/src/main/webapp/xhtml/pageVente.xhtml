@@ -1,14 +1,82 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
-    <h:head>
-        <title>Facelet Title</title>
-    </h:head>
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+
+
     <h:body>
-        page vente
-        <ui:include src="menu.xhtml"/>
+
+        <ui:composition template="/xhtml/Layout.xhtml">
+            <ui:define name="content">
+                <div class="container">
+
+                    <div id="pageVente">
+
+                        <div id="tabs-1"><br></br>
+                            <h4 >Creer une vente :</h4><br></br>
+
+                            <h:form>
+
+                                <table id="tableau">                                      
+                                    <tr>
+                                        <td id="tableauInfoPerso"><b>Vente classique</b></td>
+                                        <td id="tableauInfoPerso"><b>Vente par enchère</b></td>
+                                    </tr>
+                                </table>
+                                <br></br>
+                                <table id="tableau">                                      
+                                    <tr>
+                                        <td id="tableauInfoPerso">
+                                            <h:form>
+
+                                                <h:outputText value="Nom: " />
+                                                <h:outputText value="" /><br></br><br></br>
+                                                <h:outputText value="Prix: " />
+                                                <h:outputText value="" /><br></br> <br></br>
+                                                <h:outputText value="Image: " />
+                                                <h:outputText value="" /><br></br> <br></br> 
+                                                <h:outputText value="Description: " />
+                                                <h:outputText value="" /><br></br> <br></br> 
+                                                <h:outputText value="Type: " />
+                                                <h:selectOneMenu value="#{myBean.myValue}" >
+                                                    <f:selectItems value="#{myBean.myValues}"/>
+                                                </h:selectOneMenu><br></br> <br></br> 
+                                                <h:outputText value="" /><br></br><br></br>
+                                                <h:commandButton value="Créer la vente"/>
+                                            </h:form >
+                                        </td>
+                                        <td id="tableauInfoPerso">
+                                            <h:form>
+                                                <h:outputText value="Nom: " />
+                                                <h:outputText value="" /><br></br><br></br>
+                                                <h:outputText value="Prix: " />
+                                                <h:outputText value="" /><br></br> <br></br>
+                                                <h:outputText value="Image: " />
+                                                <h:outputText value="" /><br></br> <br></br> 
+                                                <h:outputText value="Description: " />
+                                                <h:outputText value="" /><br></br> <br></br> 
+                                                <h:outputText value="Type: " />
+                                                <h:selectOneMenu value="#{myBean.myValue}" >
+                                                    <f:selectItems value="#{myBean.myValues}"/>
+                                                </h:selectOneMenu><br></br> <br></br> 
+                                                <h:outputText value="Quantite: " />
+                                                <h:outputText value="" /><br></br><br></br>
+                                                <h:commandButton value="Créer l'enchère"/>
+                                            </h:form >
+                                        </td>
+                                    </tr>
+
+                                </table>
+
+                            </h:form>
+                        </div>
+                    </div>
+                </div>
+            </ui:define>
+        </ui:composition>
     </h:body>
 </html>
-
