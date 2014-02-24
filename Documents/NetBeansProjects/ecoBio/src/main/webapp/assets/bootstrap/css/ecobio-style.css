@@ -275,8 +275,8 @@ p {
 {
     border : 1px solid #eee;
     float :left;
-    margin-right: 20px;
-    margin-left: 20px;
+    //margin-right: px;
+   // margin-left: px;
     height: 100px;
 }
 #selection tr{

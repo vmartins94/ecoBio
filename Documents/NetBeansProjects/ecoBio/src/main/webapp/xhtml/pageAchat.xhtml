@@ -11,77 +11,66 @@
 
         <ui:composition template="/xhtml/Layout.xhtml">
             <ui:define name="content">
-
-                <div class="container">
-                    <h4 id="h4RechercheParCritere">Rechercher par critere :</h4>
-                    <div class ="row">
-                        <hr></hr>
-                        <div class="col-md-4">
-                            <h4 id="titreMetier">Categorie :</h4>
-
-                            <h:form>
-                                <h:selectManyCheckbox value="#{user.favNumber1}">
-                                    <f:selectItem itemValue="1" itemLabel="Number1 - 1" />
-                                    <f:selectItem itemValue="2" itemLabel="Number1 - 2" />
-                                    <f:selectItem itemValue="3" itemLabel="Number1 - 3" />
-                                    <f:selectItem itemValue="4" itemLabel="Number1 - 4" />
-                                    <f:selectItem itemValue="5" itemLabel="Number1 - 5" />
-                                </h:selectManyCheckbox>
-                            </h:form>
-
+                <div class="panel-group" id="accordion">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" >Rechercher par critere</a>
+                            </h4>
                         </div>
-                        <div id="traitgauche"></div>
-                        <div class="col-md-4">
-                            <h4 id="titreMetier">Saison :</h4>
-                            <h:form>
-                                <h:selectManyCheckbox value="#{user.favNumber1}">
-                                    <f:selectItem itemValue="1" itemLabel="Number1 - 1" />
-                                    <f:selectItem itemValue="2" itemLabel="Number1 - 2" />
-                                    <f:selectItem itemValue="3" itemLabel="Number1 - 3" />
-                                    <f:selectItem itemValue="4" itemLabel="Number1 - 4" />
-                                    <f:selectItem itemValue="5" itemLabel="Number1 - 5" />
-                                </h:selectManyCheckbox>
-                            </h:form>
-                        </div>   
+                        <div id="collapseOne" class="panel-collapse collapse in">
+                            <div class="panel-body">
+                                <div class="container">
+                                   
+                                    <div class ="row">
+                                        <hr></hr>
+                                        <div class="col-md-4">
+                                            <h4 id="titreMetier">Categorie :</h4>
 
-                        <div id="traitgauche"></div>
+                                            <h:form>
+                                                <h:selectManyCheckbox value="#{user.favNumber1}">
+                                                    <f:selectItem itemValue="1" itemLabel="Fruit" />
+                                                    <f:selectItem itemValue="2" itemLabel="Légume" />
+                                                    <f:selectItem itemValue="3" itemLabel="Produit défectueux" />                                
+                                                </h:selectManyCheckbox>
+                                            </h:form>
+                                        </div>
+                                        <div id="traitgauche"></div>
+                                        <div class="col-md-4">
+                                            <h4 id="titreMetier">Saison :</h4>
+                                            <h:form>
+                                                <h:selectManyCheckbox value="#{user.favNumber1}">
+                                                    <f:selectItem itemValue="1" itemLabel="Printemps" />
+                                                    <f:selectItem itemValue="2" itemLabel="Ete" />
+                                                    <f:selectItem itemValue="3" itemLabel="Automne" />
+                                                    <f:selectItem itemValue="4" itemLabel="Hiver" />
+                                                </h:selectManyCheckbox>
+                                            </h:form>
+                                        </div>   
+                                        <div id="traitgauche"></div>
+                                        <div class="col-md-4">
+                                            <h4 id="titreMetier">Prix :</h4>
+                                            <h:form>
+                                                <h:selectManyCheckbox value="#{user.favNumber1}">
+                                                    <f:selectItem itemValue="1" itemLabel="0-20" />
+                                                    <f:selectItem itemValue="2" itemLabel="0-40" />
+                                                    <f:selectItem itemValue="3" itemLabel="0-60" />
+                                                    <f:selectItem itemValue="4" itemLabel="0-80" />
+                                                </h:selectManyCheckbox>
+                                            </h:form> 
+                                        </div>
 
-                        <h4 id="titreMetier">Prix :</h4>
-                        <h:form>
-                            <h3>Range Slider</h3>
-                            <h:panelGrid columns="1" style="margin-bottom:10px">                    
-                                <h:outputText id="displayRange" value="Between #{sliderBean.number6} and #{sliderBean.number7}"/>                    
-                                <p:slider for="txt6,txt7" display="displayRange" style="width:400px" range="true" 
-                                          displayTemplate="Between {min} and {max}"/>
-                            </h:panelGrid>
-                            <h:inputHidden id="txt6" value="#{sliderBean.number6}" />
-                            <h:inputHidden id="txt7" value="#{sliderBean.number7}" />
+                                    </div>
+                                </div>
 
-                            <p:commandButton value="Submit" update="display" oncomplete="PF('dlg').show()" />
 
-                            <p:dialog header="Slider Values" widgetVar="dlg" 
-                                      showEffect="bounce" hideEffect="fade" width="200">
-
-                                <h:panelGrid id="display" columns="1" cellpadding="5">
-                                    <h:outputText value="Number 1: #{sliderBean.number1}" />
-
-                                    <h:outputText value="Number 2: #{sliderBean.number2}" />
-
-                                    <h:outputText value="Number 3: #{sliderBean.number3}" />
-
-                                    <h:outputText value="Number 4: #{sliderBean.number4}" />
-
-                                    <h:outputText value="Number 5: #{sliderBean.number5}" />
-
-                                    <h:outputText value="Range: [#{sliderBean.number6},#{sliderBean.number7}]" />
-                                </h:panelGrid>
-
-                            </p:dialog>
-                        </h:form>
-
+                            </div>
+                        </div>
                     </div>
-                    <hr></hr>
                 </div>
+
+
+
 
                 <div class="serviceBlock">
                     <div class="container">
