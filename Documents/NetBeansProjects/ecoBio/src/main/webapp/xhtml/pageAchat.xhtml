@@ -6,92 +6,117 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
 
+    <ui:composition template="/xhtml/Layout.xhtml">
+        <ui:define name="content">
 
-    <h:body>
+            <div class="panel-group" id="accordion">
+                <div id="panelCritere" class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" >Recherche par critere</a>
+                        </h4>
+                    </div>
+                    <div id="collapseOne" class="panel-collapse collapse in">
+                        <div class="panel-body">
+                            <div class="container">
 
-        <ui:composition template="/xhtml/Layout.xhtml">
-            <ui:define name="content">
-                <div class="panel-group" id="accordion">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h4 class="panel-title">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" >Rechercher par critere</a>
-                            </h4>
-                        </div>
-                        <div id="collapseOne" class="panel-collapse collapse in">
-                            <div class="panel-body">
-                                <div class="container">
-                                   
-                                    <div class ="row">
-                                        <hr></hr>
-                                        <div class="col-md-4">
-                                            <h4 id="titreMetier">Categorie :</h4>
+                                <div class ="row">
 
-                                            <h:form>
-                                                <h:selectManyCheckbox value="#{user.favNumber1}">
-                                                    <f:selectItem itemValue="1" itemLabel="Fruit" />
-                                                    <f:selectItem itemValue="2" itemLabel="Légume" />
-                                                    <f:selectItem itemValue="3" itemLabel="Produit défectueux" />                                
-                                                </h:selectManyCheckbox>
-                                            </h:form>
-                                        </div>
-                                        <div id="traitgauche"></div>
-                                        <div class="col-md-4">
-                                            <h4 id="titreMetier">Saison :</h4>
-                                            <h:form>
-                                                <h:selectManyCheckbox value="#{user.favNumber1}">
-                                                    <f:selectItem itemValue="1" itemLabel="Printemps" />
-                                                    <f:selectItem itemValue="2" itemLabel="Ete" />
-                                                    <f:selectItem itemValue="3" itemLabel="Automne" />
-                                                    <f:selectItem itemValue="4" itemLabel="Hiver" />
-                                                </h:selectManyCheckbox>
-                                            </h:form>
-                                        </div>   
-                                        <div id="traitgauche"></div>
-                                        <div class="col-md-4">
-                                            <h4 id="titreMetier">Prix :</h4>
-                                            <h:form>
-                                                <h:selectManyCheckbox value="#{user.favNumber1}">
-                                                    <f:selectItem itemValue="1" itemLabel="0-20" />
-                                                    <f:selectItem itemValue="2" itemLabel="0-40" />
-                                                    <f:selectItem itemValue="3" itemLabel="0-60" />
-                                                    <f:selectItem itemValue="4" itemLabel="0-80" />
-                                                </h:selectManyCheckbox>
-                                            </h:form> 
-                                        </div>
+                                    <div class="col-md-4">
+                                        <h4 id="titreMetier">Categorie :</h4>
+                                        <h:form>
 
+                                            <p:selectCheckboxMenu value="#{managerUser.findAll()}" label="Movies" filter="true"  filterMatchMode="startsWith" panelStyle="width:220px">
+                                                <f:selectItems value="#{managerUser.user.prenom}" />
+                                            </p:selectCheckboxMenu>
+
+                                            <p:separator style="margin-bottom:10px"/>
+
+                                            <p:commandButton value="Submit" update="display" oncomplete="PF('dlg').show()" />
+
+                                            <p:dialog header="Selected Movies" modal="true" showEffect="fade" hideEffect="fade" widgetVar="dlg" resizable="false">
+                                                <p:dataList id="display" value="#{managerUser.findAll()}" var="movie">
+                                                    #{movie}
+                                                </p:dataList>
+                                            </p:dialog>
+
+                                        </h:form>
+                                    </div>
+                                    <div id="traitgauche"></div>
+                                    <div class="col-md-4">
+                                        <h4 id="titreMetier">Saison :</h4>
+                                        <h:form>
+                                            <h:selectManyCheckbox value="#{user.favNumber1}">
+                                                <f:selectItem itemValue="1" itemLabel="Printemps" />
+                                                <f:selectItem itemValue="2" itemLabel="Ete" />
+                                                <f:selectItem itemValue="3" itemLabel="Automne" />
+                                                <f:selectItem itemValue="4" itemLabel="Hiver" />
+                                            </h:selectManyCheckbox>
+                                        </h:form>
+                                    </div>   
+                                    <div id="traitgauche"></div>
+                                    <div class="col-md-4">
+                                        <h4 id="titreMetier">Prix :</h4>
+                                        <h:form>                             
+                                            <h:panelGrid columns="1" style="margin-bottom:10px">                    
+                                                <h:outputText id="displayRange" value="Between #{sliderBean.number6} and #{sliderBean.number7}"/>                    
+                                                <p:slider for="txt6,txt7" display="displayRange" style="width:320px" range="true" 
+                                                          displayTemplate="Between {min} and {max}"/>
+                                            </h:panelGrid>
+                                            <h:inputHidden id="txt6" value="#{sliderBean.number6}" />
+                                            <h:inputHidden id="txt7" value="#{sliderBean.number7}" />
+
+                                        </h:form>
                                     </div>
                                 </div>
-
-
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <h:form>
+
+                <p:selectCheckboxMenu value="#{managerUser.findAll()}" label="Movies" filter="true"  filterMatchMode="startsWith" panelStyle="width:220px">
+                    <f:selectItems value="" />
+                </p:selectCheckboxMenu>
+
+                <p:separator style="margin-bottom:10px"/>
+
+                <p:commandButton value="Submit" update="display" oncomplete="PF('dlg').show()" />
+
+                <p:dialog header="Selected Movies" modal="true" showEffect="fade" hideEffect="fade" widgetVar="dlg" resizable="false">
+                    <p:dataList id="display" value="#{formBean.selectedMovies}" var="movie">
+                        #{movie}
+                    </p:dataList>
+                </p:dialog>
+
+            </h:form>
 
 
+            <div class="serviceBlock">
+                <div class="container">
+                    <h3>Les dernieres ventes de fruits et legumes</h3>
+                    <div class="row">
+                        <ui:repeat var="a" value="" varStatus="status">
+                            <div class="col-md-4">
+                                <div class="clearfix" >
+                                    <i class="fa fa-compress"></i>
+                                    <div class="desc">
 
-
-                <div class="serviceBlock">
-                    <div class="container">
-                        <h3>Les dernieres ventes de fruits et legumes</h3>
-                        <div class="row">
-                            <ui:repeat var="a" value="" varStatus="status">
-                                <div class="col-md-4">
-                                    <div class="clearfix">
-                                        <i class="fa fa-compress"></i>
-                                        <div class="desc">
-                                            <h4 id="titreMetier">Titre</h4>
-                                            <p>descriptif </p>
-                                        </div>
+                                        <h4 id="titreMetier">Titre</h4>
+                                        <p>descriptif </p>
+                                        <p:commandButton id="modalDialogButton" value="Détail" onclick= "dlg2.show();" type="button"/>  
+                                        <p:dialog id="modalDialog" header="Modal Dialog" widgetVar="dlg2" modal="true" height="200">
+                                            <h:outputText value="This is a Modal Dialog." />
+                                        </p:dialog>
                                     </div>
-                                </div> 
-                            </ui:repeat>
-                        </div>
+                                </div>
+                            </div> 
+                        </ui:repeat>
                     </div>
-                </div> 
-
-            </ui:define>
-        </ui:composition>
-    </h:body>
+                </div>
+            </div> 
+        </ui:define>
+    </ui:composition> 
 </html>

@@ -15,10 +15,7 @@ p {
 #ulOnglet{
     margin-bottom:  0px;
     margin-left: 74px;
-
-
 }
-
 
 
 #wrapper {
@@ -53,6 +50,11 @@ p {
 
 #tableau{
     width: 100%;
+}
+
+#tableauEvenement{
+    width: 50%;
+    float :left;
 }
 
 
@@ -276,7 +278,7 @@ p {
     border : 1px solid #eee;
     float :left;
     //margin-right: px;
-   // margin-left: px;
+    // margin-left: px;
     height: 100px;
 }
 #selection tr{
@@ -507,3 +509,22 @@ p {
     margin-top: -2.5em;
 }
 
+#panelCritere{
+    margin-top: 20px;
+    margin-left: 225px;
+    width : 71%;
+    color:#333;
+    background-color: #f5f5f5;
+    border-color:#ddd;
+}
+
+.col-md-4:active{
+    font-weight: bold;
+
+}
+
+.btn, .btnConnexion{
+
+    width : 100%;
+
+}

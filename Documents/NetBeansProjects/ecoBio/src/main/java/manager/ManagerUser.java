@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package manager;
 
 import java.io.Serializable;
@@ -18,16 +17,19 @@ import utils.Constantes;
  *
  * @author Virginie
  */
-public class ManagerUser implements IManager<User> ,Serializable{
-    
+public class ManagerUser implements IManager<User>, Serializable {
+
     //TODO C : Si on modifie le user, on modifira le bean injecté
-    private  User user;
+    private User user;
     //TODO C 
     private ManagerPanier monPanier;
 
     @Override
     public List<User> findAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        IDao userDAO = FactoryDao.getDAO("User");
+
+        return userDAO.selectAll();
     }
 
     @Override
@@ -36,29 +38,29 @@ public class ManagerUser implements IManager<User> ,Serializable{
         userDAO.insert(user);
         return "";
     }
-    
+
     //TODO C : La connexion se fera en ajax
-    public String verifAuthentification(){
+    public String verifAuthentification() {
         DaoUser userDAO = (DaoUser) FactoryDao.getDAO("User");
 //        user = userDAO.getUserByLoginPassword(user);
-        
-        user=new User();
+
+        user = new User();
         user.setId(-1);
-      
-        if(user.getId() > 0){
-            
+
+        if (user.getId() > 0) {
+
             //SI C'EST UN ADMIN ON REDIRIGE VERS LE BACK OFFICE
-            if(true /*user.getRole == 1*/){
+            if (true /*user.getRole == 1*/) {
                 return Constantes.AUTHENTIFICATION_SUCCESS_ADMIN;
             } else {
                 //SINON ON RESTE SUR LA PAGE COURANTE
-                return Constantes.AUTHENTIFICATION_SUCCESS_USER; 
+                return Constantes.AUTHENTIFICATION_SUCCESS_USER;
             }
         }
         //DANS LE CAS DE L'ECHAC ON RETOURNE DANS LA PAGE D'ACCUEIL
         return Constantes.AUTHENTIFICATION_ECHEC;
     }
-    
+
     public User getUser() {
         return user;
     }
@@ -74,5 +76,5 @@ public class ManagerUser implements IManager<User> ,Serializable{
     public void setMonPanier(ManagerPanier monPanier) {
         this.monPanier = monPanier;
     }
-    
+
 }

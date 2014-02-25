@@ -28,26 +28,30 @@
                                     </tr>
                                 </table>
                                 <br></br>
-                                <table id="tableau">                                  
-                                    <td>
-                                        <h:form>
-                                            <h:outputText value="Titre: " />
-                                            <h:outputText value="" /><br></br><br></br>
-                                            <h:outputText value="Description: " />
-                                            <h:outputText value="" /><br></br> <br></br>
-                                            <h:outputText value="Prix: " />
-                                            <h:outputText value="" /><br></br> <br></br> 
-                                            <h:outputText value="Nombre participant: " />
-                                            <h:outputText value="" /><br></br> <br></br> 
-                                            <h:outputText value="Date debut: " />
-                                            <h:outputText value="" /><br></br> <br></br> 
-                                            <h:outputText value="Date fin: " /><br></br> <br></br><br></br>     
-                                            <h:commandButton value="Créer l'évènement"/>
-                                        </h:form >
-                                    </td>
+                                <table id="tableauEvenement">     
+                                    <tr>
+                                        <td id="tableauInfoPerso">
+                                            <h:form>
+                                                <h:outputText value="Titre: " />
+                                                <h:outputText value="" /><br></br><br></br>
+                                                <h:outputText value="Description: " />
+                                                <h:outputText value="" /><br></br><br></br>
+                                                <h:outputText value="Prix: " />
+                                                <h:outputText value="" /><br></br> <br></br> 
+                                                <h:outputText value="Nombre participant: " />
+                                                <h:outputText value="" /><br></br> <br></br> 
+                                                <h:outputText value="Date debut: " />
+                                                <h:outputText value="" /><br></br> <br></br> 
+                                                <h:outputText value="Date fin: " /><br></br> <br></br><br></br>     
+                                                <h:commandButton value="Créer l'évènement"/>
+                                            </h:form >
 
-
-                                        <td>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <table id="tableauEvenement">
+                                    <tr>
+                                        <td id="tableauInfoPerso">
                                             <h:form>
                                                 <h:outputText value="Rue: " />
                                                 <h:outputText value="" /><br></br><br></br>
@@ -55,20 +59,14 @@
                                                 <h:outputText value="" /><br></br> <br></br>
                                                 <h:outputText value="ville: " />
                                             </h:form >
+
                                         </td>
-
-
+                                    </tr>
                                 </table>
-
-
-
-
-
-
 
                             </h:form>
                         </div>
-                    </div>
+                    </div>                 
                 </div>
             </ui:define>
         </ui:composition>

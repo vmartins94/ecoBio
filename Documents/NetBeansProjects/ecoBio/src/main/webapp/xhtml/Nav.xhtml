@@ -4,7 +4,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
     <body>
         <ui:composition>
             <!-- topHeaderSection -->	
@@ -35,11 +36,11 @@
                                         </h:form>                        
                                     </ul>
                                 </li>
-                               
+
                                 <li class="menuVente"><h:form> 
                                         <h:commandLink action="vente" value="Vente" styleClass="menuLogin" ></h:commandLink>
                                     </h:form>  </li>
-                             
+
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="menu">Evenement <b class="caret"></b></a>
                                     <ul class="dropdown-menu">
@@ -51,9 +52,12 @@
                                 </li>
                                 <li><a href="#contact" id="menu">Contact</a></li>
                                 <li class="menuLogin"><h:form> 
-                                        <h:commandLink action="monEspacePerso" value="Espace Perso" styleClass="menuLogin" ></h:commandLink>
-                                    </h:form>  </li>
+                                        <!-- <p:commandButton id="modalDialogButton" value="Détail" onclick= "dlg2.show();" type="button"/>  --> 
+                                        <!-- <h:commandLink action="monEspacePerso" value="Espace Perso" styleClass="menuLogin"/> -->
+                                        <p:commandLink styleClass="menuLogin"  id="modalDialogButton" value="Espace Perso"  onclick= "dlgEspacePerso.show();" type="button"/>
 
+
+                                    </h:form>  </li>
 
                             </ul>                     
                         </div><!--/.nav-collapse -->
@@ -61,6 +65,26 @@
                 </div>
             </div>
 
+            <p:dialog id="modalDialog" header="Connexion" widgetVar="dlgEspacePerso" modal="true" height="180" >
+                <h:form>
+                    <div class ="row" style="margin-top:20px ">
+                        <div class="col-md-5">
+                            <label>Login : </label>
+                        </div>
+                        <div class="col-md-7">
+                            <h:inputText class="form-control" value="" />
+                        </div>
+                    </div><br/>
+                    <div class="row">
+                        <div class="col-md-5">
+                            <label>Password : </label>
+                        </div>
+                        <div class="col-md-7">
+                            <h:inputText class="form-control" value="" />
+                        </div>
+                    </div><br/>
+                    <h:commandButton action="monEspacePerso" value="Se Connecter" styleClass="btn btnConnexion" /></h:form>
+            </p:dialog>
         </ui:composition>
     </body>
 </html>
