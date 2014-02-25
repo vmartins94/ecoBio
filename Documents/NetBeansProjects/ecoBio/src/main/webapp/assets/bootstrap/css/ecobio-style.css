@@ -544,9 +544,14 @@ maCase, .ui-chkbox-box, .ui-widget, .ui-corner-all, .ui-state-default{
 
 }
 
-#panier{
-    margin-top: 5px;
-    margin-right: 5px;
+
+
+#panierLabel{
+    margin-top: 12px;
+    color :red;
     float:right;
+   
+    margin-right: 5px;
+
 
 }

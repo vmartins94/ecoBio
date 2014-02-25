@@ -11,7 +11,7 @@
             <!-- topHeaderSection -->	
             <div class="topHeaderSection">		
                 <div class="header">	
-                    <div id ="panier"> <h:outputText class="form-control" value="#{newUser.password}" /></div>
+                    <div id ="panierLabel"> <h:outputLabel  value="#{managerUser.user.nom}" />  <img src="assets/custom/img/panier.png" alt="" /></div>
                     <div class="container">
                         <div class="navbar-header">
                             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -73,7 +73,7 @@
                             <label>Login : </label>
                         </div>
                         <div class="col-md-7">
-                            <h:inputText class="form-control" value="#{newUser.login}" />
+                            <h:inputText class="form-control" value="#{connectedUser.login}" />
                         </div>
                     </div><br/>
                     <div class="row">
@@ -81,10 +81,10 @@
                             <label>Password : </label>
                         </div>
                         <div class="col-md-7">
-                            <h:inputText class="form-control" value="#{newUser.password}" />
+                            <h:inputText class="form-control" value="#{connectedUser.password}" />
                         </div>
                     </div><br/>
-                    <h:commandButton action="#{managerUser.verifAuthentification(newUser)}" value="Se Connecter" styleClass="btn btnConnexion" /></h:form>
+                    <h:commandButton action="#{managerUser.verifAuthentification(connectedUser)}" value="Se Connecter" styleClass="btn btnConnexion" /></h:form>
             </p:dialog>
         </ui:composition>
     </body>

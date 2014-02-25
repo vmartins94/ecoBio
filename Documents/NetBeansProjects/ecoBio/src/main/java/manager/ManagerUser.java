@@ -27,30 +27,6 @@ public class ManagerUser implements IManager<User>, Serializable {
     //TODO C 
     private ManagerPanier monPanier;
 
-    private List<String> selectedMovies;
-
-    private Map<String, String> movies;
-
-    public ManagerUser() {
-        movies = new HashMap<String, String>();
-        movies.put("Scarface", "Scarface");
-        movies.put("Goodfellas", "Goodfellas");
-        movies.put("Godfather", "Godfather");
-        movies.put("Carlito's Way", "Carlito's Way");
-    }
-
-    public List<String> getSelectedMovies() {
-        return selectedMovies;
-    }
-
-    public void setSelectedMovies(List<String> selectedMovies) {
-        this.selectedMovies = selectedMovies;
-    }
-
-    public Map<String, String> getMovies() {
-        return movies;
-    }
-
     @Override
     public List<User> findAll() {
 
