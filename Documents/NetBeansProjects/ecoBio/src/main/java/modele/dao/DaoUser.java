@@ -126,9 +126,11 @@ public class DaoUser implements IDao<User> {
         Session session = HibernateUtil.getSessionFactory().openSession();
         try{
         Transaction tx = session.beginTransaction();
-        Criteria criteria = session.createCriteria(User.class);
-        criteria.add(Restrictions.eq("login", user)).add(Restrictions.eq("password", user));
-        user = (User) criteria.uniqueResult();
+        Query queryUserByLoginPass = session.createQuery("From User where login=? and password=?");
+     queryUserByLoginPass.setString(0, user.getLogin());
+     queryUserByLoginPass.setString(1, user.getPassword());
+        
+        user = (User) queryUserByLoginPass.uniqueResult();
         }catch(HibernateException e){
             e.getMessage();
         }finally{

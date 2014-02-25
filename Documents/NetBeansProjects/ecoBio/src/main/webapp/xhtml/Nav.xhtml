@@ -10,7 +10,8 @@
         <ui:composition>
             <!-- topHeaderSection -->	
             <div class="topHeaderSection">		
-                <div class="header">			
+                <div class="header">	
+                    <div id ="panier"> <h:outputText class="form-control" value="#{newUser.password}" /></div>
                     <div class="container">
                         <div class="navbar-header">
                             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -19,7 +20,7 @@
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
                             </button>
-                            <a class="navbar-brand" href="index.html" id="nomSite">ECO-BIO.COM<br></br>Achat/vente de Fruits et Legumes<!--<img src="assets/custom/img/logo.png" alt="My web solution" />--></a>
+                            <a class="navbar-brand" href="index.xhtml" id="nomSite">ECO-BIO.COM<br></br>Achat/vente de Fruits et Legumes<!--<img src="assets/custom/img/logo.png" alt="My web solution" />--></a>
                         </div>
                         <div class="navbar-collapse collapse">
                             <ul class="nav navbar-nav">
@@ -72,7 +73,7 @@
                             <label>Login : </label>
                         </div>
                         <div class="col-md-7">
-                            <h:inputText class="form-control" value="" />
+                            <h:inputText class="form-control" value="#{newUser.login}" />
                         </div>
                     </div><br/>
                     <div class="row">
@@ -80,10 +81,10 @@
                             <label>Password : </label>
                         </div>
                         <div class="col-md-7">
-                            <h:inputText class="form-control" value="" />
+                            <h:inputText class="form-control" value="#{newUser.password}" />
                         </div>
                     </div><br/>
-                    <h:commandButton action="monEspacePerso" value="Se Connecter" styleClass="btn btnConnexion" /></h:form>
+                    <h:commandButton action="#{managerUser.verifAuthentification(newUser)}" value="Se Connecter" styleClass="btn btnConnexion" /></h:form>
             </p:dialog>
         </ui:composition>
     </body>

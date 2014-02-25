@@ -6,7 +6,10 @@
 package manager;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import modele.dao.DaoUser;
 import modele.dao.FactoryDao;
 import modele.dao.IDao;
@@ -24,6 +27,30 @@ public class ManagerUser implements IManager<User>, Serializable {
     //TODO C 
     private ManagerPanier monPanier;
 
+    private List<String> selectedMovies;
+
+    private Map<String, String> movies;
+
+    public ManagerUser() {
+        movies = new HashMap<String, String>();
+        movies.put("Scarface", "Scarface");
+        movies.put("Goodfellas", "Goodfellas");
+        movies.put("Godfather", "Godfather");
+        movies.put("Carlito's Way", "Carlito's Way");
+    }
+
+    public List<String> getSelectedMovies() {
+        return selectedMovies;
+    }
+
+    public void setSelectedMovies(List<String> selectedMovies) {
+        this.selectedMovies = selectedMovies;
+    }
+
+    public Map<String, String> getMovies() {
+        return movies;
+    }
+
     @Override
     public List<User> findAll() {
 
@@ -40,24 +67,25 @@ public class ManagerUser implements IManager<User>, Serializable {
     }
 
     //TODO C : La connexion se fera en ajax
-    public String verifAuthentification() {
+    public String verifAuthentification(User user2) {
+        user = user2;
         DaoUser userDAO = (DaoUser) FactoryDao.getDAO("User");
-//        user = userDAO.getUserByLoginPassword(user);
 
-        user = new User();
-        user.setId(-1);
+        user = userDAO.getUserByLoginPassword(user);
+        if (user != null) {
 
-        if (user.getId() > 0) {
+            if (user.getId() > 0) {
 
-            //SI C'EST UN ADMIN ON REDIRIGE VERS LE BACK OFFICE
-            if (true /*user.getRole == 1*/) {
-                return Constantes.AUTHENTIFICATION_SUCCESS_ADMIN;
-            } else {
-                //SINON ON RESTE SUR LA PAGE COURANTE
-                return Constantes.AUTHENTIFICATION_SUCCESS_USER;
+                //SI C'EST UN ADMIN ON REDIRIGE VERS LE BACK OFFICE
+                if (user.getType() == true) {
+                    return Constantes.AUTHENTIFICATION_SUCCESS_ADMIN;
+                } else {
+                    //SINON ON RESTE SUR LA PAGE COURANTE
+                    return Constantes.AUTHENTIFICATION_SUCCESS_USER;
+                }
             }
         }
-        //DANS LE CAS DE L'ECHAC ON RETOURNE DANS LA PAGE D'ACCUEIL
+        //DANS LE CAS DE L'ECHEC ON RETOURNE DANS LA PAGE D'ACCUEIL
         return Constantes.AUTHENTIFICATION_ECHEC;
     }
 

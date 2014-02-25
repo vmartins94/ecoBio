@@ -93,7 +93,7 @@
         <description>ManagerAdmin</description>
         <managed-bean-name>managerAdmin</managed-bean-name>
         <managed-bean-class>manager.ManagerAdmin</managed-bean-class>
-        <managed-bean-scope>session</managed-bean-scope>
+        <managed-bean-scope>request</managed-bean-scope>
         <managed-property>
             <property-name>etat</property-name>
             <value>#{newEtat}</value>
@@ -156,13 +156,34 @@
             <to-view-id>xhtml/pageCreerEvenement.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
-     <navigation-rule>
+    <navigation-rule>
         <from-view-id>index.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>vente</from-outcome>
             <to-view-id>xhtml/pageVente.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
+    <navigation-rule>
+        <from-view-id>index.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>authentification_success_admin</from-outcome>
+            <to-view-id>xhtml/pageAdmin.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>index.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>authentification_success_user</from-outcome>
+            <to-view-id>xhtml/pageMonEspacePerso.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>index.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>authentification_echec</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>  
     <!-- **********************************END NAVIGATION RULES********************************** -->
    
     <!-- **********************************MENU NAVIGATION*************************************** -->

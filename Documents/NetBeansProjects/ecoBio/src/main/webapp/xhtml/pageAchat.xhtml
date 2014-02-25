@@ -19,43 +19,23 @@
                     <div id="collapseOne" class="panel-collapse collapse in">
                         <div class="panel-body">
                             <div class="container">
-
                                 <div class ="row">
-
-                                    <div class="col-md-4">
+                                    <div class="col-md-2">
                                         <h4 id="titreMetier">Categorie :</h4>
                                         <h:form>
-
-                                            <p:selectCheckboxMenu value="#{managerUser.findAll()}" label="Movies" filter="true"  filterMatchMode="startsWith" panelStyle="width:220px">
-                                                <f:selectItems value="#{managerUser.user.prenom}" />
+                                            <p:selectCheckboxMenu value="#{managerAdmin.selectedType}" label="Selectionnez" filter="true"  filterMatchMode="startsWith"  >
+                                                <f:selectItems value="#{managerAdmin.selectedItemFindAllType()}" />
                                             </p:selectCheckboxMenu>
-
-                                            <p:separator style="margin-bottom:10px"/>
-
-                                            <p:commandButton value="Submit" update="display" oncomplete="PF('dlg').show()" />
-
-                                            <p:dialog header="Selected Movies" modal="true" showEffect="fade" hideEffect="fade" widgetVar="dlg" resizable="false">
-                                                <p:dataList id="display" value="#{managerUser.findAll()}" var="movie">
-                                                    #{movie}
-                                                </p:dataList>
-                                            </p:dialog>
-
-                                        </h:form>
-                                    </div>
-                                    <div id="traitgauche"></div>
-                                    <div class="col-md-4">
+                                        </h:form><br></br>
                                         <h4 id="titreMetier">Saison :</h4>
                                         <h:form>
-                                            <h:selectManyCheckbox value="#{user.favNumber1}">
-                                                <f:selectItem itemValue="1" itemLabel="Printemps" />
-                                                <f:selectItem itemValue="2" itemLabel="Ete" />
-                                                <f:selectItem itemValue="3" itemLabel="Automne" />
-                                                <f:selectItem itemValue="4" itemLabel="Hiver" />
-                                            </h:selectManyCheckbox>
+                                            <p:selectCheckboxMenu value="#{managerAdmin.selectedSaison}" label="Selectionnez" filter="true"  filterMatchMode="startsWith"  >
+                                                <f:selectItems value="#{managerAdmin.selectedItemFindAllSaison()}" />
+                                            </p:selectCheckboxMenu>
                                         </h:form>
-                                    </div>   
-                                    <div id="traitgauche"></div>
-                                    <div class="col-md-4">
+                                    </div>
+                                    <div id="traitgauche2"></div>
+                                    <div class="col-md-2">
                                         <h4 id="titreMetier">Prix :</h4>
                                         <h:form>                             
                                             <h:panelGrid columns="1" style="margin-bottom:10px">                    
@@ -67,31 +47,16 @@
                                             <h:inputHidden id="txt7" value="#{sliderBean.number7}" />
 
                                         </h:form>
-                                    </div>
+
+
+                                    </div>   
+                                    
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <h:form>
-
-                <p:selectCheckboxMenu value="#{managerUser.findAll()}" label="Movies" filter="true"  filterMatchMode="startsWith" panelStyle="width:220px">
-                    <f:selectItems value="" />
-                </p:selectCheckboxMenu>
-
-                <p:separator style="margin-bottom:10px"/>
-
-                <p:commandButton value="Submit" update="display" oncomplete="PF('dlg').show()" />
-
-                <p:dialog header="Selected Movies" modal="true" showEffect="fade" hideEffect="fade" widgetVar="dlg" resizable="false">
-                    <p:dataList id="display" value="#{formBean.selectedMovies}" var="movie">
-                        #{movie}
-                    </p:dataList>
-                </p:dialog>
-
-            </h:form>
 
 
             <div class="serviceBlock">
