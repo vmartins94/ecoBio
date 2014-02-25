@@ -53,6 +53,12 @@
         <managed-bean-class>modele.metier.Type</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
+    <managed-bean>
+        <description>Nouvel évènement à insérer dans la DB</description>
+        <managed-bean-name>newEvent</managed-bean-name>
+        <managed-bean-class>modele.metier.Evenement</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
     <!-- **********************************END DECLARATION BEANS********************************* -->
    
     <!-- **********************************DECLARATION MANAGER*********************************** -->
@@ -97,6 +103,14 @@
             <value>#{newTypeProduit}</value>
         </managed-property>
     </managed-bean>
+    <managed-bean>
+        <description>ManagerEvenement</description>
+        <managed-bean-name>managerEvenement</managed-bean-name>
+        <managed-bean-class>manager.ManagerEvenement</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+        <property-name>monEvenement</property-name>
+        <value>#{newEvent}</value>
+    </managed-bean>
     <!-- **********************************END DECLARATION MANAGER******************************* -->
    
     <!-- **********************************NAVIGATION RULES************************************** -->
@@ -111,7 +125,7 @@
         <from-view-id>index.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>admin</from-outcome>
-            <to-view-id>xhtml/back-office/pageAdmin.xhtml</to-view-id>
+            <to-view-id>xhtml/pageAdmin.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
     <navigation-rule>
@@ -149,7 +163,6 @@
             <to-view-id>xhtml/pageVente.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
-
     <!-- **********************************END NAVIGATION RULES********************************** -->
    
     <!-- **********************************MENU NAVIGATION*************************************** -->
