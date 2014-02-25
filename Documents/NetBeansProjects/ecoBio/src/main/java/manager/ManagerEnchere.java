@@ -47,6 +47,18 @@ public class ManagerEnchere  implements IManager<Enchere>{
         return "isOk";
     }
     
-   
+       public String update(Enchere enchere) {
+        IDao daoEnchere = FactoryDao.getDAO("Enchere");
+        enchere.setIntUserId(1); // modifier faut prendre l'utilisateur en session
+      //  enchere.setPrix(I);
+
+         
+        boolean  valeurExecution = daoEnchere.update(enchere);
+        if (!valeurExecution) {
+            return "isKO";
+        }
+        return "";
+    }
+    
     
 }
