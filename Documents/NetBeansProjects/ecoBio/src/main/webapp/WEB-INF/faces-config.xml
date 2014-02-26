@@ -59,6 +59,12 @@
         <managed-bean-class>modele.metier.Evenement</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
+    <managed-bean>
+        <description>Nouvel utilisateur à insérer dans la DB</description>
+        <managed-bean-name>newEnchere</managed-bean-name>
+        <managed-bean-class>modele.metier.Enchere</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
     <!-- **********************************END DECLARATION BEANS********************************* -->
    
     <!-- **********************************DECLARATION MANAGER*********************************** -->
@@ -110,6 +116,16 @@
         <managed-bean-scope>session</managed-bean-scope>
         <property-name>monEvenement</property-name>
         <value>#{newEvent}</value>
+    </managed-bean>
+    <managed-bean>
+        <description>ManagerEnchere</description>
+        <managed-bean-name>managerEnchere</managed-bean-name>
+        <managed-bean-class>manager.ManagerEnchere</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+        <managed-property>
+            <property-name>uneEnchere</property-name>
+            <value>#{newEnchere}</value>
+        </managed-property>
     </managed-bean>
     <!-- **********************************END DECLARATION MANAGER******************************* -->
    

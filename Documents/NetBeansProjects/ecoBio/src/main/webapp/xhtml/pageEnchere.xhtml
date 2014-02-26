@@ -4,40 +4,63 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p ="http://primefaces.org/ui">
 
+    <!--JavaScritp-->
+     <script type="text/javascript">
+               setInterval(function() {
+                   document.location.reload();
+               }, 1000);
+    </script>
 
     <h:body>
-
         <ui:composition template="/xhtml/Layout.xhtml">
             <ui:define name="content">
-
                 <div class="serviceBlock">
                     <div class="container">
                         <h3>Les dernieres ventes par enchere</h3>
                         <div class="row">
-                            <ui:repeat var="leProduitEnchere" value="#{managerProduit.listeProduitByEnchere()}" varStatus="status">
+                            <!-- la liste des produit qui sont enchere-->
+                            <ui:repeat var="leProduitEnchere" value="#{managerProduit.listeProduitByEnchere()}">
                                 <div class="col-md-4">
                                     <div class="clearfix">
                                         <i class="fa fa-compress"></i>
                                         <div class="desc">
                                             <h4 id="titreMetier">#{leProduitEnchere.nom}</h4>
-                                            <p>#{leProduitEnchere.description}</p>
-                                            <p>Prix: #{leProduitEnchere.prix}</p>
-                                        
+                                            <h:outputLink id="description" value="#">  
+                                                <h:outputText value="Description" />  
+                                            </h:outputLink>  
+                                            <p:tooltip for="description" value="#{leProduitEnchere.description}" showEffect="fade" hideEffect="fade" /><br/> 
+
+                                            <h:outputText value="Prix Initiale: #{leProduitEnchere.prix}" />  
+                                            <!--Parcours la liste des encheres pour un produit -->
                                             <ui:repeat var="item" value="#{leProduitEnchere.convertirSetEnList(leProduitEnchere.encheres)}">
-                                                <h:outputText value="#{item.dateDebut}"/>
-                                                <h:outputText value="#{item.dateFin}"/>
-                                                <h:outputText value="#{item.prix}"/>
+
+                                                <p>Date:
+                                                    <h:outputText value="#{item.dateDebut}">
+                                                        <f:convertDateTime pattern="dd/MM/yyyy" type="date"/>
+                                                    </h:outputText> au 
+                                                    <h:outputText value="#{item.dateFin}">
+                                                        <f:convertDateTime pattern="dd/MM/yyyy" type="date"/>
+                                                    </h:outputText>
+                                                </p>
+                                                <h:outputText value="Prix du Derniére enchere: #{item.prix}" /><br/>  
+                                                <h:outputText value="Temps:" />  
+                                                   <h:inputText value="#{newEnchere.prix}" />
+                                                <h:form>
+                                              
+                                                    <h:commandButton  action="#{managerEnchere.update(item)}">
+                                                        <f:ajax event="click"  execute="@this"/>
+                                                    </h:commandButton>    
+                                                </h:form>
                                             </ui:repeat>
                                         </div>
                                     </div>
                                 </div> 
                             </ui:repeat>
-                        </div>
-                    </div>
+                        </div>  
+                    </div> 
                 </div> 
-
             </ui:define>
         </ui:composition>
     </h:body>
