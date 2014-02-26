@@ -5,7 +5,8 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
     <body>
         <ui:composition>
             <!-- topHeaderSection -->	
@@ -52,14 +53,21 @@
                                     </ul>
                                 </li>
                                 <li><a href="#contact" id="menu">Contact</a></li>
-                                <li class="menuLogin"><h:form> 
+                                <!-- Si la personne est déjà connectée on accède directement à l'espace perso sinon elle se connecte-->
+                                <c:choose>
+                                    <c:when test="#{managerUser.user.id == null}">
+                                        <li class="menuLogin"><h:form> 
                                         <!-- <p:commandButton id="modalDialogButton" value="Détail" onclick= "dlg2.show();" type="button"/>  --> 
                                         <!-- <h:commandLink action="monEspacePerso" value="Espace Perso" styleClass="menuLogin"/> -->
                                         <p:commandLink styleClass="menuLogin"  id="modalDialogButton" value="Espace Perso"  onclick= "dlgEspacePerso.show();" type="button"/>
-
-
                                     </h:form>  </li>
-
+                                    </c:when>
+                                    <c:otherwise>
+                                        <h:form>
+                                            <h:commandLink action="monEspacePerso" value="Espace Perso" styleClass="menuLogin" />
+                                        </h:form>
+                                    </c:otherwise>
+                                </c:choose>
                             </ul>                     
                         </div><!--/.nav-collapse -->
                     </div>

@@ -33,12 +33,18 @@ public class ManagerEvenement implements IManager<Evenement> {
         return "";
     }
 
-    public void createEvent(Evenement event){
-        User user =  new User();
-        user.setId(16);
+    public void createEvent(Evenement event, User connectedUser){
         monEvenement = event;
-        monEvenement.setUser(user);
+        monEvenement.setUser(connectedUser);
         create();
+    }
+    
+    public void participer(Evenement event, User user){
+        monEvenement = event;
+        monEvenement.getUsers().add(user);
+        
+        IDao eventDao = FactoryDao.getDAO("Evenement");
+        eventDao.update(monEvenement);
     }
     
     public Evenement getMonEvenement() {
