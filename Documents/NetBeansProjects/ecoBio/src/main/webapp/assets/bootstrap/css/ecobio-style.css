@@ -555,3 +555,11 @@ maCase, .ui-chkbox-box, .ui-widget, .ui-corner-all, .ui-state-default{
 
 
 }
+#formPanier{
+    float :left;
+}
+
+.imagePanier{
+    
+     background-image: url('../../custom/img/panier.png')no-repeat top;
+}
