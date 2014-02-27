@@ -9,8 +9,6 @@ import hibernate.util.HibernateUtil;
 import java.util.ArrayList;
 import java.util.List;
 import modele.metier.Produit;
-import modele.metier.ProduitHasUser;
-import modele.metier.User;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -105,56 +103,9 @@ public class DaoProduit implements IDao<Produit> {
         return execution;
 
     }
-//********** Requête TABLE : ProduitHasUser *********//
+//********** Requête  *********//
 
-    /**
-     * Cette méthode permet de récupéré tous les produits que l'utilisateur
-     * qu'il a déjà vendu ou en vente
-     *
-     * @param user
-     * @return type List d'objet ProduitHasUser
-     */
-    public List<ProduitHasUser> listeProduitByUser(User user) {
-        List<ProduitHasUser> listeProduitByUser = new ArrayList();
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        try {
-            Transaction tx = session.beginTransaction();
-
-            Query queryProduitByUser = session.createQuery("From Produit where user=?");
-            queryProduitByUser.setEntity(0, user);
-            listeProduitByUser = queryProduitByUser.list();
-
-        } catch (HibernateException e) {
-            e.getMessage();
-        } finally {
-            session.close();
-        }
-        return listeProduitByUser;
-    }
-
-    /**
-     * Cette méthode permet l'insertion la relation produit et user
-     *
-     * @param produitUser
-     * @return
-     */
-    public boolean insertProduitByUserTabAsso(ProduitHasUser produitUser) {
-        boolean execution = false;
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        try {
-            Transaction tx = session.beginTransaction();
-            session.save(produitUser);
-            tx.commit();
-            execution = true;
-        } catch (HibernateException e) {
-            e.getMessage();
-        } finally {
-            session.close();
-        }
-
-        return execution;
-    }
-
+  
     /**
      * Cette methode permet de récupérer tous les produits qui ont un statut
      * enchere.
@@ -163,21 +114,23 @@ public class DaoProduit implements IDao<Produit> {
      */
     public List<Produit> listeAllProduitByEnchere() {
         List<Produit> listeAllProduitByEnchere = new ArrayList<Produit>();
-        Session session = HibernateUtil.getSessionFactory().openSession();
+       Session session = HibernateUtil.getSessionFactory().openSession();
         try {
             Transaction tx = session.beginTransaction();
+     
 
-            Query queryProduit = session.createQuery("From Produit where avecEnchere=?");
+            Query queryProduit = session.createQuery("From Produit where avecEnchere=? and dateFin <= sysdate()");
             queryProduit.setBoolean(0, true);
-            //queryProduit.setDate(1, null)//regarder si la date de fin est plus petit que la date systeme
+           // queryProduit.setDate(1, dateNow);//regarder si la date de fin est plus petit que la date systeme
             listeAllProduitByEnchere = queryProduit.list();
-
-        } catch (HibernateException e) {
-            e.getMessage();
-        } finally {
+         
+    
+        }catch(HibernateException e){
+            e.getMessage(); 
+        }finally{
             session.close();
         }
-
+        
         return listeAllProduitByEnchere;
     }
 

@@ -295,7 +295,14 @@
             <to-view-id>xhtml/pageParticiperEvenement.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
-   
+   <navigation-rule>
+        <from-view-id>xhtml/pageEnchere.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>authentification_success_user</from-outcome>
+            <to-view-id>xhtml/pageEnchere.xhtml</to-view-id>
+        </navigation-case>
+</navigation-rule>
+
     <!-- **********************************END MENU NAVIGATION*********************************** -->
 
 </faces-config>

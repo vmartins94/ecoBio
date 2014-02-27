@@ -2,7 +2,9 @@ package modele.metier;
 
 
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -13,15 +15,15 @@ public class Produit  implements java.io.Serializable {
 
      private Integer id;
      private Type type;
+     private User user;
      private String nom;
      private int prix;
      private String image;
      private String description;
      private boolean avecEnchere;
+     private Boolean typeVente;
      private int quantiteInitiale;
-     private Integer quantiteFinale;
-     private boolean typeVente;
-     private Set produitHasUsers = new HashSet(0);
+     private int quantiteFinale;
      private Set encheres = new HashSet(0);
      private Set commandeHasProduits = new HashSet(0);
 
@@ -29,26 +31,27 @@ public class Produit  implements java.io.Serializable {
     }
 
 	
-    public Produit(Type type, int prix, String image, String description, boolean avecEnchere, int quantiteInitiale, boolean typeVente) {
+    public Produit(Type type, User user, int prix, String image, String description, boolean avecEnchere, int quantiteInitiale, int quantiteFinale) {
         this.type = type;
+        this.user = user;
         this.prix = prix;
         this.image = image;
         this.description = description;
         this.avecEnchere = avecEnchere;
         this.quantiteInitiale = quantiteInitiale;
-        this.typeVente = typeVente;
+        this.quantiteFinale = quantiteFinale;
     }
-    public Produit(Type type, String nom, int prix, String image, String description, boolean avecEnchere, int quantiteInitiale, Integer quantiteFinale, boolean typeVente, Set produitHasUsers, Set encheres, Set commandeHasProduits) {
+    public Produit(Type type, User user, String nom, int prix, String image, String description, boolean avecEnchere, Boolean typeVente, int quantiteInitiale, int quantiteFinale, Set encheres, Set commandeHasProduits) {
        this.type = type;
+       this.user = user;
        this.nom = nom;
        this.prix = prix;
        this.image = image;
        this.description = description;
        this.avecEnchere = avecEnchere;
+       this.typeVente = typeVente;
        this.quantiteInitiale = quantiteInitiale;
        this.quantiteFinale = quantiteFinale;
-       this.typeVente = typeVente;
-       this.produitHasUsers = produitHasUsers;
        this.encheres = encheres;
        this.commandeHasProduits = commandeHasProduits;
     }
@@ -66,6 +69,13 @@ public class Produit  implements java.io.Serializable {
     
     public void setType(Type type) {
         this.type = type;
+    }
+    public User getUser() {
+        return this.user;
+    }
+    
+    public void setUser(User user) {
+        this.user = user;
     }
     public String getNom() {
         return this.nom;
@@ -102,6 +112,13 @@ public class Produit  implements java.io.Serializable {
     public void setAvecEnchere(boolean avecEnchere) {
         this.avecEnchere = avecEnchere;
     }
+    public Boolean getTypeVente() {
+        return this.typeVente;
+    }
+    
+    public void setTypeVente(Boolean typeVente) {
+        this.typeVente = typeVente;
+    }
     public int getQuantiteInitiale() {
         return this.quantiteInitiale;
     }
@@ -109,26 +126,12 @@ public class Produit  implements java.io.Serializable {
     public void setQuantiteInitiale(int quantiteInitiale) {
         this.quantiteInitiale = quantiteInitiale;
     }
-    public Integer getQuantiteFinale() {
+    public int getQuantiteFinale() {
         return this.quantiteFinale;
     }
     
-    public void setQuantiteFinale(Integer quantiteFinale) {
+    public void setQuantiteFinale(int quantiteFinale) {
         this.quantiteFinale = quantiteFinale;
-    }
-    public boolean isTypeVente() {
-        return this.typeVente;
-    }
-    
-    public void setTypeVente(boolean typeVente) {
-        this.typeVente = typeVente;
-    }
-    public Set getProduitHasUsers() {
-        return this.produitHasUsers;
-    }
-    
-    public void setProduitHasUsers(Set produitHasUsers) {
-        this.produitHasUsers = produitHasUsers;
     }
     public Set getEncheres() {
         return this.encheres;
@@ -145,7 +148,10 @@ public class Produit  implements java.io.Serializable {
         this.commandeHasProduits = commandeHasProduits;
     }
 
-
+    public List convertirSetEnList(Set set){
+        List list = new ArrayList(set);
+        return list;
+    }
 
 
 }

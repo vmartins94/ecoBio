@@ -1,7 +1,6 @@
 package modele.metier;
 
 
-
 import java.util.Date;
 
 /**

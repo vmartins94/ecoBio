@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 26 f?vr. 2014 13:38:31 by Hibernate Tools 3.6.0 -->
+<!-- Generated 27 f?vr. 2014 10:32:58 by Hibernate Tools 3.6.0 -->
 <hibernate-mapping>
     <class name="modele.metier.User" table="user" catalog="ecobio">
         <id name="id" type="java.lang.Integer">
@@ -47,12 +47,6 @@
             </key>
             <one-to-many class="modele.metier.Commande" />
         </set>
-        <set name="produitHasUsers" table="produit_has_user" inverse="true" lazy="false" fetch="join">
-            <key>
-                <column name="userId" not-null="true" />
-            </key>
-            <one-to-many class="modele.metier.ProduitHasUser" />
-        </set>
         <set name="evenements_1" table="user_has_evenement" inverse="false" lazy="false" fetch="join">
             <key>
                 <column name="userId" not-null="true" />
@@ -60,6 +54,12 @@
             <many-to-many entity-name="modele.metier.Evenement">
                 <column name="evenementId" not-null="true" />
             </many-to-many>
+        </set>
+        <set name="produits" table="produit" inverse="true" lazy="false" fetch="join">
+            <key>
+                <column name="userId" not-null="true" />
+            </key>
+            <one-to-many class="modele.metier.Produit" />
         </set>
     </class>
 </hibernate-mapping>

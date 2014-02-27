@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 26 f?vr. 2014 13:38:31 by Hibernate Tools 3.6.0 -->
+<!-- Generated 27 f?vr. 2014 10:32:58 by Hibernate Tools 3.6.0 -->
 <hibernate-mapping>
     <class name="modele.metier.Produit" table="produit" catalog="ecobio">
         <id name="id" type="java.lang.Integer">
@@ -10,6 +10,9 @@
         </id>
         <many-to-one name="type" class="modele.metier.Type" fetch="select">
             <column name="typeId" not-null="true" />
+        </many-to-one>
+        <many-to-one name="user" class="modele.metier.User" fetch="select">
+            <column name="userId" not-null="true" />
         </many-to-one>
         <property name="nom" type="string">
             <column name="nom" length="45" />
@@ -26,21 +29,15 @@
         <property name="avecEnchere" type="boolean">
             <column name="avecEnchere" not-null="true" />
         </property>
+        <property name="typeVente" type="java.lang.Boolean">
+            <column name="typeVente" />
+        </property>
         <property name="quantiteInitiale" type="int">
             <column name="quantiteInitiale" not-null="true" />
         </property>
-        <property name="quantiteFinale" type="java.lang.Integer">
-            <column name="quantiteFinale" />
+        <property name="quantiteFinale" type="int">
+            <column name="quantiteFinale" not-null="true" />
         </property>
-        <property name="typeVente" type="boolean">
-            <column name="typeVente" not-null="true" />
-        </property>
-        <set name="produitHasUsers" table="produit_has_user" inverse="true" lazy="false" fetch="join">
-            <key>
-                <column name="produitId" not-null="true" />
-            </key>
-            <one-to-many class="modele.metier.ProduitHasUser" />
-        </set>
         <set name="encheres" table="enchere" inverse="true" lazy="false" fetch="join">
             <key>
                 <column name="produitId" not-null="true" />

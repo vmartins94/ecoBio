@@ -1,7 +1,5 @@
 package modele.metier;
 
-
-
 import java.util.HashSet;
 import java.util.Set;
 

@@ -1,7 +1,6 @@
 package modele.metier;
 
 
-
 import java.util.HashSet;
 import java.util.Set;
 
@@ -23,8 +22,8 @@ public class User  implements java.io.Serializable {
      private String password;
      private Set evenements = new HashSet(0);
      private Set commandes = new HashSet(0);
-     private Set produitHasUsers = new HashSet(0);
      private Set evenements_1 = new HashSet(0);
+     private Set produits = new HashSet(0);
 
     public User() {
     }
@@ -40,7 +39,7 @@ public class User  implements java.io.Serializable {
         this.ville = ville;
         this.password = password;
     }
-    public User(String nom, String prenom, String login, String email, String rue, int cp, String ville, Boolean type, String password, Set evenements, Set commandes, Set produitHasUsers, Set evenements_1) {
+    public User(String nom, String prenom, String login, String email, String rue, int cp, String ville, Boolean type, String password, Set evenements, Set commandes, Set evenements_1, Set produits) {
        this.nom = nom;
        this.prenom = prenom;
        this.login = login;
@@ -52,8 +51,8 @@ public class User  implements java.io.Serializable {
        this.password = password;
        this.evenements = evenements;
        this.commandes = commandes;
-       this.produitHasUsers = produitHasUsers;
        this.evenements_1 = evenements_1;
+       this.produits = produits;
     }
    
     public Integer getId() {
@@ -140,19 +139,19 @@ public class User  implements java.io.Serializable {
     public void setCommandes(Set commandes) {
         this.commandes = commandes;
     }
-    public Set getProduitHasUsers() {
-        return this.produitHasUsers;
-    }
-    
-    public void setProduitHasUsers(Set produitHasUsers) {
-        this.produitHasUsers = produitHasUsers;
-    }
     public Set getEvenements_1() {
         return this.evenements_1;
     }
     
     public void setEvenements_1(Set evenements_1) {
         this.evenements_1 = evenements_1;
+    }
+    public Set getProduits() {
+        return this.produits;
+    }
+    
+    public void setProduits(Set produits) {
+        this.produits = produits;
     }
 
 
