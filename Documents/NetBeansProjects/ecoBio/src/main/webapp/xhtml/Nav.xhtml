@@ -13,30 +13,22 @@
             <div class="topHeaderSection">		
                 <div class="header">	
                     <div id ="panierLabel"><h:form><h:outputLabel  value="#{managerUser.user.nom}" /> 
-                            <p:commandLink update="@form" action="cc" onclick= "dlgEspacePerso.show();" type="button" >
-                                <p:graphicImage  value="../assets/custom/img/panier.png"/>
-                            </p:commandLink>
+                            <c:choose>
+                                <c:when test="#{currentCart.listArticle.size() == 0}">
+                                    <p:commandLink  action="cc"   >
+                                        <p:graphicImage  value="/assets/custom/img/panier.png"/>
+                                    </p:commandLink>
+                                </c:when>
+                                <c:otherwise>
+                                    <p:commandLink  action="cc" onclick= "dlgPanier.show();" type="button" >
+                                        <p:graphicImage  value="/assets/custom/img/panier.png"/>
+                                    </p:commandLink>
+                                </c:otherwise>
+                            </c:choose>
+
                         </h:form></div>
-                    <p:dialog  header="Panier" widgetVar="dlgPanier" modal="true" height="180" >
-                        <h:form>
-                            <div class ="row" style="margin-top:20px ">
-                                <div class="col-md-5">
-                                    <label>Login : </label>
-                                </div>
-                                <div class="col-md-7">
-                                    <h:inputText class="form-control" value="#{connectedUser.login}" />
-                                </div>
-                            </div><br/>
-                            <div class="row">
-                                <div class="col-md-5">
-                                    <label>Password : </label>
-                                </div>
-                                <div class="col-md-7">
-                                    <h:inputText class="form-control" value="#{connectedUser.password}" />
-                                </div>
-                            </div><br/>
-                            <h:commandButton action="#{managerUser.verifAuthentification(connectedUser)}" value="Se Connecter" styleClass="btn btnConnexion" /></h:form>
-                    </p:dialog>
+
+
                     <div class="container">
                         <div class="navbar-header">
                             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -80,18 +72,21 @@
                                 <!-- Si la personne est déjà connectée on accède directement à l'espace perso sinon elle se connecte-->
                                 <c:choose>
                                     <c:when test="#{managerUser.user.id == null}">
-                                        <li class="menuLogin"><h:form> 
-                                        <!-- <p:commandButton id="modalDialogButton" value="Détail" onclick= "dlg2.show();" type="button"/>  --> 
-                                        <!-- <h:commandLink action="monEspacePerso" value="Espace Perso" styleClass="menuLogin"/> -->
-                                        <p:commandLink styleClass="menuLogin"  id="modalDialogButton" value="Espace Perso"  onclick= "dlgEspacePerso.show();" type="button"/>
-                                    </h:form>  </li>
+                                        <li class="menuLogin"> <h:form> 
+                                                <!-- <p:commandButton id="modalDialogButton" value="Détail" onclick= "dlg2.show();" type="button"/>  --> 
+                                                <!-- <h:commandLink action="monEspacePerso" value="Espace Perso" styleClass="menuLogin"/> -->
+                                                <p:commandLink styleClass="menuLogin"  id="modalDialogButton" value="Espace Perso"  onclick= "dlgEspacePerso.show();" type="button"/>
+                                            </h:form> </li>
                                     </c:when>
                                     <c:otherwise>
-                                        <h:form>
-                                            <h:commandLink action="monEspacePerso" value="Espace Perso" styleClass="menuLogin" />
-                                        </h:form>
+                                        <li class="menuLogin">
+                                            <h:form>
+                                                <h:commandLink action="monEspacePerso" value="Espace Perso" styleClass="menuLogin" />
+                                            </h:form>
+                                        </li>
                                     </c:otherwise>
                                 </c:choose>
+
                             </ul>                     
                         </div><!--/.nav-collapse -->
                     </div>
@@ -114,6 +109,21 @@
                         </div>
                         <div class="col-md-7">
                             <h:inputText class="form-control" value="#{connectedUser.password}" />
+                        </div>
+                    </div><br/>
+                    <h:commandButton action="#{managerUser.verifAuthentification(connectedUser)}" value="Se Connecter" styleClass="btn btnConnexion" /></h:form>
+            </p:dialog>
+
+            <p:dialog id="dialogBoxPanier" header="Panier" widgetVar="dlgPanier" modal="true" height="180" >
+                <h:form>
+                    <div class ="row" style="margin-top:20px ">
+                        <div class="col-md-7">
+                            <label>Mr #{managerUser.user.nom} votre panier : </label>
+                        </div>
+                        <div class="col-md-7">
+                            <ui:repeat value="#{currentCart.listArticle}" var="produit">
+                                <label>#{produit.getProduit().nom} nb :  </label>
+                            </ui:repeat>
                         </div>
                     </div><br/>
                     <h:commandButton action="#{managerUser.verifAuthentification(connectedUser)}" value="Se Connecter" styleClass="btn btnConnexion" /></h:form>

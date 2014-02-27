@@ -11,6 +11,12 @@
         <managed-bean-class>org.primefaces.examples.view.SliderBean</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
+     <managed-bean>
+        <description>Counter</description>
+        <managed-bean-name>counterBean</managed-bean-name>
+        <managed-bean-class>org.primefaces.examples.view.CounterBean</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
     <managed-bean>
         <description>Utilisateur connecté</description>
         <managed-bean-name>connectedUser</managed-bean-name>

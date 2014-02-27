@@ -3,6 +3,9 @@ package org.primefaces.examples.view;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
+import javax.faces.application.Application;
+import javax.faces.context.FacesContext;
+import javax.faces.el.ValueBinding;
 import modele.metier.Produit;
 
 public class CounterBean implements Serializable {
@@ -24,21 +27,27 @@ public class CounterBean implements Serializable {
         this.count = count;
     }
 
-    public void increment(HashMap hm, Integer monProduit) {
+    public void increment() {
 
-        Integer monInt = (Integer) hm.get(monProduit);
-
-        monInt++;
-
-        hm.put(monProduit, monInt);
+//        Integer monInt = (Integer) hm.get(monProduit);
+//
+//        monInt++;
+//
+//        hm.put(monProduit, monInt);
+        count++;
 
     }
 
-    public void decrement(Map hm, int key) {
+    public void decrement() {
         if (count > 0) {
             count--;
 
         }
 
     }
+
+    public void resetBean() {
+        count = 0;
+    }
+
 }

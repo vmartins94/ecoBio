@@ -54,7 +54,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="serviceBlock">
                 <div class="container">
                     <h3>Les dernieres ventes de fruits et legumes</h3>
@@ -77,30 +76,32 @@
                                                                                             <h:outputText id="toto_{leProduit.id}" value="{managerProduit.mapProduit.get(13)}" />
                                                                                             <p:commandButton value="-" actionListener="{counterBean.decrement(managerProduit.mapProduit,leProduit.id)}" update="toto_{leProduit.id}" />-->
 
-
                                         </div>
                                     </div>
                                 </div>
                             </div> 
-                                   <p:dialog  header="Saisissez le nombre d'article souhaité " widgetVar="dlgAjouterAupanier" modal="true" height="250" >
-                            <h:form>
-                                <div class ="row" style="margin-top:20px ">
-                                   
-                                    <label>Pour le produit :#{leProduit.nom}</label><br></br>    
-                                        <p:commandButton value="+" actionListener="{}" update="toto}" />
-                                                                                            
-                                        <h:outputText id="toto" value="{managerProduit.mapProduit.get(13)}" />
-                                                                                            
-                                        <p:commandButton value="-" actionListener="{counterBean.decrement(managerProduit.mapProduit,leProduit.id)}" update="toto_{leProduit.id}" />-->
-                                 
-                                   
-                                </div>
+                            <p:dialog  header="Saisissez le nombre d'article souhaité " widgetVar="dlgAjouterAupanier" modal="true" height="250" >
+                                <h:form>
+                                    <div class ="row" style="margin-top:20px ">
+
+                                        <label>Pour le produit :#{leProduit.nom}</label><br></br>   
+
+
+                                        <p:commandButton value="+" actionListener="#{counterBean.increment}" update="toto" />
+
+                                        <h:outputText id="toto" value="Counter :#{counterBean.count}" />
+
+                                        <p:commandButton value="-" actionListener="#{counterBean.decrement}" update="toto" />
+
+
+                                    </div>
+
+                                    <h:commandButton action="#{currentCart.addProduit(leProduit, counterBean)}" value="Ajouter aux panier" styleClass="btn btnConnexion" /> </h:form>
                                
-                                <h:commandButton action="#{managerUser.verifAuthentification(connectedUser)}" value="Se Connecter" styleClass="btn btnConnexion" /></h:form>
-                        </p:dialog>
+                            </p:dialog>
                         </c:forEach>
 
-                 
+
                         <hr></hr>
                     </div>
                 </div>
