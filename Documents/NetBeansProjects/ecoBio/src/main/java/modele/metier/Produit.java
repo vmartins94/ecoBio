@@ -1,10 +1,8 @@
 package modele.metier;
-// Generated 24 fevr. 2014 12:35:21 by Hibernate Tools 3.6.0
 
 
-import java.util.ArrayList;
+
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -20,6 +18,9 @@ public class Produit  implements java.io.Serializable {
      private String image;
      private String description;
      private boolean avecEnchere;
+     private int quantiteInitiale;
+     private Integer quantiteFinale;
+     private boolean typeVente;
      private Set produitHasUsers = new HashSet(0);
      private Set encheres = new HashSet(0);
      private Set commandeHasProduits = new HashSet(0);
@@ -28,20 +29,25 @@ public class Produit  implements java.io.Serializable {
     }
 
 	
-    public Produit(Type type, int prix, String image, String description, boolean avecEnchere) {
+    public Produit(Type type, int prix, String image, String description, boolean avecEnchere, int quantiteInitiale, boolean typeVente) {
         this.type = type;
         this.prix = prix;
         this.image = image;
         this.description = description;
         this.avecEnchere = avecEnchere;
+        this.quantiteInitiale = quantiteInitiale;
+        this.typeVente = typeVente;
     }
-    public Produit(Type type, String nom, int prix, String image, String description, boolean avecEnchere, Set produitHasUsers, Set encheres, Set commandeHasProduits) {
+    public Produit(Type type, String nom, int prix, String image, String description, boolean avecEnchere, int quantiteInitiale, Integer quantiteFinale, boolean typeVente, Set produitHasUsers, Set encheres, Set commandeHasProduits) {
        this.type = type;
        this.nom = nom;
        this.prix = prix;
        this.image = image;
        this.description = description;
        this.avecEnchere = avecEnchere;
+       this.quantiteInitiale = quantiteInitiale;
+       this.quantiteFinale = quantiteFinale;
+       this.typeVente = typeVente;
        this.produitHasUsers = produitHasUsers;
        this.encheres = encheres;
        this.commandeHasProduits = commandeHasProduits;
@@ -96,6 +102,27 @@ public class Produit  implements java.io.Serializable {
     public void setAvecEnchere(boolean avecEnchere) {
         this.avecEnchere = avecEnchere;
     }
+    public int getQuantiteInitiale() {
+        return this.quantiteInitiale;
+    }
+    
+    public void setQuantiteInitiale(int quantiteInitiale) {
+        this.quantiteInitiale = quantiteInitiale;
+    }
+    public Integer getQuantiteFinale() {
+        return this.quantiteFinale;
+    }
+    
+    public void setQuantiteFinale(Integer quantiteFinale) {
+        this.quantiteFinale = quantiteFinale;
+    }
+    public boolean isTypeVente() {
+        return this.typeVente;
+    }
+    
+    public void setTypeVente(boolean typeVente) {
+        this.typeVente = typeVente;
+    }
     public Set getProduitHasUsers() {
         return this.produitHasUsers;
     }
@@ -119,10 +146,7 @@ public class Produit  implements java.io.Serializable {
     }
 
 
-    public List convertirSetEnList(Set set){
-        List list = new ArrayList(set);
-        return list;
-    }
+
 
 }
 

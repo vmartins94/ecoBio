@@ -2,78 +2,182 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://java.sun.com/jsf/core">
-
-
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
 
     <h:body>
 
         <ui:composition template="/xhtml/Layout.xhtml">
+
             <ui:define name="content">
+
                 <div class="container">
 
-                    <div id="pageVente">
+                    <div id="pageCreationEvenement">
 
                         <div id="tabs-1"><br></br>
-                            <h4 >Creer une vente :</h4><br></br>
+
+                            <h4>Creer une vente de produit</h4>
 
                             <h:form>
 
-                                <table id="tableau">                                      
-                                    <tr>
-                                        <td id="tableauInfoPerso"><b>Vente classique</b></td>
-                                        <td id="tableauInfoPerso"><b>Vente par enchère</b></td>
-                                    </tr>
-                                </table>
-                                <br></br>
-                                <table id="tableau">                                      
-                                    <tr>
-                                        <td id="tableauInfoPerso">
-                                            <h:form>
-                                                <h:outputText value="Nom: " />
-                                                <h:outputText value="" /><br></br><br></br>
-                                                <h:outputText value="Prix: " />
-                                                <h:outputText value="" /><br></br> <br></br>
-                                                <h:outputText value="Image: " />
-                                                <h:outputText value="" /><br></br> <br></br> 
-                                                <h:outputText value="Description: " />
-                                                <h:outputText value="" /><br></br> <br></br> 
-                                                <h:outputText value="Type: " />
-                                                <h:selectOneMenu value="#{myBean.myValue}" >
-                                                    <f:selectItems value="#{myBean.myValues}"/>
-                                                </h:selectOneMenu><br></br> <br></br> 
-                                                <h:outputText value="" /><br></br><br></br>
-                                                <h:commandButton value="Créer la vente"/>
-                                            </h:form >
-                                        </td>
-                                        <td id="tableauInfoPerso">
-                                            <h:form>
-                                                <h:outputText value="Nom: " />
-                                                <h:outputText value="" /><br></br><br></br>
-                                                <h:outputText value="Prix: " />
-                                                <h:outputText value="" /><br></br> <br></br>
-                                                <h:outputText value="Image: " />
-                                                <h:outputText value="" /><br></br> <br></br> 
-                                                <h:outputText value="Description: " />
-                                                <h:outputText value="" /><br></br> <br></br> 
-                                                <h:outputText value="Type: " />
-                                                <h:selectOneMenu value="#{myBean.myValue}" >
-                                                    <f:selectItems value="#{myBean.myValues}"/>
-                                                </h:selectOneMenu><br></br> <br></br> 
-                                                <h:outputText value="Quantite: " />
-                                                <h:outputText value="" /><br></br><br></br>
-                                                <h:commandButton value="Créer l'enchère"/>
-                                            </h:form >
-                                        </td>
-                                    </tr>
-                                </table>
+                                <div class="panel-body">
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <h6>Créer un nouveau produit</h6>
+                                            <hr/>
+                                        </div>
+                                        <div class ="row">
+                                            <div class="col-md-5">
+                                                <label>Nom : </label>
+                                            </div>
+                                            <div class="col-md-7">
+                                                <h:inputText class="form-control" value="#{newProduit.nom}" />
+                                            </div>
+                                        </div><br/>
+                                        <div class="row">
+                                            <div class="col-md-5">
+                                                <label>Prix : </label>
+                                            </div>
+                                            <div class="col-md-7">
+                                                <h:inputText class="form-control" value="#{newProduit.prix}" />
+                                            </div>
+                                        </div><br/>
+                                        <div class="row">
+                                            <div class="col-md-5">
+                                                <label>Description du produit : </label>
+                                            </div>
+                                            <div class="col-md-7">
+                                                <h:inputText class="form-control" value="#{newProduit.description}" />
+                                            </div>
+                                        </div><br/>
+                                        <!-- Attention mettre a jour la bdd-->
+                                        <div class="row">
+                                            <div class="col-md-5">
+                                                <label>Quantité du produit : </label>
+                                            </div>
+                                            <div class="col-md-7">
+                                                <h:inputText class="form-control" value="#{newProduit.quantiteInitial}" />
+                                            </div>
+                                        </div><br/>
+                                        <div class="row">
+                                            <div class="col-md-5">
+                                                <label>Date de début de l'enchere: </label>
+                                            </div>
+                                            <div class="col-md-7">
+                                                <p:calendar value="#{newEnchere.dateDebut}" id="popupButtonCal" showOn="button" />
+                                            </div>
+                                        </div><br/>
+                                        <div class="row">
+                                            <div class="col-md-5">
+                                                <label>Date de fin de l'enchere : </label>
+                                            </div>
+                                            <div class="col-md-7">
+                                                <p:calendar value="#{newEnchere.dateFin}" id="popupButtonCal2" showOn="button" />
+                                            </div>
+                                        </div><br/>
+                                        <div class="row">
+                                            <div class="col-md-5">
+                                                <label>Description : </label>
+                                            </div>
+                                            <div class="col-md-7">
+                                                <h:inputTextarea class="form-control" rows="4" value="#{newEvent.description}" />
+                                            </div>
+                                        </div>
+                                        <br/>
+                                    </div>
+                                    <div class="col-md-1"/>
+                                    <div class="col-md-5">
+                                        <div class="row">
+                                            <h6>Importer</h6>
+                                            <hr/>
+                                        </div>
+                                        <div class ="row">
+                                            <div class="col-md-5">
+                                                <label>Image : </label>
+                                            </div>
+                                            <div class="col-md-7">
+                                                <h:inputText class="form-control" value="#{newProduit.image}" />
+                                            </div>
+                                        </div><br/>
+                                        <div class="row">
+                                            <div class="col-md-5">
+                                                <label>Adresse : </label>
+                                            </div>
+                                            <div class="col-md-7">
+                                                <h:inputText class="form-control" value="#{newEvent.adresse}" />
+                                            </div>
+                                        </div><br/>
+                                        <div class="row">
+                                            <div class="col-md-5">
+                                                <label>Code postal : </label>
+                                            </div>
+                                            <div class="col-md-7">
+                                                <h:inputText class="form-control" value="#{newEvent.cp}" />
+                                            </div>
+                                        </div><br/>
+                                        <div class="row">
+                                            <div class="col-md-5">
+                                                <label>Vile : </label>
+                                            </div>
+                                            <div class="col-md-7">
+                                                <h:inputText class="form-control" value="#{newEvent.ville}" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="panel-body">
+                                    <div class="col-md-5"/>
+                                    <div class="col-md-2">
+                                        <div class="row">
+                                            <c:choose>
+                                                <c:when test="#{managerUser.user.id == null}">
+                                                    <p:commandLink styleClass="btn btn-default" id="modalDialogButton" value="Connexion" onclick= "dlgEspacePerso.show();" type="button"/>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <h:commandButton class="btn btn-default" value="Créer l'évènement" action="#{managerEvenement.createEvent(newEvent,managerUser.user)}"/>
+                                                </c:otherwise>
+                                            </c:choose>
+                                            <p:dialog id="modalDialog" header="Connexion" widgetVar="dlgEspacePerso" modal="true" height="180" >
+                                                <h:form>
+                                                    <div class ="row" style="margin-top:20px ">
+                                                        <div class="col-md-5">
+                                                            <label>Login : </label>
+                                                        </div>
+                                                        <div class="col-md-7">
+                                                            <h:inputText class="form-control" value="#{connectedUser.login}" />
+                                                        </div>
+                                                    </div><br/>
+                                                    <div class="row">
+                                                        <div class="col-md-5">
+                                                            <label>Password : </label>
+                                                        </div>
+                                                        <div class="col-md-7">
+                                                            <h:inputText class="form-control" value="#{connectedUser.password}" />
+                                                        </div>
+                                                    </div><br/>
+                                                    <h:commandButton action="#{managerUser.verifAuthentification(connectedUser)}" value="Se Connecter" styleClass="btn btnConnexion" /></h:form>
+                                            </p:dialog>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5"/>
+                                </div>
+                                                                        
                             </h:form>
+
                         </div>
-                    </div>                
+
+                    </div>
+
                 </div>
+
             </ui:define>
+
         </ui:composition>
+
     </h:body>
+
 </html>

@@ -13,6 +13,7 @@ import java.util.Map;
 import modele.dao.DaoUser;
 import modele.dao.FactoryDao;
 import modele.dao.IDao;
+import modele.metier.Produit;
 import modele.metier.User;
 import utils.Constantes;
 
@@ -26,6 +27,8 @@ public class ManagerUser implements IManager<User>, Serializable {
     private User user;
     //TODO C 
     private ManagerPanier monPanier;
+
+    public ManagerUser() {}
 
     @Override
     public List<User> findAll() {
@@ -44,6 +47,21 @@ public class ManagerUser implements IManager<User>, Serializable {
 
     //TODO C : La connexion se fera en ajax
     public String verifAuthentification(User user2) {
+        
+        Map<Produit,Integer> mapA = new HashMap<Produit, Integer>();
+        
+        Produit p1 = new Produit();
+        p1.setId(1);
+         Produit p2 = new Produit();
+        p2.setId(2);       
+                
+        mapA.put(p1, 0);
+        mapA.put(p2, 0);
+                
+        
+        Integer i = mapA.get(p1);
+        
+        
         user = user2;
         DaoUser userDAO = (DaoUser) FactoryDao.getDAO("User");
 
@@ -53,10 +71,15 @@ public class ManagerUser implements IManager<User>, Serializable {
             if (user.getId() > 0) {
 
                 //SI C'EST UN ADMIN ON REDIRIGE VERS LE BACK OFFICE
-                if (user.getType() == true) {
-                    return Constantes.AUTHENTIFICATION_SUCCESS_ADMIN;
+                
+                if(user.getType() != null){
+                    if (user.getType() == true) {
+                        return Constantes.AUTHENTIFICATION_SUCCESS_ADMIN;
+                    } else {
+                        //SINON ON RESTE SUR LA PAGE COURANTE
+                        return Constantes.AUTHENTIFICATION_SUCCESS_USER;
+                    }
                 } else {
-                    //SINON ON RESTE SUR LA PAGE COURANTE
                     return Constantes.AUTHENTIFICATION_SUCCESS_USER;
                 }
             }

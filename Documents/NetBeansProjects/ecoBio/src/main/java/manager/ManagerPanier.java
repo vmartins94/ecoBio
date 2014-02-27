@@ -6,13 +6,14 @@
 
 package manager;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  *
  * @author Chac
  */
-public class ManagerPanier {
+public class ManagerPanier implements Serializable{
     
     private List<ManagerArticle> listArticle;
 }

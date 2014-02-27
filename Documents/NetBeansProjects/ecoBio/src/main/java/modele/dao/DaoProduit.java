@@ -119,15 +119,14 @@ public class DaoProduit implements IDao<Produit> {
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
             Transaction tx = session.beginTransaction();
-            
+
             Query queryProduitByUser = session.createQuery("From Produit where user=?");
             queryProduitByUser.setEntity(0, user);
             listeProduitByUser = queryProduitByUser.list();
-         
-            
+
         } catch (HibernateException e) {
             e.getMessage();
-        }finally{
+        } finally {
             session.close();
         }
         return listeProduitByUser;
@@ -135,12 +134,13 @@ public class DaoProduit implements IDao<Produit> {
 
     /**
      * Cette méthode permet l'insertion la relation produit et user
+     *
      * @param produitUser
      * @return
      */
     public boolean insertProduitByUserTabAsso(ProduitHasUser produitUser) {
         boolean execution = false;
-        Session session =  HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.getSessionFactory().openSession();
         try {
             Transaction tx = session.beginTransaction();
             session.save(produitUser);
@@ -148,35 +148,57 @@ public class DaoProduit implements IDao<Produit> {
             execution = true;
         } catch (HibernateException e) {
             e.getMessage();
-        }finally{
+        } finally {
             session.close();
         }
 
         return execution;
     }
+
     /**
-     * Cette methode permet de récupérer tous les produits qui ont un statut enchere.
-     * @return  List de type Produit
+     * Cette methode permet de récupérer tous les produits qui ont un statut
+     * enchere.
+     *
+     * @return List de type Produit
      */
-    public List<Produit> listeAllProduitByEnchere(){
-       List<Produit> listeAllProduitByEnchere = new ArrayList<Produit>();
-       Session session = HibernateUtil.getSessionFactory().openSession();
+    public List<Produit> listeAllProduitByEnchere() {
+        List<Produit> listeAllProduitByEnchere = new ArrayList<Produit>();
+        Session session = HibernateUtil.getSessionFactory().openSession();
         try {
             Transaction tx = session.beginTransaction();
-          
+
             Query queryProduit = session.createQuery("From Produit where avecEnchere=?");
             queryProduit.setBoolean(0, true);
             //queryProduit.setDate(1, null)//regarder si la date de fin est plus petit que la date systeme
             listeAllProduitByEnchere = queryProduit.list();
-         
-    
-        }catch(HibernateException e){
-            e.getMessage(); 
-        }finally{
+
+        } catch (HibernateException e) {
+            e.getMessage();
+        } finally {
             session.close();
         }
-        
+
         return listeAllProduitByEnchere;
     }
-   
+
+    public List<Produit> listeAllProduit() {
+        List<Produit> listeAllProduit = new ArrayList<Produit>();
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            Transaction tx = session.beginTransaction();
+
+            Query queryProduit = session.createQuery("From Produit where avecEnchere=?");
+            queryProduit.setBoolean(0, false);
+            //queryProduit.setDate(1, null)//regarder si la date de fin est plus petit que la date systeme
+            listeAllProduit = queryProduit.list();
+
+        } catch (HibernateException e) {
+            e.getMessage();
+        } finally {
+            session.close();
+        }
+
+        return listeAllProduit;
+    }
+
 }

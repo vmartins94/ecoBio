@@ -4,7 +4,8 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
 
     <ui:composition template="/xhtml/Layout.xhtml">
         <ui:define name="content">
@@ -39,18 +40,14 @@
                                         <h4 id="titreMetier">Prix :</h4>
                                         <h:form>                             
                                             <h:panelGrid columns="1" style="margin-bottom:10px">                    
-                                                <h:outputText id="displayRange" value="Between #{sliderBean.number6} and #{sliderBean.number7}"/>                    
+                                                <h:outputText id="displayRange" value="Entre #{sliderBean.number6} and #{sliderBean.number7}"/>                    
                                                 <p:slider for="txt6,txt7" display="displayRange" style="width:320px" range="true" 
                                                           displayTemplate="Between {min} and {max}"/>
                                             </h:panelGrid>
                                             <h:inputHidden id="txt6" value="#{sliderBean.number6}" />
                                             <h:inputHidden id="txt7" value="#{sliderBean.number7}" />
-
                                         </h:form>
-
-
                                     </div>   
-                                    
                                 </div>
                             </div>
                         </div>
@@ -58,27 +55,53 @@
                 </div>
             </div>
 
-
             <div class="serviceBlock">
                 <div class="container">
                     <h3>Les dernieres ventes de fruits et legumes</h3>
                     <div class="row">
-                        <ui:repeat var="a" value="" varStatus="status">
+                        <c:forEach var="leProduit" items="${managerProduit.listeProduit()}">
+
+                            <!--                        <ui:repeat var="leProduit" value="{managerProduit.listeProduit()}">-->
                             <div class="col-md-4">
                                 <div class="clearfix" >
                                     <i class="fa fa-compress"></i>
                                     <div class="desc">
+                                        <h4 id="titreMetier">#{leProduit.nom}</h4>
+                                        <p>Prix du lot :#{leProduit.prix} </p>
+                                        <p>Prix au kilo :#{leProduit.prix} </p>
+                                        <p>Descriptif :#{leProduit.description} </p>
+                                        <div id ="ligneAjoutPanier">
 
-                                        <h4 id="titreMetier">Titre</h4>
-                                        <p>descriptif </p>
-                                        <p:commandButton id="modalDialogButton" value="Détail" onclick= "dlg2.show();" type="button"/>  
-                                        <p:dialog id="modalDialog" header="Modal Dialog" widgetVar="dlg2" modal="true" height="200">
-                                            <h:outputText value="This is a Modal Dialog." />
-                                        </p:dialog>
+                                            <p:commandButton  value="Ajouter au panier" type="button" onclick= "dlgAjouterAupanier.show();"/>  
+                                            <!--                                                <p:commandButton value="+" actionListener="{counterBean.increment(managerProduit.mapProduit,leProduit.id)}" update="toto_{leProduit.id}" />
+                                                                                            <h:outputText id="toto_{leProduit.id}" value="{managerProduit.mapProduit.get(13)}" />
+                                                                                            <p:commandButton value="-" actionListener="{counterBean.decrement(managerProduit.mapProduit,leProduit.id)}" update="toto_{leProduit.id}" />-->
+
+
+                                        </div>
                                     </div>
                                 </div>
                             </div> 
-                        </ui:repeat>
+                                   <p:dialog  header="Saisissez le nombre d'article souhaité " widgetVar="dlgAjouterAupanier" modal="true" height="250" >
+                            <h:form>
+                                <div class ="row" style="margin-top:20px ">
+                                   
+                                    <label>Pour le produit :#{leProduit.nom}</label><br></br>    
+                                        <p:commandButton value="+" actionListener="{}" update="toto}" />
+                                                                                            
+                                        <h:outputText id="toto" value="{managerProduit.mapProduit.get(13)}" />
+                                                                                            
+                                        <p:commandButton value="-" actionListener="{counterBean.decrement(managerProduit.mapProduit,leProduit.id)}" update="toto_{leProduit.id}" />-->
+                                 
+                                   
+                                </div>
+                               
+                                <h:commandButton action="#{managerUser.verifAuthentification(connectedUser)}" value="Se Connecter" styleClass="btn btnConnexion" /></h:form>
+                        </p:dialog>
+                        </c:forEach>
+
+                 
+                        <hr></hr>
                     </div>
                 </div>
             </div> 

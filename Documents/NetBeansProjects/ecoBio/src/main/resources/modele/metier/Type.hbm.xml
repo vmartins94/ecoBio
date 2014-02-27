@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 24 f?vr. 2014 12:35:21 by Hibernate Tools 3.6.0 -->
+<!-- Generated 26 f?vr. 2014 13:38:31 by Hibernate Tools 3.6.0 -->
 <hibernate-mapping>
     <class name="modele.metier.Type" table="type" catalog="ecobio">
         <id name="id" type="java.lang.Integer">
@@ -14,7 +14,7 @@
         <property name="categorie" type="string">
             <column name="categorie" not-null="true" />
         </property>
-        <set name="saisons" table="type_has_saison" inverse="false" lazy="true" fetch="select">
+        <set name="saisons" table="type_has_saison" inverse="false" lazy="false" fetch="join">
             <key>
                 <column name="type_id" not-null="true" />
             </key>
@@ -22,7 +22,7 @@
                 <column name="saison_nom" length="45" not-null="true" />
             </many-to-many>
         </set>
-        <set name="produits" table="produit" inverse="true" lazy="true" fetch="select">
+        <set name="produits" table="produit" inverse="true" lazy="false" fetch="join">
             <key>
                 <column name="typeId" not-null="true" />
             </key>

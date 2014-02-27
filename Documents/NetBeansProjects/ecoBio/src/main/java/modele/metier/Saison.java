@@ -1,5 +1,5 @@
 package modele.metier;
-// Generated 24 fevr. 2014 12:35:21 by Hibernate Tools 3.6.0
+
 
 
 import java.util.HashSet;

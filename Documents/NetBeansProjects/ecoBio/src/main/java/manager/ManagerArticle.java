@@ -6,6 +6,7 @@
 
 package manager;
 
+import java.io.Serializable;
 import modele.metier.Produit;
 
 
@@ -14,7 +15,7 @@ import modele.metier.Produit;
  *
  * @author Chac
  */
-public class ManagerArticle {
+public class ManagerArticle implements Serializable{
     
     private Produit produit;
     private int quantite;

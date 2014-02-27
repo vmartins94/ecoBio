@@ -65,6 +65,12 @@
         <managed-bean-class>modele.metier.Enchere</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
+    <managed-bean>
+        <description>Nouveau produit à insérer dans la DB</description>
+        <managed-bean-name>newProduit</managed-bean-name>
+        <managed-bean-class>modele.metier.Produit</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
     <!-- **********************************END DECLARATION BEANS********************************* -->
    
     <!-- **********************************DECLARATION MANAGER*********************************** -->
@@ -279,6 +285,14 @@
         <navigation-case>
             <from-outcome>authentification_success_user</from-outcome>
             <to-view-id>xhtml/pageCreerEvenement.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <!-- Connexion depuis la page de participation à un évènement -->
+    <navigation-rule>
+        <from-view-id>xhtml/pageParticiperEvenement.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>authentification_success_user</from-outcome>
+            <to-view-id>xhtml/pageParticiperEvenement.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
    
