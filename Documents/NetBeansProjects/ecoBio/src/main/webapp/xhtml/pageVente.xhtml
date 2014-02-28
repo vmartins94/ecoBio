@@ -4,7 +4,8 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:c="http://java.sun.com/jsp/jstl/core">
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:f="http://java.sun.com/jsf/core">
 
     <h:body>
 
@@ -14,159 +15,257 @@
 
                 <div class="container">
 
-                    <div id="pageCreationEvenement">
+                    <div id="pageAjoutProduit">
 
                         <div id="tabs-1"><br></br>
 
                             <h4>Creer une vente de produit</h4>
 
-                            <h:form>
+                            <h:form id="idFormListProduit">
 
                                 <div class="panel-body">
-                                    <div class="col-md-6">
-                                        <div class="row">
-                                            <h6>Créer un nouveau produit</h6>
-                                            <hr/>
-                                        </div>
-                                        <div class ="row">
-                                            <div class="col-md-5">
-                                                <label>Nom : </label>
-                                            </div>
-                                            <div class="col-md-7">
-                                                <h:inputText class="form-control" value="#{newProduit.nom}" />
-                                            </div>
-                                        </div><br/>
-                                        <div class="row">
-                                            <div class="col-md-5">
-                                                <label>Prix : </label>
-                                            </div>
-                                            <div class="col-md-7">
-                                                <h:inputText class="form-control" value="#{newProduit.prix}" />
-                                            </div>
-                                        </div><br/>
-                                        <div class="row">
-                                            <div class="col-md-5">
-                                                <label>Description du produit : </label>
-                                            </div>
-                                            <div class="col-md-7">
-                                                <h:inputText class="form-control" value="#{newProduit.description}" />
-                                            </div>
-                                        </div><br/>
-                                        <!-- Attention mettre a jour la bdd-->
-                                        <div class="row">
-                                            <div class="col-md-5">
-                                                <label>Quantité du produit : </label>
-                                            </div>
-                                            <div class="col-md-7">
-                                                <h:inputText class="form-control" value="#{newProduit.quantiteInitial}" />
-                                            </div>
-                                        </div><br/>
-                                        <div class="row">
-                                            <div class="col-md-5">
-                                                <label>Date de début de l'enchere: </label>
-                                            </div>
-                                            <div class="col-md-7">
-                                                <p:calendar value="#{newEnchere.dateDebut}" id="popupButtonCal" showOn="button" />
-                                            </div>
-                                        </div><br/>
-                                        <div class="row">
-                                            <div class="col-md-5">
-                                                <label>Date de fin de l'enchere : </label>
-                                            </div>
-                                            <div class="col-md-7">
-                                                <p:calendar value="#{newEnchere.dateFin}" id="popupButtonCal2" showOn="button" />
-                                            </div>
-                                        </div><br/>
-                                        <div class="row">
-                                            <div class="col-md-5">
-                                                <label>Description : </label>
-                                            </div>
-                                            <div class="col-md-7">
-                                                <h:inputTextarea class="form-control" rows="4" value="#{newEvent.description}" />
-                                            </div>
-                                        </div>
-                                        <br/>
-                                    </div>
-                                    <div class="col-md-1"/>
-                                    <div class="col-md-5">
-                                        <div class="row">
-                                            <h6>Importer</h6>
-                                            <hr/>
-                                        </div>
-                                        <div class ="row">
-                                            <div class="col-md-5">
-                                                <label>Image : </label>
-                                            </div>
-                                            <div class="col-md-7">
-                                                <h:inputText class="form-control" value="#{newProduit.image}" />
-                                            </div>
-                                        </div><br/>
-                                        <div class="row">
-                                            <div class="col-md-5">
-                                                <label>Adresse : </label>
-                                            </div>
-                                            <div class="col-md-7">
-                                                <h:inputText class="form-control" value="#{newEvent.adresse}" />
-                                            </div>
-                                        </div><br/>
-                                        <div class="row">
-                                            <div class="col-md-5">
-                                                <label>Code postal : </label>
-                                            </div>
-                                            <div class="col-md-7">
-                                                <h:inputText class="form-control" value="#{newEvent.cp}" />
-                                            </div>
-                                        </div><br/>
-                                        <div class="row">
-                                            <div class="col-md-5">
-                                                <label>Vile : </label>
-                                            </div>
-                                            <div class="col-md-7">
-                                                <h:inputText class="form-control" value="#{newEvent.ville}" />
-                                            </div>
-                                        </div>
-                                    </div>
 
-                                </div>
-
-                                <div class="panel-body">
-                                    <div class="col-md-5"/>
-                                    <div class="col-md-2">
-                                        <div class="row">
-                                            <c:choose>
-                                                <c:when test="#{managerUser.user.id == null}">
-                                                    <p:commandLink styleClass="btn btn-default" id="modalDialogButton" value="Connexion" onclick= "dlgEspacePerso.show();" type="button"/>
-                                                </c:when>
-                                                <c:otherwise>
-                                                    <h:commandButton class="btn btn-default" value="Créer l'évènement" action="#{managerEvenement.createEvent(newEvent,managerUser.user)}"/>
-                                                </c:otherwise>
-                                            </c:choose>
-                                            <p:dialog id="modalDialog" header="Connexion" widgetVar="dlgEspacePerso" modal="true" height="180" >
-                                                <h:form>
-                                                    <div class ="row" style="margin-top:20px ">
-                                                        <div class="col-md-5">
-                                                            <label>Login : </label>
-                                                        </div>
-                                                        <div class="col-md-7">
-                                                            <h:inputText class="form-control" value="#{connectedUser.login}" />
-                                                        </div>
-                                                    </div><br/>
-                                                    <div class="row">
-                                                        <div class="col-md-5">
-                                                            <label>Password : </label>
-                                                        </div>
-                                                        <div class="col-md-7">
-                                                            <h:inputText class="form-control" value="#{connectedUser.password}" />
-                                                        </div>
-                                                    </div><br/>
-                                                    <h:commandButton action="#{managerUser.verifAuthentification(connectedUser)}" value="Se Connecter" styleClass="btn btnConnexion" /></h:form>
-                                            </p:dialog>
+                                    <!-- Importe de fichier et création de produits-->
+                                    <div class="row">
+                                        <!-- Importe de fichier -->
+                                        <div class="col-md-5">
+                                            <div class="row"><h6>Importer une liste de produits</h6><hr/></div>
+                                            <div class="row">
+                                                <div class="col-md-5">
+                                                    <h:commandButton class="btn btn-default" value="Importer" action="#{managerProduit.createProduit(newProduit,newEnchere,managerUser.user)}"/>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-5"/>
+                                        <div class="col-md-1"/>
+                                        <!-- Création de produit-->
+                                        <div class="col-md-5">
+                                            <div class="row"><h6>Ajouter un produit</h6><hr/></div>
+                                            <div class="row">
+                                                <div class="col-md-5">
+                                                    <c:choose>
+                                                        <c:when test="#{managerUser.user.id == null}">
+                                                            <p:commandLink styleClass="btn btn-default" id="modalDialogButton" value="Connexion" onclick= "dlgEspacePerso.show();" type="button"/>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <p:commandLink styleClass="btn btn-default" id="mDialogCreationProduit" value="Ajouter un produit" onclick= "dlgCreationProduit.show();" type="button"/>
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div><br/>
+                                    <!-- Liste des produits-->
+                                    <div class="row"><h6>Mes produits</h6><hr/></div>
+                                    <div class="row">
+                                        <p:dataTable id="tbl" var="produit" value="#{managerProduit.findAllMines(managerUser.user)}" paginatorPosition="bottom" paginator="true" rows="5">  
+                                            <p:column>  
+                                                <f:facet name="header"> <h:outputText value="Image" /> </f:facet>
+                                                <img width="80px" height="80px" src="assets/custom/img/fruit1.png" />
+                                            </p:column> 
+                                            <p:column>  
+                                                <f:facet name="header"> <h:outputText value="Nom" /> </f:facet>  
+                                                <h:outputText value="#{produit.nom}" />  
+                                            </p:column> 
+                                            <p:column>  
+                                                <f:facet name="header"> <h:outputText value="Description" /> </f:facet>  
+                                                <h:outputText value="#{produit.description}"/>  
+                                            </p:column>
+                                            <p:column>  
+                                                <f:facet name="header"> <h:outputText value="Prix" /> </f:facet>  
+                                                <h:outputText value="#{produit.prix}" />  
+                                            </p:column> 
+                                            <p:column>  
+                                                <f:facet name="header"> <h:outputText value="Type de vente" /> </f:facet> 
+                                                <c:choose>
+                                                    <c:when test="#{produit.typeVente == false}">
+                                                        <h:outputText value="En lot" />
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <h:outputText value="Au kilo" />
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </p:column>
+                                            <p:column>  
+                                                <f:facet name="header"> <h:outputText value="Mode de Vente" /> </f:facet> 
+                                                <c:choose>
+                                                    <c:when test="#{produit.avecEnchere == false}">
+                                                        <h:outputText value="En ligne" />
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <h:outputText value="Aux enchères" />
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </p:column>
+                                            <p:column>  
+                                                <f:facet name="header"> <h:outputText value="Plus de détaile" /> </f:facet> 
+                                                <p:commandLink value="Consulter" onclick= "dlgConsulterProduit_#{produit.id.toString()}.show();" type="button" />
+                                                <!--<h:outputText value="Consulter#{produit.prix}" />-->  
+                                            </p:column>
+                                        </p:dataTable>
+                                    </div><br/>
                                 </div>
-                                                                        
+                                <!-- Dialogue de consultation de produit-->
+                                <p:dialog id="modalDialogConsulterProduit_#{produit.id.toString()}" header="Détail du produit" widgetVar="dlgConsulterProduit_#{produit.id.toString()}" modal="true" width="500" height="500" >
+                                    <div class="panel-body" style="padding: 20px;">
+                                        <label>Nom : #{produit.nom}</label><br/>
+                                        <label>Type : #{produit.type.nom}</label><br/>
+                                        <label>Prix : #{produit.prix} €</label><br/>
+                                        <label>Description : #{produit.description}</label><br/>
+                                        <label>Quantité initiale : #{produit.quantiteInitiale}</label><br/>
+                                        <label>Quantité disponible : #{produit.quantiteFinale}</label><br/>
+                                        <label>Mode de vente : </label><br/>
+                                        <label>Type de vente : #{produit.avecEnchere}</label><br/>
+                                        <p align="center"><b>Période d'enchère</b></p>
+                                        Ici la liste des encheres
+                                    </div>
+                                </p:dialog>
                             </h:form>
+
+                            <!-- Dialogue de création de produit-->
+                            <p:dialog id="modalDialogCreationProduit" header="Ajouter un produit" widgetVar="dlgCreationProduit" modal="true" width="500" height="500" >
+
+                                <h:form id="idFormVente">
+
+                                    <div class="panel-body">
+
+                                        <div class ="row">
+                                            <div class="row">
+                                                <div class="col-md-5">
+                                                    <label>Nom : </label>
+                                                </div>
+                                                <div class="col-md-7">
+                                                    <h:inputText class="form-control" value="#{newProduit.nom}" />
+                                                </div>
+                                            </div><br/>
+                                            <div class="row">
+                                                <div class="col-md-5">
+                                                    <label>Type : </label>
+                                                </div>
+                                                <div class="col-md-7">
+                                                    <h:selectOneMenu id="idType" value="#{managerProduit.selectedType}" converter="typeConverter">
+                                                        <f:selectItems value="#{managerAdmin.selectedItemFindAllType()}" />
+                                                    </h:selectOneMenu>
+                                                </div>
+                                            </div><br/>
+                                            <div class="row">
+                                                <div class="col-md-5">
+                                                    <label>Prix : </label>
+                                                </div>
+                                                <div class="col-md-7">
+                                                    <h:inputText class="form-control" value="#{newProduit.prix}" />
+                                                </div>
+                                            </div><br/>    
+                                            <div class="row">
+                                                <div class="col-md-5">
+                                                    <label>Description du produit : </label>
+                                                </div>
+                                                <div class="col-md-7">
+                                                    <h:inputText class="form-control" value="#{newProduit.description}" />
+                                                </div>
+                                            </div><br/>
+                                            <div class="row">
+                                                <div class="col-md-5">
+                                                    <label>Type de vente : </label>
+                                                </div>
+                                                <div class="col-md-7">
+                                                    <h:selectOneRadio id="idTypeVente" value="#{managerProduit.selectedTypeVente}"> 
+                                                        <f:selectItem itemLabel="En ligne" itemValue="false" />  
+                                                        <f:selectItem itemLabel="En enchère" itemValue="true" />  
+                                                        <p:ajax event="click" update="@form,idFormVente"/>
+                                                    </h:selectOneRadio>
+                                                </div>
+                                            </div><br/>
+                                            <p:panel rendered="#{managerProduit.selectedTypeVente}">
+                                                <p align="center"><b>Période d'enchère</b></p>
+                                                <div class="row">
+                                                    <div class="col-md-5">
+                                                        <label>Date de début : </label>
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                        <p:calendar value="#{newEnchere.dateDebut}" id="enchereDateDebut"/>
+                                                    </div>
+                                                </div><br/>
+                                                <div class="row">
+                                                    <div class="col-md-5">
+                                                        <label>Date de fin : </label>
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                        <p:calendar value="#{newEnchere.dateFin}" id="enchereDateFin"/>
+                                                    </div>
+                                                </div>
+                                            </p:panel><br/>
+                                            <p:panel rendered="#{!managerProduit.selectedTypeVente}">
+                                                <p align="center"><b>Produit en ligne</b></p>
+                                                <div class="row">
+                                                    <div class="col-md-5">
+                                                        <label>Quantité du produit : </label>
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                        <h:inputText class="form-control" value="#{newProduit.quantiteInitiale}" />
+                                                    </div>
+                                                </div><br/>
+                                                <div class="row">
+                                                    <div class="col-md-5">
+                                                        <label>Mode de vente : </label>
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                        <h:selectOneRadio id="options" value="#{managerProduit.selectedModeVente}">  
+                                                            <f:selectItem itemLabel="Par lot" itemValue="false" />  
+                                                            <f:selectItem itemLabel="Au kilo" itemValue="true" />  
+                                                        </h:selectOneRadio>
+                                                    </div>
+                                                </div>
+                                            </p:panel><br/>
+                                            <div class="row">
+                                                <div class="col-md-5">
+                                                    <label>Image : </label>
+<!--                                                    <h:form id="form" enctype="multipart/form-data">
+                                                      <p:fileUpload fileUploadListener="#{fileUploadController.upload}" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" sizeLimit="100000"/>
+                                                    </h:form>-->
+
+<h:form enctype="multipart/form-data">
+<p:fileUpload mode="advanced" fileUploadListener="#{uploaderBB.handleFileUpload}" allowTypes="/(\.|\/)(gif|jpg|jpeg|gif|png|PNG|GIF|JPG|JPEG)$/" />
+</h:form>
+                                                                                                       
+                                                </div>
+                                                <div class="col-md-7">
+                                                    <c:choose>
+                                                        <c:when test="#{managerUser.user.id == null}">
+                                                            <p:commandLink styleClass="btn btn-default" id="modalDialogButton" value="Connexion" onclick= "dlgEspacePerso.show();" type="button"/>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <h:commandButton class="btn btn-default" value="Créer le produit" action="#{managerProduit.createProduit(newProduit,newEnchere,managerUser.user)}"/>
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                </div>
+                                            </div><br/>
+                                        </div>
+                                    </div>
+                                </h:form>
+                            </p:dialog>
+                                                        
+                            <!-- Dialogue de connexion -->
+                            <p:dialog id="modalDialogConnexion" header="Connexion" widgetVar="dlgEspacePerso" modal="true" height="180" >
+                                <h:form>
+                                    <div class ="row" style="margin-top:20px ">
+                                        <div class="col-md-5">
+                                            <label>Login : </label>
+                                        </div>
+                                        <div class="col-md-7">
+                                            <h:inputText class="form-control" value="#{connectedUser.login}" />
+                                        </div>
+                                    </div><br/>
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            <label>Password : </label>
+                                        </div>
+                                        <div class="col-md-7">
+                                            <h:inputText class="form-control" value="#{connectedUser.password}" />
+                                        </div>
+                                    </div><br/>
+                                    <h:commandButton action="#{managerUser.verifAuthentification(connectedUser)}" value="Se Connecter" styleClass="btn btnConnexion" />
+                                </h:form>
+                            </p:dialog>
 
                         </div>
 

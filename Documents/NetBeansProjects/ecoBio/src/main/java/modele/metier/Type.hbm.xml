@@ -14,7 +14,7 @@
         <property name="categorie" type="string">
             <column name="categorie" not-null="true" />
         </property>
-        <set name="saisons" table="type_has_saison" inverse="false" lazy="false" fetch="join">
+        <set name="saisons" table="type_has_saison" inverse="false" lazy="true" fetch="select">
             <key>
                 <column name="type_id" not-null="true" />
             </key>

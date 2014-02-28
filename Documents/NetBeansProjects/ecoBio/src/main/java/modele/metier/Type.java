@@ -67,6 +67,10 @@ public class Type  implements java.io.Serializable {
         this.produits = produits;
     }
 
+    public void setCategorie(Set selectTest) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 
 
 

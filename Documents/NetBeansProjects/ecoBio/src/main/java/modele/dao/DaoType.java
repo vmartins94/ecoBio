@@ -60,20 +60,38 @@ public class DaoType implements IDao<Type> {
 
     @Override
     public Type selectById(int id) {
-     Session session = HibernateUtil.getSessionFactory().openSession();
-      Type type = null;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Type type = null;
         try {
             Transaction tx = session.beginTransaction();
             Query queryType = session.createQuery("From Type where id=?");
             queryType.setInteger(0, id);
             type = (Type) queryType.uniqueResult();
-       
+
         } catch (HibernateException e) {
             e.getMessage();
         } finally {
             session.close();
         }
-        return type; }
+        return type;
+    }
+    
+    public Type selectByName(String name) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Type type = null;
+        try {
+            Transaction tx = session.beginTransaction();
+            Query queryType = session.createQuery("From Type where nom=?");
+            queryType.setString(0, name);
+            type = (Type) queryType.uniqueResult();
+
+        } catch (HibernateException e) {
+            e.getMessage();
+        } finally {
+            session.close();
+        }
+        return type;
+    }
 
     @Override
     public boolean update(Type objet) {

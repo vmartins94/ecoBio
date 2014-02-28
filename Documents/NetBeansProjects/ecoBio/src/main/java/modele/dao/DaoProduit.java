@@ -9,6 +9,7 @@ import hibernate.util.HibernateUtil;
 import java.util.ArrayList;
 import java.util.List;
 import modele.metier.Produit;
+import modele.metier.User;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -39,6 +40,7 @@ public class DaoProduit implements IDao<Produit> {
 
     }
 
+    
     @Override
     public boolean insert(Produit objet) {
         boolean execution = false;
@@ -50,22 +52,28 @@ public class DaoProduit implements IDao<Produit> {
             execution = true;
         } catch (HibernateException e) {
             e.getMessage();
+        } finally {
+            session.close();
         }
+        
         return execution;
     }
 
     @Override
     public boolean update(Produit objet) {
         boolean execution = false;
+        Session session = HibernateUtil.getSessionFactory().openSession();
         try {
-            Session session = HibernateUtil.getSessionFactory().openSession();
             Transaction tx = session.beginTransaction();
             session.update(objet);
             tx.commit();
             execution = true;
         } catch (HibernateException e) {
             e.getMessage();
+        } finally {
+            session.close();
         }
+        
         return execution;
     }
 
@@ -99,6 +107,8 @@ public class DaoProduit implements IDao<Produit> {
             execution = true;
         } catch (HibernateException e) {
             e.getMessage();
+        }  finally {
+            session.close();
         }
         return execution;
 
@@ -152,6 +162,30 @@ public class DaoProduit implements IDao<Produit> {
         }
 
         return listeAllProduit;
+    }
+    
+    /**
+     * Récupération des produits en fonction d'un utilisateur
+     * @param user
+     * @return 
+     */
+    public List<Produit> selectAllByUser(User user) {
+
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        List<Produit> listeProduits = new ArrayList();
+        try {
+            Transaction tx = session.beginTransaction();
+            Query queryAllProduit = session.createQuery("From Produit where userId=?");
+            queryAllProduit.setInteger(0, user.getId());
+            listeProduits = queryAllProduit.list();
+        } catch (HibernateException e) {
+            e.getMessage();
+        } finally {
+            session.close();
+        }
+
+        return listeProduits;
+
     }
 
 }

@@ -55,9 +55,27 @@
                                     </ul>
                                 </li>
 
-                                <li class="menuVente"><h:form> 
+<!--                                <li class="menuVente"><h:form> 
                                         <h:commandLink action="vente" value="Vente" styleClass="menuLogin" ></h:commandLink>
-                                    </h:form>  </li>
+                                    </h:form>  </li>-->
+                                
+                                <!-- MENU VENTE -->
+                                <c:choose>
+                                    <c:when test="#{managerUser.user.id == null}">
+                                        <li class="menuVente"> 
+                                            <h:form> 
+                                                <p:commandLink styleClass="menuLogin" id="modalDialogButton" value="Vente" onclick= "dlgEspacePerso.show();" type="button"/>
+                                            </h:form> 
+                                        </li>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <li class="menuVente">
+                                            <h:form>
+                                                <h:commandLink action="vente" value="Vente" styleClass="menuLogin" />
+                                            </h:form>
+                                        </li>
+                                    </c:otherwise>
+                                </c:choose>
 
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="menu">Evenement <b class="caret"></b></a>

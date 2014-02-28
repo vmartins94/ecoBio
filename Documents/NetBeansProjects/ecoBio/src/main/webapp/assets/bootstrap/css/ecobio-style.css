@@ -576,6 +576,24 @@ maCase, .ui-chkbox-box, .ui-widget, .ui-corner-all, .ui-state-default{
 
 }
 
+#pageAjoutProduit {
+    width:100%;
+    height: 800px;
+    position: relative;
+    margin: 0 auto;
+    margin-top :50px;
+    padding-left: 20px;
+    margin-bottom: 100px;
+    overflow:hidden;  
+    box-shadow: 3px 3px 3px rgb(251,251,251), -2px 1px #fff;
+    background: #FBFBFB;
+    border-bottom-right-radius: 45px;
+    border-bottom-left-radius: 45px;
+    border-top-left-radius: 45px;
+    border-top-right-radius: 45px;
+    -moz-border-radius: 45px;
+}
+
 #traitseparation {
     border : 1px solid #eee;
     float :left;

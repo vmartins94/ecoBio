@@ -8,14 +8,19 @@ package manager;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
+import modele.dao.DaoSaison;
 import modele.dao.FactoryDao;
 import modele.dao.IDao;
 import modele.metier.Etat;
 import modele.metier.Saison;
 import modele.metier.Type;
 import modele.metier.User;
+import utils.Constantes;
 
 /**
  *
@@ -33,12 +38,14 @@ public class ManagerAdmin implements Serializable{
     private List<SelectItem> listEtat;
     private List<SelectItem> listSaison;
     private List<SelectItem> listType;
+    private List<SelectItem> listCategorie;
     
     //Objets selectionnés dans la liste
-    private List<Saison> selectedSaisonForType;
+    private List<String> selectedSaisonForType;
     private List<Saison> selectedSaison;
     private List<Etat> selectedEtat;
-    private List<Type> selectedType;
+    private List<Type> selectedType = new ArrayList<Type>();
+    private List<String> selectedCategorie;
  
     public String createEtat(Etat newEtat) {
         etat = newEtat;
@@ -57,7 +64,17 @@ public class ManagerAdmin implements Serializable{
     public String createTypeProduit(Type newType) {
         type = newType;
         IDao typeDao = FactoryDao.getDAO("Type");
-        type.getSaisons().add(selectedSaisonForType);
+        DaoSaison saisonDao = (DaoSaison) FactoryDao.getDAO("Saison");
+        
+        Set<Saison> setSaison = new HashSet<Saison>();
+        
+        String nameSaison = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("idFormType:idSaison");
+        setSaison.add(saisonDao.selectByName(nameSaison));
+        type.setSaisons(setSaison);
+
+        String categorie = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("idFormType:idCategorie");
+        type.setCategorie(categorie);
+        
         typeDao.insert(type);
         return "";
     }
@@ -115,6 +132,16 @@ public class ManagerAdmin implements Serializable{
         }
 
         return listType;
+    }
+
+    public List<SelectItem> selectedItemFindAllCategorie() {
+
+        listCategorie = new ArrayList<SelectItem>();
+        listCategorie.add(new SelectItem(Constantes.CATEGORIE_FRUITS));
+        listCategorie.add(new SelectItem(Constantes.CATEGORIE_LEGUMES));
+        listCategorie.add(new SelectItem(Constantes.CATEGORIE_PRODUITS_DEFECTUEUX));
+
+        return listCategorie;
     }
     
     public List<User> findAllUser() {
@@ -179,25 +206,13 @@ public class ManagerAdmin implements Serializable{
         this.selectedEtat = selectedEtat;
     }
 
-    public List<Saison> getSelectedSaisonForType() {
+    public List<String> getSelectedSaisonForType() {
         return selectedSaisonForType;
     }
 
-    public void setSelectedSaisonForType(List<Saison> selectedSaisonForType) {
+    public void setSelectedSaisonForType(List<String> selectedSaisonForType) {
         this.selectedSaisonForType = selectedSaisonForType;
     }
-
-//     public List<SelectItem> getMyListProject() {
-// 
-//     findAllSaison();
-// if (MyListproject == null) {
-// MyListproject = new ArrayList<SelectItem>();
-//     for (Saison saison : listS) {
-//         MyListproject.add(new SelectItem(saison.getNom()));
-//     }
-// }
-// return MyListproject;
-//}
 
     public List<Saison> getSelectedSaison() {
         return selectedSaison;
@@ -213,6 +228,22 @@ public class ManagerAdmin implements Serializable{
 
     public void setSelectedType(List<Type> selectedType) {
         this.selectedType = selectedType;
+    }
+
+    public List<SelectItem> getListCategorie() {
+        return listCategorie;
+    }
+
+    public void setListCategorie(List<SelectItem> listCategorie) {
+        this.listCategorie = listCategorie;
+    }
+
+    public List<String> getSelectedCategorie() {
+        return selectedCategorie;
+    }
+
+    public void setSelectedCategorie(List<String> selectedCategorie) {
+        this.selectedCategorie = selectedCategorie;
     }
  
 }

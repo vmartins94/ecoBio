@@ -8,7 +8,7 @@
             <column name="nom" length="45" />
             <generator class="assigned" />
         </id>
-        <set name="types" table="type_has_saison" inverse="false" lazy="false" fetch="join">
+        <set name="types" table="type_has_saison" inverse="false" lazy="true" fetch="select">
             <key>
                 <column name="saison_nom" length="45" not-null="true" />
             </key>

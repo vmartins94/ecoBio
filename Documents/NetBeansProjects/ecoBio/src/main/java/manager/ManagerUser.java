@@ -48,20 +48,6 @@ public class ManagerUser implements IManager<User>, Serializable {
     //TODO C : La connexion se fera en ajax
     public String verifAuthentification(User user2) {
         
-        Map<Produit,Integer> mapA = new HashMap<Produit, Integer>();
-        
-        Produit p1 = new Produit();
-        p1.setId(1);
-         Produit p2 = new Produit();
-        p2.setId(2);       
-                
-        mapA.put(p1, 0);
-        mapA.put(p2, 0);
-                
-        
-        Integer i = mapA.get(p1);
-        
-        
         user = user2;
         DaoUser userDAO = (DaoUser) FactoryDao.getDAO("User");
 

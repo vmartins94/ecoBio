@@ -45,36 +45,36 @@
         <description>Nouvel etat à  insérer dans la DB</description>
         <managed-bean-name>newEtat</managed-bean-name>
         <managed-bean-class>modele.metier.Etat</managed-bean-class>
-        <managed-bean-scope>session</managed-bean-scope>
+        <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
     <managed-bean>
         <description>Nouvelle saison à insérer dans la DB</description>
         <managed-bean-name>newSaison</managed-bean-name>
         <managed-bean-class>modele.metier.Saison</managed-bean-class>
-        <managed-bean-scope>session</managed-bean-scope>
+        <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
     <managed-bean>
         <description>Nouveau type de produit à insérer dans la DB</description>
         <managed-bean-name>newTypeProduit</managed-bean-name>
         <managed-bean-class>modele.metier.Type</managed-bean-class>
-        <managed-bean-scope>session</managed-bean-scope>
+        <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
     <managed-bean>
         <description>Nouvel évènement à insérer dans la DB</description>
         <managed-bean-name>newEvent</managed-bean-name>
         <managed-bean-class>modele.metier.Evenement</managed-bean-class>
-        <managed-bean-scope>session</managed-bean-scope>
-    </managed-bean>
-    <managed-bean>
-        <description>Nouvel utilisateur à insérer dans la DB</description>
-        <managed-bean-name>newEnchere</managed-bean-name>
-        <managed-bean-class>modele.metier.Enchere</managed-bean-class>
-        <managed-bean-scope>session</managed-bean-scope>
+        <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
     <managed-bean>
         <description>Nouveau produit à insérer dans la DB</description>
         <managed-bean-name>newProduit</managed-bean-name>
         <managed-bean-class>modele.metier.Produit</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <description>Nouvelle enchère à insérer dans la DB</description>
+        <managed-bean-name>newEnchere</managed-bean-name>
+        <managed-bean-class>modele.metier.Enchere</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
     <!-- **********************************END DECLARATION BEANS********************************* -->
@@ -138,6 +138,12 @@
             <property-name>uneEnchere</property-name>
             <value>#{newEnchere}</value>
         </managed-property>
+    </managed-bean>
+    <managed-bean>
+        <description>TEST</description>
+        <managed-bean-name>uploaderBB</managed-bean-name>
+        <managed-bean-class>manager.UploaderBB</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
     <!-- **********************************END DECLARATION MANAGER******************************* -->
    
@@ -307,8 +313,30 @@
             <from-outcome>authentification_success_user</from-outcome>
             <to-view-id>xhtml/pageEnchere.xhtml</to-view-id>
         </navigation-case>
-</navigation-rule>
+    </navigation-rule>
+    <!-- Connexion depuis la page de vente -->
+    <navigation-rule>
+        <from-view-id>xhtml/pageVente.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>authentification_success_user</from-outcome>
+            <to-view-id>xhtml/pageVente.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
 
     <!-- **********************************END MENU NAVIGATION*********************************** -->
-
+    <!-- **********************************CONVERTER********************************************* -->
+    <converter>
+        <converter-id>typeConverter</converter-id>
+	<converter-class>converter.ConverterType</converter-class>
+    </converter>
+    <converter>
+        <converter-id>saisonConverter</converter-id>
+	<converter-class>converter.ConverterSaison</converter-class>
+    </converter>
+    <converter>
+        <converter-id>categorieConverter</converter-id>
+	<converter-class>converter.ConverterCategorie</converter-class>
+    </converter>
+    <!-- **********************************END CONVERTER***************************************** -->
+    
 </faces-config>
