@@ -8,6 +8,7 @@ package modele.dao;
 import hibernate.util.HibernateUtil;
 import java.util.ArrayList;
 import java.util.List;
+import manager.ManagerArticle;
 import modele.metier.Produit;
 import modele.metier.User;
 import org.hibernate.HibernateException;
@@ -186,6 +187,27 @@ public class DaoProduit implements IDao<Produit> {
 
         return listeProduits;
 
+    }
+    
+    public boolean updateProduit(ManagerArticle MonManagerArticle)
+    {
+     boolean execution = false;
+        try {
+            Session session = HibernateUtil.getSessionFactory().openSession();
+            Transaction tx = session.beginTransaction();
+           Integer quantiteActuelle = MonManagerArticle.getProduit().getQuantiteFinale();
+           Integer nouvelleQuantite = quantiteActuelle - MonManagerArticle.getQuantite();
+            MonManagerArticle.getProduit().setQuantiteFinale(nouvelleQuantite);
+            session.update(MonManagerArticle.getProduit());
+            tx.commit();
+            execution = true;
+                
+            
+           
+        } catch (HibernateException e) {
+            e.getMessage();
+        }
+        return execution;
     }
 
 }

@@ -8,6 +8,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.el.ValueBinding;
 import modele.metier.Produit;
 
+
 public class CounterBean implements Serializable {
 
     private int count;
@@ -29,11 +30,6 @@ public class CounterBean implements Serializable {
 
     public void increment() {
 
-//        Integer monInt = (Integer) hm.get(monProduit);
-//
-//        monInt++;
-//
-//        hm.put(monProduit, monInt);
         count++;
 
     }
@@ -41,9 +37,7 @@ public class CounterBean implements Serializable {
     public void decrement() {
         if (count > 0) {
             count--;
-
         }
-
     }
 
     public void resetBean() {

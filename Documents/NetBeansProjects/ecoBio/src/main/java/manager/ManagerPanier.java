@@ -33,10 +33,51 @@ public class ManagerPanier implements Serializable {
     }
 
     public void addProduit(Produit monProduit, CounterBean count) {
-        
         ManagerArticle monManagerArticle = new ManagerArticle(monProduit, count.getCount());
-        listArticle.add(monManagerArticle);
-        count.resetBean();
-        
+        Boolean monBool = false;
+        Integer i = 0;
+
+        if (!listArticle.isEmpty()) {
+            while (!monBool && i < listArticle.size()) {
+
+                if (monProduit.getId() == listArticle.get(i).getProduit().getId()) {
+                    Integer maValeurActuelle = listArticle.get(i).getQuantite();
+                    Integer maValeurFinale = count.getCount() + maValeurActuelle;
+                    monManagerArticle.setQuantite(maValeurFinale);
+                    listArticle.set(i, monManagerArticle);
+                    count.resetBean();
+                    monBool = true;
+                }
+                i++;
+            }
+            if (monBool == false) {
+
+                listArticle.add(monManagerArticle);
+                count.resetBean();
+
+            }
+        } else {
+            listArticle.add(monManagerArticle);
+            count.resetBean();
+        }
+
+    }
+
+    public void deleteProduit(Integer id) {
+
+        Boolean monBool = false;
+        Integer i = 0;
+
+        while (!monBool && i <= listArticle.size()) {
+
+            if (id == listArticle.get(i).getProduit().getId()) {
+                ManagerArticle monManagerArticle = listArticle.get(i);
+                listArticle.remove(monManagerArticle);
+                monBool = true;
+
+            }
+            i++;
+        }
+
     }
 }

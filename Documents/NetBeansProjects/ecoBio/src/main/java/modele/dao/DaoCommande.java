@@ -150,9 +150,7 @@ public class DaoCommande implements IDao<Commande> {
      * Cette methode permet d'insert une commande en fonction d'un pronduit et
      * d'une quantité
      *
-     * @param commande
-     * @param produit
-     * @param qte
+     * @param commandeHasProduit
      * @return type boolean = true lorsque la requête a bien été executer
      */
     public boolean insertTableAsso(CommandeHasProduit commandeHasProduit) {

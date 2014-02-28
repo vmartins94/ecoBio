@@ -17,6 +17,7 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import modele.dao.DaoCommande;
+import modele.dao.DaoProduit;
 import modele.dao.FactoryDao;
 import modele.dao.IDao;
 import modele.metier.Commande;
@@ -53,6 +54,61 @@ public class ManagerCommande implements IManager<Commande>, Serializable {
 
     @Override
     public String create() {
+
+        //appel Dao
+        DaoCommande dao = (DaoCommande) FactoryDao.getDAO("Commande");
+        IDao daoP = FactoryDao.getDAO("Produit");
+        //Recuperation des objets
+        Produit produit = (Produit) daoP.selectById(5);
+        maCommande = dao.selectById(2);
+        // creation objet et insertion dans la base  ok 
+        CommandeHasProduit commandehasProduit = new CommandeHasProduit(produit, maCommande, 2);
+        dao.insertTableAsso(commandehasProduit);
+
+        // creation d'une liste de type commandeHasProduit
+        Set<CommandeHasProduit> commandeHasProduit = new HashSet<CommandeHasProduit>();
+        commandeHasProduit.add(commandehasProduit);
+        //mise a jour de la commande
+        maCommande.setPrixTotal(Float.valueOf(25));
+        maCommande.setCommandeHasProduits(commandeHasProduit);
+        dao.update(maCommande);
+
+        return null;
+
+    }
+
+    public String create(List<ManagerArticle> listManagerArticle, User user) {
+
+        //appel Dao
+        Integer quantiteTotal = 0;
+        Integer nbArticle = 0;
+        Integer prixTotal = 0;
+        DaoCommande dao = (DaoCommande) FactoryDao.getDAO("Commande");
+        IDao daoEtat = FactoryDao.getDAO("Etat");
+        Etat monEtat = (Etat) daoEtat.selectById(1);
+        Date maDate = new Date();
+        for (ManagerArticle monManagerArticle : listManagerArticle) {
+
+            quantiteTotal = monManagerArticle.getQuantite() + quantiteTotal;
+            nbArticle = listManagerArticle.size();
+            prixTotal = monManagerArticle.getQuantite() * monManagerArticle.getProduit().getPrix() + prixTotal;
+
+        }
+        Float prixFloat = Float.valueOf(prixTotal);
+        //Recuperation des objets
+        Commande nouvelleCommande = new Commande(monEtat, user, maDate, prixFloat, quantiteTotal);
+        dao.insert(nouvelleCommande);
+        // creation objet et insertion dans la base  ok 
+        for (ManagerArticle monManagerArticle : listManagerArticle) {
+
+            CommandeHasProduit commandehasProduit = new CommandeHasProduit(monManagerArticle.getProduit(), nouvelleCommande, monManagerArticle.getQuantite());
+            dao.insertTableAsso(commandehasProduit);
+
+        }
+        
+        ManagerProduit monManagerProduit = new ManagerProduit();
+        monManagerProduit.updateProduit(listManagerArticle);
+        listManagerArticle.clear();
         return null;
     }
 
@@ -170,7 +226,7 @@ public class ManagerCommande implements IManager<Commande>, Serializable {
     }
 
     public void update() {
-        
+
         //appel Dao
         DaoCommande dao = (DaoCommande) FactoryDao.getDAO("Commande");
         IDao daoP = FactoryDao.getDAO("Produit");
@@ -180,7 +236,7 @@ public class ManagerCommande implements IManager<Commande>, Serializable {
         // creation objet et insertion dans la base  ok 
         CommandeHasProduit commandehasProduit = new CommandeHasProduit(produit, maCommande, 2);
         dao.insertTableAsso(commandehasProduit);
-        
+
         // creation d'une liste de type commandeHasProduit
         Set<CommandeHasProduit> commandeHasProduit = new HashSet<CommandeHasProduit>();
         commandeHasProduit.add(commandehasProduit);

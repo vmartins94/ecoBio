@@ -37,6 +37,14 @@ public class Commande  implements java.io.Serializable {
        this.quantiteTotal = quantiteTotal;
        this.commandeHasProduits = commandeHasProduits;
     }
+    
+      public Commande(Etat etat, User user, Date dateCreation, Float prixTotal, Integer quantiteTotal) {
+       this.etat = etat;
+       this.user = user;
+       this.dateCreation = dateCreation;
+       this.prixTotal = prixTotal;
+       this.quantiteTotal = quantiteTotal;
+    }
    
     public Integer getId() {
         return this.id;

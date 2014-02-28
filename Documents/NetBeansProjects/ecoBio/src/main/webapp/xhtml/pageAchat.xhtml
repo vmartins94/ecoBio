@@ -42,7 +42,7 @@
                                             <h:panelGrid columns="1" style="margin-bottom:10px">                    
                                                 <h:outputText id="displayRange" value="Entre #{sliderBean.number6} and #{sliderBean.number7}"/>                    
                                                 <p:slider for="txt6,txt7" display="displayRange" style="width:320px" range="true" 
-                                                          displayTemplate="Between {min} and {max}"/>
+                                                          displayTemplate="Entre {min} and {max}"/>
                                             </h:panelGrid>
                                             <h:inputHidden id="txt6" value="#{sliderBean.number6}" />
                                             <h:inputHidden id="txt7" value="#{sliderBean.number7}" />
@@ -59,49 +59,48 @@
                     <h3>Les dernieres ventes de fruits et legumes</h3>
                     <div class="row">
                         <c:forEach var="leProduit" items="${managerProduit.listeProduit()}">
-
                             <!--                        <ui:repeat var="leProduit" value="{managerProduit.listeProduit()}">-->
                             <div class="col-md-4">
                                 <div class="clearfix" >
                                     <i class="fa fa-compress"></i>
                                     <div class="desc">
                                         <h4 id="titreMetier">#{leProduit.nom}</h4>
-                                        <p>Prix du lot :#{leProduit.prix} </p>
-                                        <p>Prix au kilo :#{leProduit.prix} </p>
-                                        <p>Descriptif :#{leProduit.description} </p>
-                                        <div id ="ligneAjoutPanier">
-
-                                            <p:commandButton  value="Ajouter au panier" type="button" onclick= "dlgAjouterAupanier.show();"/>  
-                                            <!--                                                <p:commandButton value="+" actionListener="{counterBean.increment(managerProduit.mapProduit,leProduit.id)}" update="toto_{leProduit.id}" />
-                                                                                            <h:outputText id="toto_{leProduit.id}" value="{managerProduit.mapProduit.get(13)}" />
-                                                                                            <p:commandButton value="-" actionListener="{counterBean.decrement(managerProduit.mapProduit,leProduit.id)}" update="toto_{leProduit.id}" />-->
-
+                                        <c:choose>
+                                            <c:when test="#{leProduit.typeVente == false}">
+                                                Vente au : Lot <br></br>
+                                                Prix du lot : #{leProduit.prix}<br></br>
+                                                Quantité restante : #{leProduit.quantiteFinale}<br></br>
+                                                Descriptif : #{leProduit.description}
+                                            </c:when>
+                                            <c:otherwise>
+                                                Vente au : Kilo  <br></br>
+                                                Prix au kilo : #{leProduit.prix} <br></br>
+                                                Quantité restante : #{leProduit.quantiteFinale}<br></br>
+                                                Descriptif : #{leProduit.description}
+                                            </c:otherwise>
+                                        </c:choose>
+                                        <div id ="ligneAjoutPanier">                                      
+                                            <h:form>
+                                                <p:commandButton id="boutonid_#{leProduit.id}" action="#{managerProduit.outcome}" actionListener="#{managerProduit.attrListener}" onclick= "dialogBoxShow_#{leProduit.id}.show();" value="ajouterPanier">
+                                                    <f:attribute name="username" value="#{leProduit.nom}" />
+                                                </p:commandButton> 
+                                            </h:form>
                                         </div>
+                                        <p:dialog id="dialogBoxId_#{leProduit.id}"  header="Saisissez le nombre d'article souhaité " widgetVar="dialogBoxShow_#{leProduit.id}" modal="true" height="180" >
+                                            <h:form>
+                                                <div class ="row" style="margin-top:20px ">
+                                                    <h7 style="padding-left:10px;">      Combien voulez vous de : #{leProduit.nom} ?  </h7>  <br></br><br></br>
+                                                    <p:commandButton value="+" actionListener="#{counterBean.increment}" update="toto" style="margin-left : 80px;" />
+                                                    <p:commandButton value="-" actionListener="#{counterBean.decrement}" update="toto" />
+                                                    <h:outputText id="toto" value="Quantité :#{counterBean.count}" style="height :100;" /><br></br><br></br>
+                                                </div>
+
+                                                <h:commandButton action="#{currentCart.addProduit(leProduit, counterBean)}" value="Ajouter ces articles aux paniers" styleClass="btn btnConnexion" /> </h:form>
+                                        </p:dialog>
                                     </div>
                                 </div>
                             </div> 
-                            <p:dialog  header="Saisissez le nombre d'article souhaité " widgetVar="dlgAjouterAupanier" modal="true" height="250" >
-                                <h:form>
-                                    <div class ="row" style="margin-top:20px ">
-
-                                        <label>Pour le produit :#{leProduit.nom}</label><br></br>   
-
-
-                                        <p:commandButton value="+" actionListener="#{counterBean.increment}" update="toto" />
-
-                                        <h:outputText id="toto" value="Counter :#{counterBean.count}" />
-
-                                        <p:commandButton value="-" actionListener="#{counterBean.decrement}" update="toto" />
-
-
-                                    </div>
-
-                                    <h:commandButton action="#{currentCart.addProduit(leProduit, counterBean)}" value="Ajouter aux panier" styleClass="btn btnConnexion" /> </h:form>
-                               
-                            </p:dialog>
                         </c:forEach>
-
-
                         <hr></hr>
                     </div>
                 </div>

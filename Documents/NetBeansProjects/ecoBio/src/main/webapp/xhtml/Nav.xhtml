@@ -104,6 +104,18 @@
                                         </li>
                                     </c:otherwise>
                                 </c:choose>
+                                <c:choose>
+                                <c:when test="#{managerUser.user.id != null}">
+                                    <li class="menuLogin">
+                                            <h:form>
+                                                <h:commandLink action="monEspacePerso" value="Deconnexion" styleClass="menuLogin" />
+                                            </h:form>
+                                        </li>
+                                </c:when>
+                                <c:otherwise>
+                                    
+                                </c:otherwise>
+                            </c:choose>
 
                             </ul>                     
                         </div><!--/.nav-collapse -->
@@ -132,19 +144,16 @@
                     <h:commandButton action="#{managerUser.verifAuthentification(connectedUser)}" value="Se Connecter" styleClass="btn btnConnexion" /></h:form>
             </p:dialog>
 
-            <p:dialog id="dialogBoxPanier" header="Panier" widgetVar="dlgPanier" modal="true" height="180" >
+            <p:dialog id="dialogBoxPanier" header="Panier" widgetVar="dlgPanier" modal="true" height="250" width="500" >
                 <h:form>
-                    <div class ="row" style="margin-top:20px ">
-                        <div class="col-md-7">
-                            <label>Mr #{managerUser.user.nom} votre panier : </label>
-                        </div>
-                        <div class="col-md-7">
-                            <ui:repeat value="#{currentCart.listArticle}" var="produit">
-                                <label>#{produit.getProduit().nom} nb :  </label>
-                            </ui:repeat>
-                        </div>
-                    </div><br/>
-                    <h:commandButton action="#{managerUser.verifAuthentification(connectedUser)}" value="Se Connecter" styleClass="btn btnConnexion" /></h:form>
+                    <div class ="row" style="margin-top:20px ">                      
+                        <h7 style="padding-left:10px;">  Mr #{managerUser.user.nom} votre panier : </h7><br></br><br></br>         
+                        <ui:repeat value="#{currentCart.listArticle}" var="produit">
+                            <label style="margin-left: 20px;" > #{produit.getProduit().nom} nombre : #{produit.getQuantite()} <h:commandButton styleClass="imagePoubelle"  action="#{currentCart.deleteProduit(produit.getProduit().id)}"  style="margin-left : 20px; height : 33px; width : 30px;" /></label> <br></br>
+                        </ui:repeat>
+
+                    </div> <br></br><br></br><br></br>    
+                    <h:commandButton action="#{managerCommande.create(currentCart.listArticle,managerUser.user)}" value="Acheter les éléments de mon panier" styleClass="btn btnConnexion" /> </h:form>
             </p:dialog>
         </ui:composition>
     </body>

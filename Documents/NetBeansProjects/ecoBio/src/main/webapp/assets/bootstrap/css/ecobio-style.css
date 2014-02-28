@@ -527,10 +527,7 @@ p {
     border-color:#ddd;
 }
 
-.col-md-4:active{
-    font-weight: bold;
 
-}
 
 .btn, .btnConnexion{
 
@@ -605,4 +602,14 @@ maCase, .ui-chkbox-box, .ui-widget, .ui-corner-all, .ui-state-default{
 .rowCenter {
     margin-right: -100px;
     margin-left: 30px;
+}
+
+.imagePoubelle {
+    
+    background: url('../../custom/img/Poubelle.png') no-repeat;
+    cursor: pointer;
+  
+    border: none;
+    
+    
 }

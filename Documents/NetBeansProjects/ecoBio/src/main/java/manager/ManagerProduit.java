@@ -123,6 +123,14 @@ public class ManagerProduit implements IManager<Produit>, Serializable {
 //        return listTypeVente;
         return null;
     }
+    
+     public void updateProduit(List<ManagerArticle> listManagerArticle) {
+
+        DaoProduit daoProduit = (DaoProduit) FactoryDao.getDAO("Produit");
+        for (ManagerArticle monManagerArticle : listManagerArticle) {
+            daoProduit.updateProduit(monManagerArticle);
+        }
+     }
         
     public Produit getProduit() {
         return produit;
