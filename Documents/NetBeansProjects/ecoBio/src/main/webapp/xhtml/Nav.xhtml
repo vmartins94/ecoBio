@@ -55,10 +55,10 @@
                                     </ul>
                                 </li>
 
-<!--                                <li class="menuVente"><h:form> 
-                                        <h:commandLink action="vente" value="Vente" styleClass="menuLogin" ></h:commandLink>
-                                    </h:form>  </li>-->
-                                
+                                <!--                                <li class="menuVente"><h:form> 
+                                                                        <h:commandLink action="vente" value="Vente" styleClass="menuLogin" ></h:commandLink>
+                                                                    </h:form>  </li>-->
+
                                 <!-- MENU VENTE -->
                                 <c:choose>
                                     <c:when test="#{managerUser.user.id == null}">
@@ -105,17 +105,17 @@
                                     </c:otherwise>
                                 </c:choose>
                                 <c:choose>
-                                <c:when test="#{managerUser.user.id != null}">
-                                    <li class="menuLogin">
+                                    <c:when test="#{managerUser.user.id != null}">
+                                        <li class="menuLogin">
                                             <h:form>
                                                 <h:commandLink action="monEspacePerso" value="Deconnexion" styleClass="menuLogin" />
                                             </h:form>
                                         </li>
-                                </c:when>
-                                <c:otherwise>
-                                    
-                                </c:otherwise>
-                            </c:choose>
+                                    </c:when>
+                                    <c:otherwise>
+
+                                    </c:otherwise>
+                                </c:choose>
 
                             </ul>                     
                         </div><!--/.nav-collapse -->
@@ -123,9 +123,9 @@
                 </div>
             </div>
 
-            <p:dialog id="modalDialog" header="Connexion" widgetVar="dlgEspacePerso" modal="true" height="180" >
+            <p:dialog id="modalDialog" header="Connexion" widgetVar="dlgEspacePerso" modal="true" height="210" >
                 <h:form>
-                    <div class ="row" style="margin-top:20px ">
+                    <div class ="row" style="margin-top:30px ">
                         <div class="col-md-5">
                             <label>Login : </label>
                         </div>
@@ -141,7 +141,14 @@
                             <h:inputText class="form-control" value="#{connectedUser.password}" />
                         </div>
                     </div><br/>
-                    <h:commandButton action="#{managerUser.verifAuthentification(connectedUser)}" value="Se Connecter" styleClass="btn btnConnexion" /></h:form>
+                    <h:commandButton action="#{managerUser.verifAuthentification(connectedUser)}" value="Se Connecter" styleClass="btn btnConnexion" />
+                    <br/><br/>
+                    <div class="row">
+                        <div class="col-md-5">
+                            <h:commandLink action="Inscription" value="Inscription" />
+                        </div>
+                    </div><br/>
+                </h:form>
             </p:dialog>
 
             <p:dialog id="dialogBoxPanier" header="Panier" widgetVar="dlgPanier" modal="true" height="250" width="500" >

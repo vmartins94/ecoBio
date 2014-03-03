@@ -1,0 +1,111 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <h:body>
+        <ui:composition template="/xhtml/Layout.xhtml"> 
+            <ui:define name="content">
+                <div class="container">
+                    <div id="pageCreationEvenement">
+                        <div id="tabs-1"><br></br>
+                            <h4>Inscription</h4>
+                            <h:form>
+                                <div class="panel-body">
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <h6>Description</h6>
+                                            <hr/>
+                                        </div>
+                                        <div class ="row">
+                                            <div class="col-md-5">
+                                                <label>Nom : </label>
+                                            </div>
+                                            <div class="col-md-7">
+                                                <h:inputText class="form-control" value="#{newUser.nom}" />
+                                            </div>
+                                        </div><br/>
+                                        <div class="row">
+                                            <div class="col-md-5">
+                                                <label>Prénom: </label>
+                                            </div>
+                                            <div class="col-md-7">
+                                                <h:inputText class="form-control" value="#{newUser.prenom}" />
+                                            </div>
+                                        </div><br/>
+                                        <div class="row">
+                                            <div class="col-md-5">
+                                                <label>Mail:</label>
+                                            </div>
+                                            <div class="col-md-7">
+                                                <h:inputText class="form-control" value="#{newUser.email}" />
+                                            </div>
+                                        </div><br/>
+                                        <div class="row">
+                                            <div class="col-md-5">
+                                                <label>Login: </label>
+                                            </div>
+                                            <div class="col-md-7">
+                                                <h:inputText class="form-control" value="#{newUser.login}" />
+                                            </div>
+                                        </div><br/>
+                                        <div class="row">
+                                            <div class="col-md-5">
+                                                <label>Mot de passe: </label>
+                                            </div>
+                                            <div class="col-md-7">
+                                                <h:inputText class="form-control" value="#{newUser.password}" />
+                                            </div>
+                                        </div><br/>
+                                    </div>
+                                    <div class="col-md-1"/>
+                                    <div class="col-md-5">
+                                        <div class="row">
+                                            <h6>Lieu</h6>
+                                            <hr/>
+                                        </div>
+                                        <div class ="row">
+                                            <div class="col-md-5">
+                                                <label>Rue : </label>
+                                            </div>
+                                            <div class="col-md-7">
+                                                <h:inputText class="form-control" value="#{newUser.rue}" />
+                                            </div>
+                                        </div><br/>
+                                        <div class="row">
+                                            <div class="col-md-5">
+                                                <label>Code postal : </label>
+                                            </div>
+                                            <div class="col-md-7">
+                                                <h:inputText class="form-control" value="#{newUser.cp}" />
+                                            </div>
+                                        </div><br/>
+                                        <div class="row">
+                                            <div class="col-md-5">
+                                                <label>Ville : </label>
+                                            </div>
+                                            <div class="col-md-7">
+                                                <h:inputText class="form-control" value="#{newUser.ville}" />
+                                            </div>
+                                        </div><br/><br/><br/>
+                                        <div class="row">
+                                            <div class="col-md-5">
+                                            </div>
+                                            <div class="col-md-7">
+                                                <h:commandButton class="btn btn-default" value="Inscription" action="#{managerUser.create(newUser)}" actionListener="monEspacePerso" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>                                         
+                            </h:form>
+                        </div>
+                    </div>
+                </div>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

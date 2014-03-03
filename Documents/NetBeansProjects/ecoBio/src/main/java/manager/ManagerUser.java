@@ -44,6 +44,12 @@ public class ManagerUser implements IManager<User>, Serializable {
         userDAO.insert(user);
         return "";
     }
+    public String create(User utilisateur) {
+        user= utilisateur;
+        IDao userDAO = FactoryDao.getDAO("User");
+        userDAO.insert(user);
+        return "Inscription_sucess";
+    }
 
     //TODO C : La connexion se fera en ajax
     public String verifAuthentification(User user2) {

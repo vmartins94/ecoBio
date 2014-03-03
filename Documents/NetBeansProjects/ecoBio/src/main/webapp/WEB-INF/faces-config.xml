@@ -218,6 +218,14 @@
             <to-view-id>/index.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>  
+    <navigation-rule>
+        <from-view-id>index.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>Inscription</from-outcome>
+            <to-view-id>xhtml/pageInscription.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>  
+  
     <!-- **********************************END NAVIGATION RULES********************************** -->
    
     <!-- **********************************MENU NAVIGATION*************************************** -->
@@ -258,6 +266,14 @@
             <to-view-id>xhtml/pageVente.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
+     <navigation-rule>
+        <from-view-id>xhtml/pageInscription.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>Inscription_sucess</from-outcome>
+            <to-view-id>xhtml/pageMonEspacePerso.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>  
+     
     <!-- **********************************END MENU NAVIGATION*********************************** -->
    
     <!-- **********************************LOGIN NAVIGATION************************************** -->
@@ -322,6 +338,8 @@
             <to-view-id>xhtml/pageVente.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
+    
+ 
 
     <!-- **********************************END MENU NAVIGATION*********************************** -->
     <!-- **********************************CONVERTER********************************************* -->
