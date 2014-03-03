@@ -7,74 +7,89 @@
       xmlns:p ="http://primefaces.org/ui"
       xmlns:c="http://java.sun.com/jsp/jstl/core">
 
-    <!--JavaScritp-->
-     <script type="text/javascript">
-                   setInterval(function() {
-                        document.location.reload();
-                   }, 3*1000);
-        </script>
 
-                           
+
+
 
     <h:body>
+
         <ui:composition template="/xhtml/Layout.xhtml">
             <ui:define name="content">
+                <!--JavaScritp-->
+                <script type="text/javascript">
+                            /*  setInterval(function() {
+                                   document.location.reload();
+                              }, 10000);*/
+
+//                    setInterval(function() {
+//
+//                        var date = document.getElementById('myForm:date');
+//                        var today = new Date().toLocaleDateString();
+//                        var tt = today - date;
+//                        alert(date);
+//                        alert(today);
+//                        alert(tt);
+//                        document.getElementById('timer').innerHTML = tt;
+//
+//                    }, 1000);
+
+                </script>
+
+
                 <div class="serviceBlock">
                     <div class="container">
                         <h3>Les dernieres ventes par enchere</h3>
                         <div class="row">  
-                            <!-- la liste des produits qui sont encheres-->
-                            <ui:repeat var="leProduitEnchere" value="#{managerProduit.listeProduitByEnchere()}">
-                                  <h:form id="infoEnchere">
-                                <div class="col-md-4">
-                                    <div class="clearfix">
-                                        <i class="fa fa-compress"></i>
-                                        <div class="desc">
-                                            <h4 id="titreMetier">#{leProduitEnchere.nom}</h4>
-                                            <h:outputLink id="description" value="#">  
-                                                <h:outputText value="Description" />  
-                                            </h:outputLink>  
-                                            <p:tooltip for="description" value="#{leProduitEnchere.description}" showEffect="fade" hideEffect="fade" /><br/> 
-                                            <h:outputText value="Prix Initiale: #{leProduitEnchere.prix}" />  
-                                            <!-- recupere le dernierEnchere pour un produit -->
-                                            <c:set var="uneEnchere" value="#{managerEnchere.derniereEnchereByProduit(leProduitEnchere.convertirSetEnList(leProduitEnchere.encheres))}" />
-                                            <p>Date:
-                                                <h:outputText value="#{uneEnchere.dateDebut}">
-                                                    <f:convertDateTime pattern="dd/MM/yyyy" type="date"/>
-                                                </h:outputText> au 
-                                                <h:outputText value="#{uneEnchere.dateFin}">
-                                                    <f:convertDateTime pattern="dd/MM/yyyy" type="date"/>
-                                                </h:outputText>
-                                            </p>
-                                            <h:outputText value="Prix du Derniére enchere: #{uneEnchere.prix}" /><br/>  
-                               
-                                            <h:outputLabel value="Temps:" />  <h:outputText id="temps" value="" />    
-                                   
-                 
-          
- 
-                                            
-                                            <!--* l'utilisateur doit être connecté avant d'encherie.
-                                                * si l'user n'est pas connecter appel du dialog -->
-                                            <c:choose>
-                                                <c:when test="#{managerUser.user.id == null}">
-                                                    <p:commandLink styleClass="menuLogin"  id="modalDialogButton" value="Connexion" onclick= "dlgEspacePerso.show();" type="button"/>
-                                                </c:when>
-                                                <c:otherwise>                                                                                                           
-                                                  
-                                                        <h:outputLabel for="newPrice" value="Nouveau Prix: *" />  
-                                                        <h:inputText value="#{managerEnchere.uneEnchere.prix}" binding="#{managerEnchere.inputPrix}" required="true"/>
-                                                        <h:commandButton styleClass="menuLogin"   value="Encherie" id="btnEncherie" > 
-                                                            <f:ajax   render="infoEnchere" event="click"  listener="#{managerEnchere.enchereExisteByUser(leProduitEnchere.convertirSetEnList(leProduitEnchere.encheres), managerUser.user, uneEnchere)}"/>
-                                                        </h:commandButton>
-                                                 
-                                                </c:otherwise>
-                                            </c:choose>
+                            <!-- la liste des produits qui sont encheres -->  
+                                <ui:repeat var="leProduitEnchere" value="#{managerProduit.listeProduitByEnchere()}">
+
+                                    <div class="col-md-4">
+                                        <div class="clearfix">
+                                            <i class="fa fa-compress"></i>
+                                            <div class="desc">
+                                                <h4 id="titreMetier">#{leProduitEnchere.nom}</h4>
+                                                <h:outputLink id="description" value="#">  
+                                                    <h:outputText value="Description" />  
+                                                </h:outputLink>  
+                                                <p:tooltip for="description" value="#{leProduitEnchere.description}" showEffect="fade" hideEffect="fade" /><br/> 
+                                                <h:outputText value="Prix Initiale: #{leProduitEnchere.prix}" />  
+                                                <!-- recupere le dernierEnchere pour un produit -->
+                                                <c:set var="derniereEnchere" value="#{managerEnchere.derniereEnchereByProduit(leProduitEnchere.convertirSetEnList(leProduitEnchere.encheres))}" />
+                                                <p>Date:
+                                                    <h:outputText id="dateDebut" value="#{derniereEnchere.dateDebut}">
+                                                        <f:convertDateTime pattern="dd/MM/yyyy" type="date"/>
+                                                    </h:outputText> au 
+
+                                                    <h:outputText  id="date" value="#{derniereEnchere.dateFin}">
+                                                        <f:convertDateTime   pattern="dd/MM/yyyy" type="date"/>
+                                                    </h:outputText>
+
+                                                </p>
+                                                <h:outputText value="Prix du Derniére enchere: #{derniereEnchere.prix}" /><br/>  
+                                                <h:outputText value="Temps:"/><p id="timer"></p> 
+
+                                                <!--* l'utilisateur doit être connecté avant d'encherie.
+                                                    * si l'user n'est pas connecter appel du dialogue de connection
+                                                    * sinon affichage d'un input et d'un bouton pour encherie -->
+                                                <c:choose>
+                                                    <c:when test="#{managerUser.user.id == null}">
+                                                        <p:commandLink styleClass="menuLogin"  id="modalDialogButton" value="Connexion" onclick= "dlgEspacePerso.show();" type="button"/>
+                                                    </c:when>
+                                                    <c:otherwise>          
+                                                        <h:form id="enchere"> <!--formulaire pour encherie sur un produit via l'ajax-->                         
+                                                            <h:inputText id="newPrix" value="#{managerEnchere.uneEnchere.prix}" converter="javax.faces.Float" ></h:inputText>
+                                                            <h:commandButton styleClass="menuLogin" value="Encherie" id="btnEncherie" action="#{managerEnchere.enchereExisteByUser(leProduitEnchere.convertirSetEnList(leProduitEnchere.encheres), managerUser.user, derniereEnchere)}">
+                                                                <!--p:ajax  event="click"  update=":enchere:btnEncherie"  /-->
+                                                            </h:commandButton>
+                                                        </h:form>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>   </h:form>
-                            </ui:repeat>
-                           
+                                    </div> 
+
+                                </ui:repeat>
+                         
                         </div>
                     </div> 
                 </div> 
@@ -98,8 +113,10 @@
                             <h:inputText class="form-control" value="#{connectedUser.password}" />
                         </div>
                     </div><br/>
-                    <h:commandButton action="#{managerUser.verifAuthentification(connectedUser)}" value="Se Connecter" styleClass="btn btnConnexion" /></h:form>
+                    <h:commandButton action="#{managerUser.verifAuthentification(connectedUser)}" value="Se Connecter" styleClass="btn btnConnexion" />
+                </h:form>
             </p:dialog>
         </ui:composition>
+
     </h:body>
 </html>

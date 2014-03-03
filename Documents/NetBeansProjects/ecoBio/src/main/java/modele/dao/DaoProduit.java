@@ -117,7 +117,7 @@ public class DaoProduit implements IDao<Produit> {
 //********** Requête  *********//
 
   
-    /**
+  /**
      * Cette methode permet de récupérer tous les produits qui ont un statut
      * enchere.
      *
@@ -128,11 +128,8 @@ public class DaoProduit implements IDao<Produit> {
        Session session = HibernateUtil.getSessionFactory().openSession();
         try {
             Transaction tx = session.beginTransaction();
-     
-
-            Query queryProduit = session.createQuery("From Produit where avecEnchere=? and dateFin <= sysdate()");
+            Query queryProduit = session.createQuery("From Produit as p where p.avecEnchere=? and p.id in ( select en.produit.id from Enchere as en where en.dateFin >=  sysdate())");
             queryProduit.setBoolean(0, true);
-           // queryProduit.setDate(1, dateNow);//regarder si la date de fin est plus petit que la date systeme
             listeAllProduitByEnchere = queryProduit.list();
          
     

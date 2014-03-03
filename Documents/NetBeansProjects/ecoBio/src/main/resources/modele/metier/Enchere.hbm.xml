@@ -14,7 +14,7 @@
         <property name="dateDebut" type="timestamp">
             <column name="dateDebut" length="19" not-null="true" />
         </property>
-        <property name="prix" type="float">
+  <property name="prix" type="java.lang.Float">
             <column name="prix" precision="12" scale="0" not-null="true" />
         </property>
         <property name="intUserId" type="java.lang.Integer">

@@ -2,8 +2,10 @@ package modele.metier;
 
 
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -96,7 +98,10 @@ public class Commande  implements java.io.Serializable {
         this.commandeHasProduits = commandeHasProduits;
     }
 
-
+    public List convertirSetEnList(Set set){
+        List list = new ArrayList(set);
+        return list;
+    }
 
 
 }

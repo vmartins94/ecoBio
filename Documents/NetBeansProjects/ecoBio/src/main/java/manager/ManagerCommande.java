@@ -22,6 +22,7 @@ import modele.dao.FactoryDao;
 import modele.dao.IDao;
 import modele.metier.Commande;
 import modele.metier.CommandeHasProduit;
+import modele.metier.Enchere;
 import modele.metier.Etat;
 import modele.metier.Produit;
 import modele.metier.User;
@@ -39,8 +40,16 @@ import org.apache.poi.ss.usermodel.CellStyle;
 public class ManagerCommande implements IManager<Commande>, Serializable {
 
     private Commande maCommande;
-    private User userCommande;
+    private User userCommande;  
+    private Commande selectedCommande;
 
+    public Commande getSelectedCommande() {
+        return selectedCommande;
+    }
+
+    public void setSelectedCommande(Commande selectedCommande) {
+        this.selectedCommande = selectedCommande;
+    }
     @Override
     public List<Commande> findAll() {
         IDao daoCommande = FactoryDao.getDAO("Commande");
@@ -105,11 +114,62 @@ public class ManagerCommande implements IManager<Commande>, Serializable {
             dao.insertTableAsso(commandehasProduit);
 
         }
-        
+
         ManagerProduit monManagerProduit = new ManagerProduit();
         monManagerProduit.updateProduit(listManagerArticle);
         listManagerArticle.clear();
         return null;
+    }
+
+    public boolean update(Commande uneCommande) {
+        IDao daoCommande = FactoryDao.getDAO("Commande");
+        return daoCommande.update(uneCommande);
+    }
+
+    public List<Commande> findAllCommandeByUser(User user) {
+        DaoCommande daoCommande = (DaoCommande) FactoryDao.getDAO("Commande");
+        return daoCommande.selectAllMyCommande(user);
+    }
+
+    /**
+     * Cette méthode permet de verifier s'il y a une commande pour un produit
+     * qu'il est en statut encherer
+     *
+     * @param uneEnchere
+     * @return un Objet commande
+     */
+    public boolean selectCommandeByProduitEnchere(Enchere uneEnchere) {
+        DaoCommande daoCommande = (DaoCommande) FactoryDao.getDAO("Commande");
+        Commande uneCommande = (Commande) daoCommande.selectCommandeByProduitEnchere(uneEnchere);
+        IDao daoUser = FactoryDao.getDAO("User");
+        User unUser = (User) daoUser.selectById(uneEnchere.getIntUserId());
+        boolean executer = false;
+        Date today = new Date();
+        if (uneCommande != null) {
+            uneCommande.setUser(unUser);
+            uneCommande.setDateCreation(today);
+            executer = daoCommande.update(uneCommande);
+        } else {
+            IDao daoEtat = FactoryDao.getDAO("Etat");
+            Etat unEtat = (Etat) daoEtat.selectById(2);
+            uneCommande = new Commande(unEtat, unUser, today, uneEnchere.getPrix(), 1);
+            executer = createCommande(uneCommande);
+            CommandeHasProduit commandehasProduit = new CommandeHasProduit(uneEnchere.getProduit(), uneCommande, 1);
+            daoCommande.insertTableAsso(commandehasProduit);
+
+        }
+        return executer;
+    }
+
+    /**
+     * Cette methode permet de create une commande
+     *
+     * @param uneCommande
+     * @return un type boolean true = commande bien créée
+     */
+    public boolean createCommande(Commande uneCommande) {
+        IDao daoCommande = FactoryDao.getDAO("Commande");
+        return daoCommande.insert(uneCommande);
     }
 
     public void genererFacture() {
@@ -215,36 +275,6 @@ public class ManagerCommande implements IManager<Commande>, Serializable {
 
     public void setUserCommande(User userCommande) {
         this.userCommande = userCommande;
-    }
-
-    ////////////////////////////  TEST ///////////////////////////////
-    public void delete() {
-
-        DaoCommande dao = (DaoCommande) FactoryDao.getDAO("Commande");
-        maCommande = (Commande) dao.selectById(2); // modifier l'id
-        dao.delete(maCommande);
-    }
-
-    public void update() {
-
-        //appel Dao
-        DaoCommande dao = (DaoCommande) FactoryDao.getDAO("Commande");
-        IDao daoP = FactoryDao.getDAO("Produit");
-        //Recuperation des objets
-        Produit produit = (Produit) daoP.selectById(5);
-        maCommande = dao.selectById(2);
-        // creation objet et insertion dans la base  ok 
-        CommandeHasProduit commandehasProduit = new CommandeHasProduit(produit, maCommande, 2);
-        dao.insertTableAsso(commandehasProduit);
-
-        // creation d'une liste de type commandeHasProduit
-        Set<CommandeHasProduit> commandeHasProduit = new HashSet<CommandeHasProduit>();
-        commandeHasProduit.add(commandehasProduit);
-        //mise a jour de la commande
-        maCommande.setPrixTotal(Float.valueOf(25));
-        maCommande.setCommandeHasProduits(commandeHasProduit);
-        dao.update(maCommande);
-
     }
 
 }

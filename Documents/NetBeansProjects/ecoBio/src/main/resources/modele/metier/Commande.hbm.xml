@@ -8,10 +8,10 @@
             <column name="id" />
             <generator class="identity" />
         </id>
-        <many-to-one name="etat" class="modele.metier.Etat" fetch="select">
+        <many-to-one name="etat" class="modele.metier.Etat" fetch="join" lazy="false">
             <column name="etatId" not-null="true" />
         </many-to-one>
-        <many-to-one name="user" class="modele.metier.User" fetch="select">
+        <many-to-one name="user" class="modele.metier.User" fetch="join"  lazy="false">
             <column name="userId" not-null="true" />
         </many-to-one>
         <property name="dateCreation" type="timestamp">

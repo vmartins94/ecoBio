@@ -71,12 +71,15 @@ public class DaoEnchere implements IDao<Enchere> {
     }
 
     @Override
-    public boolean update(Enchere objet) {
+    public boolean update(Enchere uneEnchere) {
         boolean execution = false;
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
             Transaction tx = session.beginTransaction();
-            session.update(objet);
+             Query query = session.createQuery("Update Enchere Set prix = ? Where int_userId = ?");
+             query.setParameter(0,uneEnchere.getPrix());
+             query.setParameter(1,uneEnchere.getIntUserId());
+             query.executeUpdate();
             tx.commit();
             execution = true;
         } catch (HibernateException e) {

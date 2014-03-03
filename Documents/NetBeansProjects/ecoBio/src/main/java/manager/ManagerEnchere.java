@@ -6,11 +6,15 @@
 package manager;
 
 import java.io.Serializable;
+import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javax.faces.component.UIInput;
 import modele.dao.DaoEnchere;
 import modele.dao.FactoryDao;
 import modele.dao.IDao;
+import modele.metier.Commande;
 import modele.metier.Enchere;
 import modele.metier.Produit;
 import modele.metier.User;
@@ -18,24 +22,18 @@ import modele.metier.User;
 public class ManagerEnchere implements IManager<Enchere>, Serializable {
 
     private Enchere uneEnchere;
-    private UIInput inputPrix;
+
+    
+    /*-------------------------------------------------------------- GETTER & SETTER -------------------------------------------------------------- */
 
     public Enchere getUneEnchere() {
         return uneEnchere;
     }
-
-    public UIInput getInputPrix() {
-        return inputPrix;
-    }
-
-    public void setInputPrix(UIInput inputPrix) {
-        this.inputPrix = inputPrix;
-    }
-
+    
     public void setUneEnchere(Enchere uneEnchere) {
         this.uneEnchere = uneEnchere;
     }
-
+   /*--------------------------------------------------------------- METHODF SURCHARGER PAR IMANAGER -------------------------------------------------- */
     @Override
     public List<Enchere> findAll() {
         IDao daoEnchere = FactoryDao.getDAO("Enchere");
@@ -66,6 +64,7 @@ public class ManagerEnchere implements IManager<Enchere>, Serializable {
     }
 
     public String update(Enchere enchere) {
+        
         IDao daoEnchere = FactoryDao.getDAO("Enchere");
         boolean valeurExecution = daoEnchere.update(enchere);
         if (!valeurExecution) {
@@ -74,21 +73,7 @@ public class ManagerEnchere implements IManager<Enchere>, Serializable {
         return "";
     }
 
-//    public String update(Enchere enchere) {
-//        IDao daoEnchere = FactoryDao.getDAO("Enchere");
-//        String chainePrix = (String) this.inputPrix.getSubmittedValue();
-//        float prix = Float.valueOf(chainePrix);
-//        this.uneEnchere.setPrix(prix);
-//       enchere.setPrix(prix);
-//       enchere.setIntUserId(1); // modifier faut prendre l'utilisateur en session
-//        //enchere.setPrix(I);
-//
-//        boolean valeurExecution = daoEnchere.update(enchere);
-//        if (!valeurExecution) {
-//            return "isKO";
-//        }
-//        return "";
-//    }
+
 
     
     
@@ -101,7 +86,8 @@ public class ManagerEnchere implements IManager<Enchere>, Serializable {
      * */
     public void enchereExisteByUser(List<Enchere> listeEnchereByProduit, User userConnecter, Enchere nouveauEnchere) {
         boolean dejaEnchereForProduit = false;
-        if (!listeEnchereByProduit.isEmpty()) {
+        if(listeEnchereByProduit != null){
+         if (!listeEnchereByProduit.isEmpty()) {
             for (Enchere enchere : listeEnchereByProduit) {
                 if (enchere.getIntUserId().equals(userConnecter.getId())) {
                     dejaEnchereForProduit = true;
@@ -110,11 +96,8 @@ public class ManagerEnchere implements IManager<Enchere>, Serializable {
         }else{
                 dejaEnchereForProduit = false;
         }
-        
-        //DAOEnchere
-        String chainePrix = (String) this.inputPrix.getSubmittedValue();
-        float prix = Float.valueOf(chainePrix);
-        nouveauEnchere.setPrix(prix);
+    
+        nouveauEnchere.setPrix(uneEnchere.getPrix());
         nouveauEnchere.setIntUserId(userConnecter.getId());
         
         if(dejaEnchereForProduit){
@@ -122,7 +105,17 @@ public class ManagerEnchere implements IManager<Enchere>, Serializable {
         }else{
             create(nouveauEnchere);
         }
+        // ajout dans la liste des enchere pour un produit
+//        Set<Enchere> setEnchere = new HashSet<Enchere>();
+//        setEnchere.add(nouveauEnchere);
+//        nouveauEnchere.getProduit().setEncheres(setEnchere);
+        
+        // creation ou update d'une commande 
+        ManagerCommande managerCommande = new ManagerCommande();
+        managerCommande.selectCommandeByProduitEnchere(nouveauEnchere);
+        }
     }
+    
 
     /**
      * Cette methode permet de retouner le derniere d'enchere pour un produit

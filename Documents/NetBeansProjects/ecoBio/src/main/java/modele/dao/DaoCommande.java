@@ -12,6 +12,7 @@ import java.util.Iterator;
 import java.util.List;
 import modele.metier.Commande;
 import modele.metier.CommandeHasProduit;
+import modele.metier.Enchere;
 import modele.metier.Produit;
 import modele.metier.User;
 import org.hibernate.Criteria;
@@ -143,6 +144,29 @@ public class DaoCommande implements IDao<Commande> {
         }
 
         return listeCommandeByUser;
+    }
+    
+   /**
+     * Cette méthode permet de vérifier s'il y a une commande pour un produit qu'il est en statut enchere
+     * @param uneEnchere     
+     * @return 
+     */
+    public Commande selectCommandeByProduitEnchere(Enchere uneEnchere) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Commande commande = null;
+        try {
+
+            Transaction tx = session.beginTransaction();
+            Query queryCommande = session.createQuery("From Commande where produit.id=? ");
+            queryCommande.setInteger(0, uneEnchere.getProduit().getId());
+            commande = (Commande) queryCommande.uniqueResult();
+            return commande;
+        } catch (HibernateException e) {
+            e.getMessage();
+        } finally {
+            session.close();
+        }
+        return commande;
     }
 
     //********** Requete pour la table CommandeHasProduit **********//

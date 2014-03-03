@@ -1,114 +1,129 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui"
+      xmlns:h ="http://java.sun.com/jsf/html"
+      xmlns:f ="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://java.sun.com/jsf/core">
-
+      xmlns:p ="http://primefaces.org/ui"
+      xmlns:c ="http://java.sun.com/jsp/jstl/core">
 
 
     <h:body>
-
         <ui:composition template="/xhtml/Layout.xhtml">
             <ui:define name="content">
-                <div class="container">
+                <!-- Onglets-->
+     <div class="container">
 
+                <p:tabView id="tabView">    
 
-                    <div id="wrapper">
+                    <!--****************************************************** PARTIE INFO PERSONNELLE ********************************************************-->
+                    <p:tab id="tab1" title="Information personnelle">  
+                        <h:form>
+                            <div id="collapseOne" class="panel-collapse collapse in">
+                                <div class="panel-body">
+                                    <div class="col-md-6">
+                                        <div class ="row">
+                                            <h:panelGrid columns="2" cellpadding="10"> 
+                                                <h:outputLabel value="Nom :"/>
+                                                <h:inputText value="#{managerUser.user.nom}"/>
+                                                <h:outputLabel value="Prénom:"/>
+                                                <h:inputText value="#{managerUser.user.prenom}"/>
+                                                <h:outputLabel value="Rue:"/>
+                                                <h:inputText value="#{managerUser.user.rue}"/>
+                                                <h:outputLabel value="Ville: "/>
+                                                <h:inputText value="#{managerUser.user.ville}"/>
+                                                <h:outputLabel value="Code postal:"/>
+                                                <h:inputText value="#{managerUser.user.cp}"/>
+                                            </h:panelGrid>
+                                        </div>
 
-                        <div id="tabs">
-                            <ul id="ulOnglet">
-                                <li><a href="#tabs-1" title="">Informations personelles</a></li>
-                                <li><a href="#tabs-2" title="">Mes commandes</a></li>
-
-                            </ul>
-
-                            <div id="pageEspacePerso">
-
-                                <div id="tabs-1">
-                                    <h4 >Vos informations personnelles :</h4><br></br>
-
-                                    <h:form>
-
-                                        <table id="tableau">                                      
-                                            <tr>
-                                                <td id="tableauInfoPerso">Vos informations personelles</td>
-                                                <td id="tableauInfoPerso">Adresse de livraison</td>
-                                            </tr>
-                                        </table>
-                                        <br></br>
-                                        <table id="tableau">                                      
-                                            <tr>
-                                                <td id="tableauInfoPerso">
-                                                    <h:outputText value="Nom: " />
-                                                    <h:outputText value="" /><br></br><br></br>
-                                                    <h:outputText value="Prenom: " />
-                                                    <h:outputText value="" /><br></br> <br></br>
-                                                    <h:outputText value="Login: " />
-                                                    <h:outputText value="" />
-                                                    <h:outputText value="Password: " />
-                                                    <h:outputText value="" /><br></br> <br></br> 
-                                                    <h:outputText value="Email: " />
-                                                    <h:outputText value="" /><br></br><br></br>
-                                                    <h:commandButton value="Modifer vos informations personelles"/>
-                                                </td>
-                                                <td id="tableauInfoPerso">
-                                                    <h:outputText value="Rue: " />
-                                                    <h:outputText value="" /><br></br><br></br>
-                                                    <h:outputText value="Cp: " />
-                                                    <h:outputText value="" /><br></br><br></br>
-                                                    <h:outputText value="Ville: " />
-                                                    <h:outputText value="" /><br></br><br></br>
-                                                    <h:commandButton value="Modifer mes données de livraisons"/>
-                                                </td>
-                                            </tr>
-
-                                        </table>
-
-                                    </h:form>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class ="row">
+                                            <h:panelGrid columns="2" cellpadding="10"> 
+                                                <h:outputLabel value="Mail:"/>
+                                                <h:inputText value="#{managerUser.user.email}"/>
+                                                <h:outputLabel value="Login:"/>
+                                                <h:inputText value="#{managerUser.user.login}"/>
+                                                <h:outputLabel value="Mot de passe:"/>
+                                                <h:inputText value="#{managerUser.user.password}"/>
+                                                <h:commandButton value="Modification" action="#{managerUser.update(managerUser.user)}"/>
+                                            </h:panelGrid>
+                                        </div>
+                                    </div>
                                 </div>
+                            </div>
+                        </h:form>
+                    </p:tab>  
 
-                                <div id="tabs-2">
-                                    <h4 >Vos commandes :</h4><br></br>
+                    <!--****************************************************** PARTIE VISUALISER TOUTES LES COMMANDES ******************************************************-->
 
-                                    <table id="tableau">                                      
-                                        <tr>
-                                            <td id="tableauCommande">Numero Commande</td>
-                                            <td id="tableauCommande">Nom commande</td>
-                                            <td id="tableauCommande">Descriptif commande</td>
-                                            <td id="tableauCommande">Etat commande</td>
-                                        </tr>
-                                    </table>
-
-                                    <table id="tableau" border="1" frame="rhs" rules="cols">
-                                        <ui:repeat var="a" value="" varStatus="status">
-                                            <tr id="tableauLigne" >
-                                                <td id="tableauCommande">cc</td> 
-                                                <td id="tableauCommande">cc</td> 
-                                                <td id="tableauCommande">cc</td> 
-                                                <td id="tableauCommande">cc</td> 
-                                            </tr> <br></br>
-                                        </ui:repeat>
-                                    </table>
-
-                                </div>
-
-                                <div id="tabs-3">
-                                    <p>Mauris eleifend est et turpis. Duis id erat. Suspendisse potenti. Aliquam vulputate, pede vel vehicula accumsan, mi neque rutrum erat, eu congue orci lorem eget lorem.</p><p> Vestibulum non ante. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce sodales.</p>
-                                </div>
-
-                            </div><!--End tabs container-->
-
-                        </div><!--End tabs-->
-                    </div>
-                  <hr></hr>
-                </div>
-                <!-- </div> -->
-                <script type="text/javascript" src="../assets/custom/js/jquery-1.8.2.min.js"></script>
+                    <p:tab id="tab2" title="Mes Commandes">  
+                        <h:panelGrid columns="2" cellpadding="10">  
+                            <h:form id="form">
+                                <!-- la liste des commandes pour l'utilisateur connecter-->
+                                <p:dataGrid var="cdUser" value="#{managerCommande.findAllCommandeByUser(managerUser.user)}" columns="3"  
+                                            rows="12" paginator="true"  
+                                            paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
+                                            rowsPerPageTemplate="9,12,15" style="width:100%">  
+                                    <p:panel header="Commande n° #{cdUser.id}" style="text-align:center">  
+                                        <h:panelGrid columns="2" style="width:100%">  
+                                            <h:outputLabel value="Date:" />  
+                                            <h:outputText value="#{cdUser.dateCreation}">
+                                                <f:convertDateTime pattern="dd/MM/yyyy" type="date"/>
+                                            </h:outputText> 
+                                            <h:outputLabel value="Etat de la commande:"/><h:outputText value="#{cdUser.etat.nom}"/> 
+                                            <h:outputLabel value="Prix total:"/><h:outputText value="#{cdUser.prixTotal}"/> 
+                                            <h:outputLabel value="Détail:"/> 
+                                            <p:commandLink update=":tabView:form:commandeDetail" oncomplete="commandeDialog.show()" title="View Detail">  
+                                                <h:outputText styleClass="ui-icon ui-icon-search" style="margin:0 auto;" />   
+                                                <f:setPropertyActionListener value="#{cdUser}" target="#{managerCommande.selectedCommande}" />  
+                                            </p:commandLink>
+                                            <h:commandButton value="Générer votre facture"/>
+                                        </h:panelGrid>  
+                                    </p:panel>  
+                                </p:dataGrid>  
+                                <!-- dialogue liste des produits dans une commande -->
+                                <p:dialog header="Détail de commande" widgetVar="commandeDialog" modal="true">  
+                                    <p:outputPanel id="commandeDetail" >
+                                        <h:dataTable var="leProduitCommande" value="#{managerCommande.selectedCommande.convertirSetEnList(managerCommande.selectedCommande.commandeHasProduits)}">
+                                            <h:column>
+                                                <f:facet name="header"><h:outputLabel  value="Nom"/></f:facet>
+                                                <h:outputText id="nomProduit" value="#{leProduitCommande.produit.nom}"/>
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header"><h:outputLabel  value="Description"/></f:facet>
+                                                <h:outputText id="descProduit" value="#{leProduitCommande.produit.description}"/>
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header"><h:outputLabel for="typeProduit" value="Type" /></f:facet>
+                                                <h:outputText id="typeProduit" value="#{leProduitCommande.produit.type.nom}"/>
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header"><h:outputLabel for="typeProduit" value="Catégorie" /></f:facet>
+                                                <h:outputText id="categorieProduit" value="#{leProduitCommande.produit.type.categorie}"/>
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header"><h:outputLabel value="Prix unitaire" /></f:facet>
+                                                <h:outputText id="prixProduit" value="#{leProduitCommande.produit.prix}"/>
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header"><h:outputLabel for="qteProduit" value="Quantité" /></f:facet>
+                                                <h:outputText id="qteProduit" value="#{leProduitCommande.quantite}"/>
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header"><h:outputLabel  value="Prix " /></f:facet>
+                                                <h:outputText id="PrixTotalProduit" value="#{leProduitCommande.quantite * leProduitCommande.produit.prix }"/>
+                                            </h:column>
+                                        </h:dataTable>
+                                    </p:outputPanel>  
+                                </p:dialog>  
+                            </h:form>   
+                        </h:panelGrid>  
+                    </p:tab> 
+                </p:tabView>
+              </div>
             </ui:define>
         </ui:composition>
     </h:body>
-
-
 </html>
