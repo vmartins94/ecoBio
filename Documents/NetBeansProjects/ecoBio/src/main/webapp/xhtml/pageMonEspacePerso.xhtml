@@ -12,7 +12,7 @@
         <ui:composition template="/xhtml/Layout.xhtml">
             <ui:define name="content">
                 <!-- Onglets-->
-                <div class="container">
+                <br></br><br></br><br></br><div class="container">
 
                     <p:tabView id="tabView">    
 
@@ -25,15 +25,15 @@
                                             <div class ="row">
                                                 <h:panelGrid columns="2" cellpadding="10"> 
                                                     <h:outputLabel value="Nom :"/>
-                                                    <h:inputText value="#{managerUser.user.nom}"/>
+                                                    <h:inputText class="form-control" value="#{managerUser.user.nom}"/>
                                                     <h:outputLabel value="Prénom:"/>
-                                                    <h:inputText value="#{managerUser.user.prenom}"/>
+                                                    <h:inputText class="form-control" value="#{managerUser.user.prenom}"/>
                                                     <h:outputLabel value="Rue:"/>
-                                                    <h:inputText value="#{managerUser.user.rue}"/>
+                                                    <h:inputText class="form-control" value="#{managerUser.user.rue}"/>
                                                     <h:outputLabel value="Ville: "/>
-                                                    <h:inputText value="#{managerUser.user.ville}"/>
+                                                    <h:inputText class="form-control" value="#{managerUser.user.ville}"/>
                                                     <h:outputLabel value="Code postal:"/>
-                                                    <h:inputText value="#{managerUser.user.cp}"/>
+                                                    <h:inputText class="form-control" value="#{managerUser.user.cp}"/>
                                                 </h:panelGrid>
                                             </div>
 
@@ -42,12 +42,12 @@
                                             <div class ="row">
                                                 <h:panelGrid columns="2" cellpadding="10"> 
                                                     <h:outputLabel value="Mail:"/>
-                                                    <h:inputText value="#{managerUser.user.email}"/>
+                                                    <h:inputText class="form-control" value="#{managerUser.user.email}"/>
                                                     <h:outputLabel value="Login:"/>
-                                                    <h:inputText value="#{managerUser.user.login}"/>
+                                                    <h:inputText class="form-control" value="#{managerUser.user.login}"/>
                                                     <h:outputLabel value="Mot de passe:"/>
-                                                    <h:inputText value="#{managerUser.user.password}"/>
-                                                    <h:commandButton value="Modification" action="#{managerUser.update(managerUser.user)}"/>
+                                                    <h:inputText class="form-control" value="#{managerUser.user.password}"/>
+                                                    <h:commandButton value="Modification" class="form-control" action="#{managerUser.update(managerUser.user)}"/>
                                                 </h:panelGrid>
                                             </div>
                                         </div>
@@ -58,15 +58,15 @@
 
                         <!--****************************************************** PARTIE VISUALISER TOUTES LES COMMANDES ******************************************************-->
 
-                        <p:tab id="tab2" title="Mes Commandes">  
-                            <h:panelGrid columns="2" cellpadding="10">  
+                        <p:tab id="tab2" title="Mes Commandes" >  
+                            <h:panelGrid  cellpadding="10" style="width:100%;"  >  
                                 <h:form id="form">
                                     <!-- la liste des commandes pour l'utilisateur connecter-->
                                     <p:dataGrid var="cdUser" value="#{managerCommande.findAllCommandeByUser(managerUser.user)}" columns="3"  
                                                 rows="12" paginator="true"  
                                                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
                                                 rowsPerPageTemplate="9,12,15" style="width:100%">  
-                                        <p:panel header="Commande n° #{cdUser.id}" style="text-align:center">  
+                                        <p:panel header="Commande n° #{cdUser.id}"  >  
                                             <h:panelGrid columns="2" style="width:100%">  
                                                 <h:outputLabel value="Date:" />  
                                                 <h:outputText value="#{cdUser.dateCreation}">
@@ -79,7 +79,7 @@
                                                     <h:outputText styleClass="ui-icon ui-icon-search" style="margin:0 auto;" />   
                                                     <f:setPropertyActionListener value="#{cdUser}" target="#{managerCommande.selectedCommande}" />  
                                                 </p:commandLink>
-                                                <h:commandButton value="Générer votre facture"/>
+                                                <h:commandButton class="form-control" value="Générer votre facture"/>
                                             </h:panelGrid>  
                                         </p:panel>  
                                     </p:dataGrid>  
@@ -119,18 +119,21 @@
                                         </p:outputPanel>  
                                     </p:dialog>  
                                 </h:form>   
-                            </h:panelGrid>
+                            </h:panelGrid>  
                         </p:tab> 
-                        <!--****************************************************** PARTIE EVENEMEMENT CREE ********************************************************-->
+              
+                    
+                    <br></br><br></br><br></br>
+                      <!--****************************************************** PARTIE EVENEMEMENT CREE ********************************************************-->
                         <p:tab id="tab3" title="Mes événements Crées">  
-                            <h:panelGrid cellpadding="10">  
+                            <h:panelGrid cellpadding="10" style="width:100%;" >  
                                 <h:form id="formEvenCree">
                                     <!-- la liste des evenements cree pour l'utilisateur connecter-->
                                     <p:dataGrid var="EvenUserCree" value="#{managerEvenement.listeEvenementCreeByUser(managerUser.user)}" columns="3"  
                                                 rows="12" paginator="true"  
                                                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
                                                 rowsPerPageTemplate="9,12,15" style="width:100%">  
-                                        <p:panel header="Evenemengt : #{EvenUserCree.titre}" style="text-align:center">  
+                                        <p:panel header="Evenement : #{EvenUserCree.titre}" >  
                                             <h:panelGrid columns="2" style="width:100%"> 
                                                 <h:outputLabel value="Date" /> <h:outputText value="#{EvenUserCree.dateDebut}"><f:convertDateTime pattern="dd/MM/yyyy" type="date"/> </h:outputText><h:outputLabel value="au" /> <h:outputText value="#{EvenUserCree.dateFin}"><f:convertDateTime pattern="dd/MM/yyyy" type="date"/></h:outputText>
                                                 <h:outputLabel value="Nb participant:"/><h:outputText value="#{EvenUserCree.nbParticipant}"/> 
@@ -175,14 +178,14 @@
                         </p:tab> 
                     <!--****************************************************** PARTIE EVENEMEMENT PARTICIPANT ********************************************************-->
                     <p:tab id="tab4" title="Mes événements Participer">  
-                        <h:panelGrid cellpadding="10">  
+                        <h:panelGrid cellpadding="10" style="width:100%;">  
                             <h:form id="formEvenParti">
                                 <!-- la liste des evenements participer pour l'utilisateur-->
                                 <p:dataGrid var="EvenUserPart" value="#{managerUser.convertirSetEnList(managerUser.user.evenements_1)}" columns="3"  
                                             rows="12" paginator="true"  
                                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
                                             rowsPerPageTemplate="9,12,15" style="width:100%">  
-                                    <p:panel header="Evenement : #{EvenUserPart.titre}" style="text-align:center">  
+                                    <p:panel header="Evenement : #{EvenUserPart.titre}" >  
                                         <h:panelGrid columns="2" style="width:100%"> 
                                             <h:outputLabel value="Date" /><h:outputText value="#{EvenUserPart.dateDebut}"><f:convertDateTime pattern="dd/MM/yyyy" type="date"/></h:outputText><h:outputLabel value="au" /><h:outputText value="#{EvenUserPart.dateFin}"> <f:convertDateTime pattern="dd/MM/yyyy" type="date"/></h:outputText>
                                             <h:outputLabel value="Nb participant:"/><h:outputText value="#{EvenUserPart.nbParticipant}"/> 
@@ -226,6 +229,7 @@
                         </h:panelGrid>
                     </p:tab> 
                     </p:tabView>
+                    <br></br><br></br><br></br><br></br>
                 </div>
             </ui:define>
         </ui:composition>
