@@ -547,8 +547,7 @@ maCase, .ui-chkbox-box, .ui-widget, .ui-corner-all, .ui-state-default{
     margin-top: 12px;
     color :red;
     float:right;
-   
-    margin-right: 5px;
+    margin-right: 45px;
 
 
 }
@@ -604,12 +603,18 @@ maCase, .ui-chkbox-box, .ui-widget, .ui-corner-all, .ui-state-default{
     margin-left: 30px;
 }
 
-.imagePoubelle {
-    
+.imagePoubelle {   
     background: url('../../custom/img/Poubelle.png') no-repeat;
     cursor: pointer;
-  
-    border: none;
-    
-    
+    border: none;   
 }
+.imageCroixMenuLogin{  
+    background: url('../../custom/img/croix.png') no-repeat top;
+    cursor: pointer;
+    border: none;
+    position: absolute;
+    top: 8px;
+    right: 14px;
+}
+
+

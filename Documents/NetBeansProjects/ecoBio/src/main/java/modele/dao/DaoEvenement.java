@@ -127,5 +127,27 @@ public class DaoEvenement implements IDao<Evenement> {
         }
         return listeEvenements;
     }
+      public List<Evenement> selectLastThreeEvenement() {
+
+        List<Evenement> listeAllEvenement = new ArrayList<Evenement>();
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            Transaction tx = session.beginTransaction();
+
+            Query queryProduit = session.createQuery("From Evenement").setMaxResults(3);
+       
+            
+            
+            listeAllEvenement = queryProduit.list();
+
+        } catch (HibernateException e) {
+            e.getMessage();
+        } finally {
+            session.close();
+        }
+        return listeAllEvenement;
+    }
 
 }
+
+

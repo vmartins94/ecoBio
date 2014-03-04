@@ -195,5 +195,18 @@ public class ManagerProduit implements IManager<Produit>, Serializable {
         }
         return maListeProduitFinale;
     }
+        
+         public List<Produit> selectLastThreeProduit() {
+
+        DaoProduit daoProduit = (DaoProduit) FactoryDao.getDAO("Produit");
+        List<Produit> listeProduit = daoProduit.selectLastThreeProduit();
+
+        mapProduit();
+
+        if (!listeProduit.isEmpty()) {
+            return listeProduit;
+        }
+        return null;
+    }
 
 }

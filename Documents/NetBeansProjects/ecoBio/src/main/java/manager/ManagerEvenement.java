@@ -51,6 +51,17 @@ public class ManagerEvenement implements IManager<Evenement> {
         IDao eventDao = FactoryDao.getDAO("Evenement");
         eventDao.update(monEvenement);
     }
+    
+     public List<Evenement> selectLastThreeEvenement() {
+
+        DaoEvenement daoEvenement = (DaoEvenement) FactoryDao.getDAO("Evenement");
+        List<Evenement> listeEvenement = daoEvenement.selectLastThreeEvenement();
+
+        if (!listeEvenement.isEmpty()) {
+            return listeEvenement;
+        }
+        return null;
+    }
 
     public Evenement getMonEvenement() {
         return monEvenement;

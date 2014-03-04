@@ -1,21 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"   
       xmlns:ui="http://java.sun.com/jsf/facelets"
       >
     <body>
-	    <ui:composition>
- 
-		   <!-- footerBottomSection -->	
+        <ui:composition>
+
+            <!-- footerBottomSection -->	
             <div class="footerBottomSection">
                 <div class="container">
                     &copy; 2014, Allright reserved. <a href="#">Terms and Condition</a> | <a href="#">Privacy Policy</a> 
+
+
+
+
                     <div class="pull-right"> <a href="index.html">ECO-BIO.COM</a></div>
+
+                    <div class="fb-share-button" data-href="https://www.facebook.com/pages/Ecobio/1400495916880051" data-type="button_count" style="margin-left:10px;"></div>
+
+                    <a href="https://twitter.com/share" class="twitter-share-button" data-related="jasoncosta" data-lang="en" data-size="large" data-count="none" style="padding-left: 10px;">Tweet</a>
+
+
                 </div>
             </div>
             <!-- JS Global Compulsory -->			
-           <!-- <script type="text/javascript" src="assets/custom/js/jquery-1.8.2.min.js"></script> -->
+            <!-- <script type="text/javascript" src="assets/custom/js/jquery-1.8.2.min.js"></script> -->
             <script type="text/javascript" src="assets/custom/js/modernizr.custom.js"></script>		
             <script type="text/javascript" src="assets/bootstrap/js/bootstrap.min.js"></script>	
 
@@ -39,7 +49,29 @@
                 });
             </script>
 
- 
-	    </ui:composition>
+            <script>(function(d, s, id) {
+                    var js, fjs = d.getElementsByTagName(s)[0];
+                    if (d.getElementById(id))
+                        return;
+                    js = d.createElement(s);
+                    js.id = id;
+                    js.src = "//connect.facebook.net/fr_FR/all.js#xfbml=1";
+                    fjs.parentNode.insertBefore(js, fjs);
+                }(document, 'script', 'facebook-jssdk'));</script>
+
+            <script>!function(d, s, id) {
+                    var js, fjs = d.getElementsByTagName(s)[0];
+                    if (!d.getElementById(id)) {
+                        js = d.createElement(s);
+                        js.id = id;
+                        js.src = "https://platform.twitter.com/widgets.js";
+                        fjs.parentNode.insertBefore(js, fjs);
+                    }
+                }(document, "script", "twitter-wjs");</script>
+
+
+
+
+        </ui:composition>
     </body>
 </html>

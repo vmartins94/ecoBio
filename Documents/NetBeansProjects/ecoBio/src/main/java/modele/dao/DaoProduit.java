@@ -206,5 +206,24 @@ public class DaoProduit implements IDao<Produit> {
         }
         return execution;
     }
+     public List<Produit> selectLastThreeProduit() {
+
+        List<Produit> listeAllProduit = new ArrayList<Produit>();
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            Transaction tx = session.beginTransaction();
+
+            Query queryProduit = session.createQuery("From Produit where avecEnchere=?").setMaxResults(3);
+            queryProduit.setBoolean(0, false);
+            
+            listeAllProduit = queryProduit.list();
+
+        } catch (HibernateException e) {
+            e.getMessage();
+        } finally {
+            session.close();
+        }
+        return listeAllProduit;
+    }
 
 }

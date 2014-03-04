@@ -182,7 +182,7 @@
                                             rows="12" paginator="true"  
                                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
                                             rowsPerPageTemplate="9,12,15" style="width:100%">  
-                                    <p:panel header="Evenemengt : #{EvenUserPart.titre}" style="text-align:center">  
+                                    <p:panel header="Evenement : #{EvenUserPart.titre}" style="text-align:center">  
                                         <h:panelGrid columns="2" style="width:100%"> 
                                             <h:outputLabel value="Date" /><h:outputText value="#{EvenUserPart.dateDebut}"><f:convertDateTime pattern="dd/MM/yyyy" type="date"/></h:outputText><h:outputLabel value="au" /><h:outputText value="#{EvenUserPart.dateFin}"> <f:convertDateTime pattern="dd/MM/yyyy" type="date"/></h:outputText>
                                             <h:outputLabel value="Nb participant:"/><h:outputText value="#{EvenUserPart.nbParticipant}"/> 

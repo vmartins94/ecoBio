@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import javax.faces.context.FacesContext;
 import modele.dao.DaoUser;
 import modele.dao.FactoryDao;
 import modele.dao.IDao;
@@ -28,7 +29,9 @@ public class ManagerUser implements IManager<User>, Serializable {
     private User user;
     //TODO C 
     private ManagerPanier monPanier;
-    public ManagerUser() {}
+
+    public ManagerUser() {
+    }
 
     @Override
     public List<User> findAll() {
@@ -44,8 +47,9 @@ public class ManagerUser implements IManager<User>, Serializable {
         userDAO.insert(user);
         return "";
     }
+
     public String create(User utilisateur) {
-        user= utilisateur;
+        user = utilisateur;
         IDao userDAO = FactoryDao.getDAO("User");
         userDAO.insert(user);
         return "Inscription_sucess";
@@ -53,7 +57,7 @@ public class ManagerUser implements IManager<User>, Serializable {
 
     //TODO C : La connexion se fera en ajax
     public String verifAuthentification(User user2) {
-        
+
         user = user2;
         DaoUser userDAO = (DaoUser) FactoryDao.getDAO("User");
 
@@ -63,8 +67,7 @@ public class ManagerUser implements IManager<User>, Serializable {
             if (user.getId() > 0) {
 
                 //SI C'EST UN ADMIN ON REDIRIGE VERS LE BACK OFFICE
-                
-                if(user.getType() != null){
+                if (user.getType() != null) {
                     if (user.getType() == true) {
                         return Constantes.AUTHENTIFICATION_SUCCESS_ADMIN;
                     } else {
@@ -78,6 +81,11 @@ public class ManagerUser implements IManager<User>, Serializable {
         }
         //DANS LE CAS DE L'ECHEC ON RETOURNE DANS LA PAGE D'ACCUEIL
         return Constantes.AUTHENTIFICATION_ECHEC;
+    }
+
+    public String deconnexion() {
+        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+        return "/index.xhtml?faces-redirect=true";
     }
 
     public User getUser() {
@@ -95,9 +103,10 @@ public class ManagerUser implements IManager<User>, Serializable {
     public void setMonPanier(ManagerPanier monPanier) {
         this.monPanier = monPanier;
     }
-     public List convertirSetEnList(Set set){
+
+    public List convertirSetEnList(Set set) {
         List list = new ArrayList(set);
         return list;
-     }
+    }
 
 }

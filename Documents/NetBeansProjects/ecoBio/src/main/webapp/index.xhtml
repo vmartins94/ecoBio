@@ -2,8 +2,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
-   
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+
     <h:body>
         <ui:composition template="/xhtml/LayoutWithHeaderIndex.xhtml">
             <ui:define name="content">
@@ -41,98 +44,93 @@
 
                 <div class="serviceBlock">
                     <div class="container">
-                        <h3>Les dernieres ventes de fruits et legumes</h3>
                         <div class="row">
-                            <div class="col-md-4">
-                                <div class="clearfix">
-                                    <i class="fa fa-compress"></i>
-                                    <div class="desc">
-                                        <h4 id="titreMetier">Titre vente</h4>
-                                        <p>Descriptif vente </p>
+                            <h3>Les dernieres ventes de fruits et legumes</h3>
+                            <c:forEach var="leProduit" items="${managerProduit.selectLastThreeProduit()}">
+                                <!--                        <ui:repeat var="leProduit" value="{managerProduit.listeProduit()}">-->
+                                <div class="col-md-4">
+                                    <div class="clearfix" >
+                                        <i class="fa fa-compress"></i>
+                                        <div class="desc">
+                                            <h4 id="titreMetier">#{leProduit.nom}</h4>
+                                            <c:choose>
+                                                <c:when test="#{leProduit.typeVente == false}">
+                                                    Vente au : Lot <br></br>
+                                                    Prix du lot : #{leProduit.prix}<br></br>
+                                                    Quantité restante : #{leProduit.quantiteFinale}<br></br>
+                                                    Descriptif : #{leProduit.description}
+                                                </c:when>
+                                                <c:otherwise>
+                                                    Vente au : Kilo  <br></br>
+                                                    Prix au kilo : #{leProduit.prix} <br></br>
+                                                    Quantité restante : #{leProduit.quantiteFinale}<br></br>
+                                                    Descriptif : #{leProduit.description}
+                                                </c:otherwise>
+                                            </c:choose>
+                                             <div id ="ligneAjoutPanier">                                      
+                                            <h:form>
+                                                <p:commandButton id="boutonid_#{leProduit.id}" action="#{managerProduit.outcome}" actionListener="#{managerProduit.attrListener}" onclick= "dialogBoxShow_#{leProduit.id}.show();" value="ajouterPanier">
+                                                    <f:attribute name="username" value="#{leProduit.nom}" />
+                                                </p:commandButton> 
+                                            </h:form>
+                                        </div>
+                                        <p:dialog id="dialogBoxId_#{leProduit.id}"  header="Saisissez le nombre d'article souhaité " widgetVar="dialogBoxShow_#{leProduit.id}" modal="true" height="180" >
+                                            <h:form>
+                                                <div class ="row" style="margin-top:20px ">
+                                                    <h7 style="padding-left:10px;">      Combien voulez vous de : #{leProduit.nom} ?  </h7>  <br></br><br></br>
+                                                    <p:commandButton value="+" actionListener="#{counterBean.increment}" update="toto" style="margin-left : 80px;" />
+                                                    <p:commandButton value="-" actionListener="#{counterBean.decrement}" update="toto" />
+                                                    <h:outputText id="toto" value="Quantité :#{counterBean.count}" style="height :100;" /><br></br><br></br>
+                                                </div>
+
+                                                <h:commandButton action="#{currentCart.addProduit(leProduit, counterBean)}" value="Ajouter ces articles aux paniers" styleClass="btn btnConnexion" /> </h:form>
+                                        </p:dialog>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="clearfix">
-                                    <i class="fa fa-code"></i>
-                                    <div class="desc">
-                                        <h4 id="titreMetier">Titre vente</h4>
-                                        <p>Descriptif vente </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="clearfix">
-                                    <i class="fa fa-thumbs-up"></i>
-                                    <div class="desc">
-                                        <h4 id="titreMetier">Titre vente</h4>
-                                        <p>Descriptif vente </p>
-                                    </div>
-                                </div>
-                            </div>
+                                </div>                     
+                            </c:forEach>
                         </div>
-                        <hr>
-                            <div class="row">
-                                <h3>Les dernieres ventes de produits defecteux </h3>
-                                <div class="col-md-4">
-                                    <div class="clearfix">
-                                        <i class="fa fa-desktop"></i>
-                                        <div class="desc">
-                                            <h4 id="titreMetier">Titre vente</h4>
-                                            <p>Descriptif vente </p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="clearfix">
-                                        <i class="fa fa-html5"></i> 
-                                        <div class="desc">
-                                            <h4 id="titreMetier">Titre vente</h4>
-                                            <p>Descriptif vente </p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="clearfix">
-                                        <i class="fa fa-css3"></i>
-                                        <div class="desc">
-                                            <h4 id="titreMetier">Titre vente</h4>
-                                            <p>Descriptif vente </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </hr>
                         <hr></hr>
                         <div class="row">
                             <h3>Les derniers evenements</h3>
-                            <div class="col-md-4">
-                                <div class="clearfix">
-                                    <i class="fa fa-github"></i>
-                                    <div class="desc">
-                                        <h4 id="titreMetier">Titre evenement</h4>
-                                        <p>Descriptif evenement</p>
+                            <ui:repeat var="unEvenement" value="#{managerEvenement.selectLastThreeEvenement()}">
+                                <div class="col-md-4">
+
+                                    <div class="clearfix">
+                                        <div>
+                                            <img width="150px" height="150px" src="assets/custom/img/fruit1.png" />
+                                        </div>
+                                        <div class="desc">
+                                            <h4 align="center" id="titreMetier">#{unEvenement.titre}</h4>
+                                            <h:outputText value="Prix : #{unEvenement.prix}" /><br/>
+                                            <h:outputText value="Nombre de participant : #{unEvenement.nbParticipant}" /><br/>
+                                            Date : <h:outputText value="#{unEvenement.dateDebut}">
+                                                <f:convertDateTime pattern="dd/MM/yyyy" type="date"/>
+                                            </h:outputText> au 
+                                            <h:outputText value="#{unEvenement.dateFin}">
+                                                <f:convertDateTime pattern="dd/MM/yyyy" type="date"/>
+                                            </h:outputText><br/>
+                                            <h:outputText value="Adresse : #{unEvenement.rue} #{unEvenement.adresse} #{unEvenement.cp} #{unEvenement.ville}" /><br/>
+                                            <h:outputLink id="description" value="#">  
+                                                <h:outputText value="Description"/>
+                                            </h:outputLink>  
+                                            <p:tooltip for="description" value="#{unEvenement.description}" showEffect="fade" hideEffect="fade" /> 
+                                            <!-- Si le nombre de participant est égal au nombre de la liste contenant les utilisateur, on affiche pas le bouton-->
+                                            <h:form>
+                                                <c:choose>
+                                                    <c:when test="#{managerUser.user.id == null}">
+                                                        <p:commandLink styleClass="btn btn-default" id="modalDialogButton" value="Connexion" onclick= "dlgEspacePerso.show();" type="button"/>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <h:commandButton class="btn btn-default" value="Participer" rendered="#{unEvenement.nbParticipant > unEvenement.users.size()}" action="#{managerEvenement.participer(unEvenement, managerUser.user)}"/>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </h:form>
+
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="clearfix">
-                                    <i class="fa fa-android"></i>
-                                    <div class="desc">
-                                        <h4 id="titreMetier">Titre evenement</h4>
-                                        <p>Descriptif evenement</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="clearfix">
-                                    <i class="fa fa-tablet"></i>
-                                    <div class="desc">
-                                        <h4 id="titreMetier">Titre evenement</h4>
-                                        <p>Descriptif evenement</p>
-                                    </div>
-                                </div>
-                            </div>
+                                </div>        
+                            </ui:repeat>
                         </div>
                     </div>
                 </div>
