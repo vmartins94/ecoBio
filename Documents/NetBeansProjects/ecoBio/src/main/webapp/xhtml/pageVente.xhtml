@@ -32,7 +32,7 @@
                                             <div class="row"><h6>Importer une liste de produits</h6><hr/></div>
                                             <div class="row">
                                                 <div class="col-md-5">
-                                                    <h:commandButton class="btn btn-default" value="Importer" action="#{managerProduit.createProduit(newProduit,newEnchere,managerUser.user)}"/>
+                                                    <p:commandLink styleClass="btn btn-default" id="mDialogImporter" value="Importer" onclick= "dlgUpload.show();" type="button"/>
                                                 </div>
                                             </div>
                                         </div>
@@ -60,7 +60,7 @@
                                         <p:dataTable id="tbl" var="produit" value="#{managerProduit.findAllMines(managerUser.user)}" paginatorPosition="bottom" paginator="true" rows="5">  
                                             <p:column>  
                                                 <f:facet name="header"> <h:outputText value="Image" /> </f:facet>
-                                                <img width="80px" height="80px" src="assets/custom/img/fruit1.png" />
+                                                <img width="80px" height="80px" src="assets/custom/img/#{produit.type.nom}.jpg" alt="" />
                                             </p:column> 
                                             <p:column>  
                                                 <f:facet name="header"> <h:outputText value="Nom" /> </f:facet>  
@@ -98,8 +98,7 @@
                                             </p:column>
                                             <p:column>  
                                                 <f:facet name="header"> <h:outputText value="Plus de détaile" /> </f:facet> 
-                                                <p:commandLink value="Consulter" onclick= "dlgConsulterProduit_#{produit.id.toString()}.show();" type="button" />
-                                                <!--<h:outputText value="Consulter#{produit.prix}" />-->  
+                                                <p:commandLink value="Consulter" onclick= "dlgConsulterProduit_#{produit.id.toString()}.show();" type="button" /> 
                                             </p:column>
                                         </p:dataTable>
                                     </div><br/>
@@ -122,7 +121,7 @@
                             </h:form>
 
                             <!-- Dialogue de création de produit-->
-                            <p:dialog id="modalDialogCreationProduit" header="Ajouter un produit" widgetVar="dlgCreationProduit" modal="true" width="500" height="500" >
+                            <p:dialog id="modalDialogCreationProduit" header="Ajouter un produit" widgetVar="dlgCreationProduit" modal="true" width="600" height="500" >
 
                                 <h:form id="idFormVente">
 
@@ -216,18 +215,15 @@
                                                     </div>
                                                 </div>
                                             </p:panel><br/>
+<!--                                            <div class="row">
+                                                <div class="col-md-3"><label>Image : </label></div>  
+                                            </div>
                                             <div class="row">
-                                                <div class="col-md-5">
-                                                    <label>Image : </label>
-<!--                                                    <h:form id="form" enctype="multipart/form-data">
-                                                      <p:fileUpload fileUploadListener="#{fileUploadController.upload}" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" sizeLimit="100000"/>
-                                                    </h:form>-->
-
-<h:form enctype="multipart/form-data">
-<p:fileUpload mode="advanced" fileUploadListener="#{uploaderBB.handleFileUpload}" allowTypes="/(\.|\/)(gif|jpg|jpeg|gif|png|PNG|GIF|JPG|JPEG)$/" />
-</h:form>
-                                                                                                       
-                                                </div>
+                                                <h:form enctype="multipart/form-data">
+                                                    <p:fileUpload fileUploadListener="#{fileUploadController.handleFileUpload}" mode="advanced" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"/>  
+                                                </h:form>
+                                            </div>-->
+                                            <div class="row">
                                                 <div class="col-md-7">
                                                     <c:choose>
                                                         <c:when test="#{managerUser.user.id == null}">
@@ -240,6 +236,77 @@
                                                 </div>
                                             </div><br/>
                                         </div>
+                                    </div>
+                                </h:form>
+                            </p:dialog>
+                            
+                            <!-- Dialogue d'upload de fichier-->
+                            <p:dialog id="modalDialogUpload" header="Import de fichier excel" widgetVar="dlgUpload" modal="true" width="1200" height="auto">
+
+                                <h:form id="idFormImport">
+
+                                    <div class="panel-body" style="margin: 20px;">
+
+                                        <div class="row">
+                                            <div class="col-md-3"><label>Fichier : </label></div>  
+                                        </div>
+                                        <h:form enctype="multipart/form-data">
+                                            <div class="row">
+                                                <p:fileUpload fileUploadListener="#{fileUploadController.handleFileUploadExcel}" mode="advanced" allowTypes="/(\.|\/)(xlsx)$/" oncomplete="dlgUpload.show();" update="tbl"/> 
+                                            </div><br/>
+                                            <div class="row">
+                                                <p:dataTable id="tbl" var="produit" value="#{fileUploadController.listeProduits}" paginatorPosition="bottom" paginator="true" rows="5" editable="true" editMode="cell" >  
+                                                    <p:column>  
+                                                        <f:facet name="header"> <h:outputText value="Nom" /> </f:facet>  
+                                                        <h:inputText value="#{produit.nom}" />  
+                                                        <!--                                                        <p:cellEditor>    
+                                                                                                                    <f:facet name="input"><p:inputText id="modelInput" value="#{produit.nom}" style="width:96%"/></f:facet>  
+                                                                                                                </p:cellEditor>-->
+                                                    </p:column> 
+                                                    <p:column>  
+                                                        <f:facet name="header"> <h:outputText value="Type" /> </f:facet>  
+                                                        <h:outputText value="#{produit.nom}" />  
+                                                    </p:column>
+                                                    <p:column>  
+                                                        <f:facet name="header"> <h:outputText value="Description" /> </f:facet>  
+                                                        <h:outputText value="#{produit.description}"/>  
+                                                    </p:column>
+                                                    <p:column>  
+                                                        <f:facet name="header"> <h:outputText value="Prix" /> </f:facet>  
+                                                        <h:outputText value="#{produit.prix}" />  
+                                                    </p:column> 
+                                                    <p:column>  
+                                                        <f:facet name="header"> <h:outputText value="Type de vente" /> </f:facet> 
+                                                        <c:choose>
+                                                            <c:when test="#{produit.typeVente == false}">
+                                                                <h:outputText value="En lot" />
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <h:outputText value="Au kilo" />
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                    </p:column>
+                                                    <p:column>  
+                                                        <f:facet name="header"> <h:outputText value="Mode de Vente" /> </f:facet> 
+                                                        <c:choose>
+                                                            <c:when test="#{produit.avecEnchere == false}">
+                                                                <h:outputText value="En ligne" />
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <h:outputText value="Aux enchères" />
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                    </p:column>
+                                                    <p:column>  
+                                                        <f:facet name="header"> <h:outputText value="Plus de détaile" /> </f:facet> 
+                                                        <p:commandLink value="Consulter" onclick= "dlgConsulterProduit_#{produit.id.toString()}.show();" type="button" />
+                                                    </p:column>
+                                                </p:dataTable>
+                                            </div><br/>
+                                        </h:form>
+                                        <div class="row">
+                                            <h:commandButton class="btn btn-default" value="Ajouter les produits" action="#{managerProduit.createProduit(newProduit,newEnchere,managerUser.user)}"/>
+                                        </div><br/>
                                     </div>
                                 </h:form>
                             </p:dialog>

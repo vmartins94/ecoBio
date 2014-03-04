@@ -16,32 +16,20 @@
         <param-name>javax.faces.FACELETS_SKIP_COMMENTS</param-name>
         <param-value>true</param-value>
     </context-param>
-    
     <context-param>
         <param-name>org.icefaces.render.auto</param-name>
         <param-value>false</param-value>
     </context-param>
-   
-<!--    Filtre pour l'upload d'image-->
-<filter>
-<filter-name>PrimeFaces FileUpload Filter</filter-name>
-<filter-class>filter.FileUploadFilter</filter-class>
-<init-param>
-<param-name>thresholdSize</param-name>
-<param-value>51200</param-value>
-</init-param>
-
-<init-param>
-<param-name>uploadDirectory</param-name>
-<param-value>C/Temp</param-value>
-</init-param>
-</filter>
-<filter-mapping>
-<filter-name>PrimeFaces FileUpload Filter</filter-name>
-<servlet-name>Faces Servlet</servlet-name>
-</filter-mapping>
-     
-
+    
+   <!-- Filtre primeFaces pour l'upload de fichier-->
+    <filter>
+        <filter-name>PrimeFaces FileUpload Filter</filter-name>
+        <filter-class>org.primefaces.webapp.filter.FileUploadFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>PrimeFaces FileUpload Filter</filter-name>
+        <servlet-name>Faces Servlet</servlet-name>
+    </filter-mapping>
 
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>

@@ -6,12 +6,16 @@
 package manager;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
@@ -31,7 +35,16 @@ import org.apache.poi.hssf.usermodel.HSSFRichTextString;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.ClientAnchor;
+import org.apache.poi.ss.usermodel.CreationHelper;
+import org.apache.poi.ss.usermodel.Drawing;
+import org.apache.poi.ss.usermodel.Picture;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.util.IOUtils;
+import utils.Constantes;
+import utils.GenerateExcelFile;
 
 /**
  *
@@ -172,93 +185,183 @@ public class ManagerCommande implements IManager<Commande>, Serializable {
         return daoCommande.insert(uneCommande);
     }
 
-    public void genererFacture() {
+    public void genererFacture(Commande commande) {
 
-        //TODO C : 2 type de facture => une pour le client et l'autre pour le vendeur
-        maCommande = new Commande();
-        maCommande.setId(120);
-        maCommande.setDateCreation(new Date());
-        User user = new User("SEVERIEN", "Christiana", "login", "c.severien@insta.fr", "25 rue de Bellevue", 93800, "Epinay-Sur-seine", "password");
-        maCommande.setUser(user);
-
-        HSSFWorkbook workbook = new HSSFWorkbook();
-        HSSFSheet sheet = workbook.createSheet("students");
+        maCommande = commande;
+        
+        GenerateExcelFile generateExcel = new GenerateExcelFile();
+        HSSFSheet sheet = generateExcel.getWorkbook().createSheet("Facture");
         sheet.protectSheet("secret");
+
         //style pour verrouiller les cellules
-        CellStyle lockedCellStyle = workbook.createCellStyle();
+        CellStyle lockedCellStyle = generateExcel.getWorkbook().createCellStyle();
         lockedCellStyle.setLocked(true);
 
         //Titre
-        HSSFRow rowTitle = sheet.createRow(1);
-        HSSFCell cellTitle = rowTitle.createCell(9);
+        HSSFRow rowTitle = sheet.createRow(3);
+        HSSFCell cellTitle = rowTitle.createCell(6);
         cellTitle.setCellValue(new HSSFRichTextString("FACTURE"));
-//        cellTitle.setCellStyle(lockedCellStyle);
+        cellTitle.setCellStyle(generateExcel.creationFontTitre());
+        
+        //Logo
+
+        //add picture data to this workbook.
+        InputStream is = null;
+        try {
+            is = new FileInputStream(Constantes.UPLOAD_DIR + File.separator + "logo_Facture.jpg");
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(ManagerCommande.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        byte[] bytes = null;
+        try {
+            bytes = IOUtils.toByteArray(is);
+        } catch (IOException ex) {
+            Logger.getLogger(ManagerCommande.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        int pictureIdx = generateExcel.getWorkbook().addPicture(bytes, Workbook.PICTURE_TYPE_JPEG);
+        try {
+            is.close();
+        } catch (IOException ex) {
+            Logger.getLogger(ManagerCommande.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        CreationHelper helper = generateExcel.getWorkbook().getCreationHelper();
+
+        // Create the drawing patriarch. This is the top level container for all shapes. 
+        Drawing drawing = sheet.createDrawingPatriarch();
+
+        //add a picture shape
+        ClientAnchor anchor = helper.createClientAnchor();
+        //set top-left corner of the picture,
+        //subsequent call of Picture#resize() will operate relative to it
+        anchor.setCol1(1);
+        anchor.setRow1(6);
+        Picture pict = drawing.createPicture(anchor, pictureIdx);
+
+        //auto-size picture relative to its top-left corner
+        pict.resize();
 
         //Numéro de la commande
-        HSSFRow rowNumeroCommande = sheet.createRow(3);
-        HSSFCell cellNumeroCommande = rowNumeroCommande.createCell(16);
+        HSSFRow rowNumeroCommande = sheet.createRow(15);
+        HSSFCell cellNumeroCommande = rowNumeroCommande.createCell(1);
         cellNumeroCommande.setCellValue(new HSSFRichTextString("Numéro commande : " + maCommande.getId()));
-
+        cellNumeroCommande.setCellStyle(generateExcel.creationTexteGrasMoyen());
+        
         //Date de la commande
-        HSSFRow rowDateCommande = sheet.createRow(4);
-        HSSFCell cellDateCommande = rowDateCommande.createCell(16);
-        cellDateCommande.setCellValue(new HSSFRichTextString("Date commande : " + maCommande.getDateCreation()));
-
+        HSSFRow rowDateCommande = sheet.createRow(16);
+        HSSFCell cellDateCommande = rowDateCommande.createCell(1);
+        SimpleDateFormat formatter = new SimpleDateFormat ("dd/MM/yyyy"); 
+        cellDateCommande.setCellValue(new HSSFRichTextString("Date commande : " + formatter.format(maCommande.getDateCreation())));
+        cellDateCommande.setCellStyle(generateExcel.creationTexteGrasMoyen());
+        
         //Identifiant vendeur
         //Adresse vendeur
         //CP et ville vendeur
+        
         //Numéro client
-        HSSFRow rowNumeroClient = sheet.createRow(11);
-        HSSFCell cellNumeroClient = rowNumeroClient.createCell(12);
+        HSSFRow rowNumeroClient = sheet.createRow(7);
+        HSSFCell cellNumeroClient = rowNumeroClient.createCell(10);
         cellNumeroClient.setCellValue(new HSSFRichTextString("Numéro client : " + maCommande.getUser().getId()));
-
+        cellNumeroClient.setCellStyle(generateExcel.creationTexteGrasMoyen());
+        
         //Identifiant client
-        HSSFRow rowIdentifiantClient = sheet.createRow(12);
-        HSSFCell cellIdentifiantClient = rowIdentifiantClient.createCell(12);
+        HSSFRow rowIdentifiantClient = sheet.createRow(9);
+        HSSFCell cellIdentifiantClient = rowIdentifiantClient.createCell(10);
         cellIdentifiantClient.setCellValue(new HSSFRichTextString(maCommande.getUser().getNom() + " " + maCommande.getUser().getPrenom()));
-
+        cellIdentifiantClient.setCellStyle(generateExcel.creationTexteGrasMoyen());
+        
         //Adresse client
-        HSSFRow rowAdresseClient = sheet.createRow(13);
-        HSSFCell cellAdresseClient = rowAdresseClient.createCell(12);
+        HSSFRow rowAdresseClient = sheet.createRow(10);
+        HSSFCell cellAdresseClient = rowAdresseClient.createCell(10);
         cellAdresseClient.setCellValue(new HSSFRichTextString(maCommande.getUser().getRue()));
-
+        cellAdresseClient.setCellStyle(generateExcel.creationTexteGrasMoyen());
+        
         //CP et ville client
-        HSSFRow rowCpVilleClient = sheet.createRow(14);
-        HSSFCell cellCpVilleClient = rowCpVilleClient.createCell(12);
+        HSSFRow rowCpVilleClient = sheet.createRow(11);
+        HSSFCell cellCpVilleClient = rowCpVilleClient.createCell(10);
         cellCpVilleClient.setCellValue(new HSSFRichTextString(maCommande.getUser().getCp() + " " + maCommande.getUser().getVille()));
-
-        //Titre colonne du tablea (Quantité,Désignation,Prix unitaire,Prix total)
+        cellCpVilleClient.setCellStyle(generateExcel.creationTexteGrasMoyen());
+        
+        //Titre colonne du tableau
         HSSFRow rowTitreColonne = sheet.createRow(20);
-        HSSFCell cellQuantité = rowTitreColonne.createCell(1);
-        cellQuantité.setCellValue(new HSSFRichTextString("Quantité"));
-        HSSFCell cellDesignation = rowTitreColonne.createCell(2);
-        cellDesignation.setCellValue(new HSSFRichTextString("Désignation"));
-        HSSFCell cellPrixU = rowTitreColonne.createCell(3);
-        cellPrixU.setCellValue(new HSSFRichTextString("Prix unitaire"));
-        HSSFCell cellPrixTotal = rowTitreColonne.createCell(4);
+        
+        //Colonne nom
+        HSSFCell cellNom = rowTitreColonne.createCell(2);
+        cellNom.setCellValue(new HSSFRichTextString("Nom"));
+        cellNom.setCellStyle(generateExcel.creationFontTitreColonne());
+        //Colonne description
+        HSSFCell cellDesignation = rowTitreColonne.createCell(3);
+        cellDesignation.setCellValue(new HSSFRichTextString("Description"));
+        cellDesignation.setCellStyle(generateExcel.creationFontTitreColonne());
+        //Colonne quantité
+        HSSFCell cellQuantite = rowTitreColonne.createCell(4);
+        cellQuantite.setCellValue(new HSSFRichTextString("Quantité"));
+        cellQuantite.setCellStyle(generateExcel.creationFontTitreColonne());
+        //Colonne prix unitaire
+        HSSFCell cellPrixU = rowTitreColonne.createCell(5);
+        cellPrixU.setCellValue(new HSSFRichTextString("Prix unitaire (en €)"));
+        cellPrixU.setCellStyle(generateExcel.creationFontTitreColonne());
+        //Colonne prix total ligne
+        HSSFCell cellPrixTotal = rowTitreColonne.createCell(6);
         cellPrixTotal.setCellValue(new HSSFRichTextString("Prix Total"));
+        cellPrixTotal.setCellStyle(generateExcel.creationFontTitreColonne());
+
+        //Taille des colonnes en fonction du contenu
+        sheet.autoSizeColumn(1);
+        sheet.autoSizeColumn(2);
+        sheet.autoSizeColumn(3);
+        sheet.autoSizeColumn(4);
+        sheet.autoSizeColumn(5);
+        sheet.autoSizeColumn(6);
+
+        int indexLine = 21;
+        //Liste des produits
+        Iterator iteratorCommande = maCommande.getCommandeHasProduits().iterator();
+        CommandeHasProduit aCommandeHasProduit;
+        
+        while(iteratorCommande.hasNext()){
+            aCommandeHasProduit = (CommandeHasProduit) iteratorCommande.next();
+            
+            HSSFRow rowProduit = sheet.createRow(indexLine);
+            HSSFCell nom = rowProduit.createCell(2);
+            nom.setCellValue(new HSSFRichTextString(aCommandeHasProduit.getProduit().getNom()));
+            nom.setCellStyle(generateExcel.creationTexteGrasMoyen());
+            HSSFCell description = rowProduit.createCell(3);
+            description.setCellValue(new HSSFRichTextString(aCommandeHasProduit.getProduit().getDescription()));
+            description.setCellStyle(generateExcel.creationTexteGrasMoyen());
+            HSSFCell quantite = rowProduit.createCell(4);
+            quantite.setCellValue(new HSSFRichTextString(String.valueOf(aCommandeHasProduit.getQuantite())));
+            quantite.setCellStyle(generateExcel.creationTexteGrasMoyen());
+            HSSFCell prixU = rowProduit.createCell(5);
+            prixU.setCellValue(new HSSFRichTextString(String.valueOf(aCommandeHasProduit.getProduit().getPrix())));
+            prixU.setCellStyle(generateExcel.creationTexteGrasMoyen());
+            HSSFCell prixT = rowProduit.createCell(6);
+            prixT.setCellValue(new HSSFRichTextString(String.valueOf(aCommandeHasProduit.getProduit().getPrix()*aCommandeHasProduit.getQuantite())));
+            prixT.setCellStyle(generateExcel.creationTexteGrasMoyen());
+            indexLine++;
+        }
 
         FileOutputStream fos = null;
 
         try {
-            fos = new FileOutputStream(new File("C:/Users/Chac/Desktop/myExcelWorkBook.xls"));
-            workbook.write(fos);
+            fos = new FileOutputStream(
+                    new File(Constantes.UPLOAD_DIR + File.separator + "Facture_" + maCommande.getId() + "_" + maCommande.getUser().getNom() + ".xls"));
+            generateExcel.getWorkbook().write(fos);
         } catch (FileNotFoundException e) {
-
             e.printStackTrace();
+            
         } catch (IOException e) {
-
             e.printStackTrace();
+            
         } finally {
             try {
                 fos.flush();
                 fos.close();
+                
             } catch (IOException e) {
-
                 e.printStackTrace();
             }
         }
-
     }
 
     public Commande getMaCommande() {

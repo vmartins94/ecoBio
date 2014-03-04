@@ -79,7 +79,7 @@
                                                     <h:outputText styleClass="ui-icon ui-icon-search" style="margin:0 auto;" />   
                                                     <f:setPropertyActionListener value="#{cdUser}" target="#{managerCommande.selectedCommande}" />  
                                                 </p:commandLink>
-                                                <h:commandButton class="form-control" value="Générer votre facture"/>
+                                                <h:commandButton value="Générer votre facture" action="#{managerCommande.genererFacture(cdUser)}"/>
                                             </h:panelGrid>  
                                         </p:panel>  
                                     </p:dataGrid>  

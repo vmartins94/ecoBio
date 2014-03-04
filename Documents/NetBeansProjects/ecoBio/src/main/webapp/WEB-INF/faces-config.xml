@@ -140,9 +140,9 @@
         </managed-property>
     </managed-bean>
     <managed-bean>
-        <description>TEST</description>
-        <managed-bean-name>uploaderBB</managed-bean-name>
-        <managed-bean-class>manager.UploaderBB</managed-bean-class>
+        <description>Upload</description>
+        <managed-bean-name>fileUploadController</managed-bean-name>
+        <managed-bean-class>manager.FileUploadController</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
     <!-- **********************************END DECLARATION MANAGER******************************* -->
@@ -338,10 +338,8 @@
             <to-view-id>xhtml/pageVente.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
-    
- 
-
     <!-- **********************************END MENU NAVIGATION*********************************** -->
+    
     <!-- **********************************CONVERTER********************************************* -->
     <converter>
         <converter-id>typeConverter</converter-id>

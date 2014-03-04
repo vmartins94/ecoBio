@@ -10,7 +10,7 @@
     <ui:composition template="/xhtml/Layout.xhtml">
         <ui:define name="content">
 
-            <div class="panel-group" id="accordion">
+<!--            <div class="panel-group" id="accordion">
                 <div id="panelCritere" class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
@@ -53,16 +53,16 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>-->
             <div class="serviceBlock">
                 <div class="container">
-                    <h3>Les dernieres ventes de fruits et legumes</h3>
-                    <div class="row">
+                    <h3>Les dernieres ventes de produits</h3>
+                    <div class="rowCenter">
                         <c:forEach var="leProduit" items="${managerProduit.listeProduit()}">
                             <!--                        <ui:repeat var="leProduit" value="{managerProduit.listeProduit()}">-->
-                            <div class="col-md-4">
+                            <div class="col-md-4" style="margin-top: 40px;">
                                 <div class="clearfix" >
-                                    <i class="fa fa-compress"></i>
+                                    <img width="150px" height="150px" src="assets/custom/img/#{leProduit.type.nom}.jpg" alt="" />
                                     <div class="desc">
                                         <h4 id="titreMetier">#{leProduit.nom}</h4>
                                         <c:choose>
@@ -99,7 +99,7 @@
                                         </p:dialog>
                                     </div>
                                 </div>
-                            </div> 
+                            </div>
                         </c:forEach>                     
                     </div>
                 </div>

@@ -7,10 +7,6 @@
       xmlns:p ="http://primefaces.org/ui"
       xmlns:c="http://java.sun.com/jsp/jstl/core">
 
-
-
-
-
     <h:body>
 
         <ui:composition template="/xhtml/Layout.xhtml">
@@ -35,17 +31,15 @@
 
                 </script>
 
-
                 <div class="serviceBlock">
                     <div class="container">
                         <h3>Les dernieres ventes par enchere</h3>
-                        <div class="row">  
+                        <div class="rowCenter">  
                             <!-- la liste des produits qui sont encheres -->  
                                 <ui:repeat var="leProduitEnchere" value="#{managerProduit.listeProduitByEnchere()}">
-
-                                    <div class="col-md-4">
+                                    <div class="col-md-4" style="margin-top: 40px;">
                                         <div class="clearfix">
-                                            <i class="fa fa-compress"></i>
+                                            <img width="150px" height="150px" src="assets/custom/img/#{leProduitEnchere.type.nom}.jpg" alt="" />
                                             <div class="desc">
                                                 <h4 id="titreMetier">#{leProduitEnchere.nom}</h4>
                                                 <h:outputLink id="description" value="#">  
@@ -58,15 +52,13 @@
                                                 <p>Date:
                                                     <h:outputText id="dateDebut" value="#{derniereEnchere.dateDebut}">
                                                         <f:convertDateTime pattern="dd/MM/yyyy" type="date"/>
-                                                    </h:outputText> au 
-
+                                                    </h:outputText> au
                                                     <h:outputText  id="date" value="#{derniereEnchere.dateFin}">
-                                                        <f:convertDateTime   pattern="dd/MM/yyyy" type="date"/>
+                                                        <f:convertDateTime pattern="dd/MM/yyyy" type="date"/>
                                                     </h:outputText>
-
                                                 </p>
                                                 <h:outputText value="Prix du Derniére enchere: #{derniereEnchere.prix}" /><br/>  
-                                                <h:outputText value="Temps:"/><p id="timer"></p> 
+                                                <!--<h:outputText value="Temps:"/><p id="timer"></p>--> 
 
                                                 <!--* l'utilisateur doit être connecté avant d'encherie.
                                                     * si l'user n'est pas connecter appel du dialogue de connection
@@ -87,9 +79,7 @@
                                             </div>
                                         </div>
                                     </div> 
-
                                 </ui:repeat>
-                         
                         </div>
                     </div> 
                 </div> 

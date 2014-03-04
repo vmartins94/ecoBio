@@ -45,12 +45,20 @@
                 <div class="serviceBlock">
                     <div class="container">
                         <div class="row">
-                            <h3>Les dernieres ventes de fruits et legumes</h3>
+                            <h3>Les dernieres ventes de produits</h3>
                             <c:forEach var="leProduit" items="${managerProduit.selectLastThreeProduit()}">
                                 <!--                        <ui:repeat var="leProduit" value="{managerProduit.listeProduit()}">-->
                                 <div class="col-md-4">
                                     <div class="clearfix" >
-                                        <i class="fa fa-compress"></i>
+                                        <c:if test="#{leProduit.type.nom == 'Tomate'}">
+                                            <img width="150px" height="150px" src="assets/custom/img/Tomate.jpg" alt="" />
+                                        </c:if>
+                                        <c:if test="#{leProduit.type.nom == 'Pomme de terre'}">
+                                            <img width="150px" height="150px" src="assets/custom/img/Pomme de terre.jpg" alt="" />
+                                        </c:if>
+                                        <c:if test="#{leProduit.type.nom == 'Pasteque'}">
+                                            <img width="150px" height="150px" src="assets/custom/img/Pasteque.jpg" alt="" />
+                                        </c:if>
                                         <div class="desc">
                                             <h4 id="titreMetier">#{leProduit.nom}</h4>
                                             <c:choose>
@@ -82,7 +90,6 @@
                                                     <p:commandButton value="-" actionListener="#{counterBean.decrement}" update="toto" />
                                                     <h:outputText id="toto" value="Quantité :#{counterBean.count}" style="height :100;" /><br></br><br></br>
                                                 </div>
-
                                                 <h:commandButton action="#{currentCart.addProduit(leProduit, counterBean)}" value="Ajouter ces articles aux paniers" styleClass="btn btnConnexion" /> </h:form>
                                         </p:dialog>
                                         </div>
@@ -95,10 +102,9 @@
                             <h3>Les derniers evenements</h3>
                             <ui:repeat var="unEvenement" value="#{managerEvenement.selectLastThreeEvenement()}">
                                 <div class="col-md-4">
-
                                     <div class="clearfix">
                                         <div>
-                                            <img width="150px" height="150px" src="assets/custom/img/fruit1.png" />
+                                            <img width="200px" height="150px" src="assets/custom/img/marche2.jpg" alt="" />
                                         </div>
                                         <div class="desc">
                                             <h4 align="center" id="titreMetier">#{unEvenement.titre}</h4>

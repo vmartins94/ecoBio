@@ -20,4 +20,6 @@ public class Constantes {
     public static String CATEGORIE_LEGUMES = "Legumes";
     public static String CATEGORIE_PRODUITS_DEFECTUEUX = "Produits defectueux";
     
+    public static String UPLOAD_DIR = "C:/Temp";
+    
 }
