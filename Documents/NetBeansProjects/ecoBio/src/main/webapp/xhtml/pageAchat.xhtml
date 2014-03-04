@@ -24,13 +24,14 @@
                                     <div class="col-md-2">
                                         <h4 id="titreMetier">Categorie :</h4>
                                         <h:form>
-                                            <p:selectCheckboxMenu value="#{managerAdmin.selectedType}" label="Selectionnez" filter="true"  filterMatchMode="startsWith"  >
+                                            <p:selectCheckboxMenu value="#{sliderBean.type}" label="Selectionnez" filter="true"  filterMatchMode="startsWith"  >
                                                 <f:selectItems value="#{managerAdmin.selectedItemFindAllType()}" />
                                             </p:selectCheckboxMenu>
+
                                         </h:form><br></br>
                                         <h4 id="titreMetier">Saison :</h4>
                                         <h:form>
-                                            <p:selectCheckboxMenu value="#{managerAdmin.selectedSaison}" label="Selectionnez" filter="true"  filterMatchMode="startsWith"  >
+                                            <p:selectCheckboxMenu value="#{sliderBean.maSaison}" label="Selectionnez" filter="true"  filterMatchMode="startsWith"  >
                                                 <f:selectItems value="#{managerAdmin.selectedItemFindAllSaison()}" />
                                             </p:selectCheckboxMenu>
                                         </h:form>
@@ -46,7 +47,26 @@
                                             </h:panelGrid>
                                             <h:inputHidden id="txt6" value="#{sliderBean.number6}" />
                                             <h:inputHidden id="txt7" value="#{sliderBean.number7}" />
+
+
+                                            <p:commandButton value="Rechercher"  actionListener="#{sliderBean.isButtonClick()}" styleClass="ui-priority-primary">
+                                                <f:ajax render="formPageAchat" />
+                                            </p:commandButton>
+                                             
+
+
+                                            <!--                                              <h:commandButton value="Rechercher"   >
+                                                                                            <p:ajax event="click" update="formPageAchat"/>
+                                            
+                                                                                        </h:commandButton>-->
+                                            <h:outputText id="msgs" value="#{sliderBean.isButtonClick()}" />
+                                            <h:outputText id="cc" value="#{sliderBean.number6}" />
+                                            <h:outputText id="ccc" value="#{sliderBean.number7}" />
+
+
                                         </h:form>
+
+                                        <!--<h:outputText id="toto" value="QuantitÃ© :{counterBean.count}" style="height :100;" />-->
                                     </div>   
                                 </div>
                             </div>
@@ -54,54 +74,82 @@
                     </div>
                 </div>
             </div>
+
             <div class="serviceBlock">
+
                 <div class="container">
+
                     <h3>Les dernieres ventes de fruits et legumes</h3>
                     <div class="row">
-                        <c:forEach var="leProduit" items="${managerProduit.listeProduit()}">
-                            <!--                        <ui:repeat var="leProduit" value="{managerProduit.listeProduit()}">-->
-                            <div class="col-md-4">
-                                <div class="clearfix" >
-                                    <i class="fa fa-compress"></i>
-                                    <div class="desc">
-                                        <h4 id="titreMetier">#{leProduit.nom}</h4>
-                                        <c:choose>
-                                            <c:when test="#{leProduit.typeVente == false}">
-                                                Vente au : Lot <br></br>
-                                                Prix du lot : #{leProduit.prix}<br></br>
-                                                Quantité restante : #{leProduit.quantiteFinale}<br></br>
-                                                Descriptif : #{leProduit.description}
-                                            </c:when>
-                                            <c:otherwise>
-                                                Vente au : Kilo  <br></br>
-                                                Prix au kilo : #{leProduit.prix} <br></br>
-                                                Quantité restante : #{leProduit.quantiteFinale}<br></br>
-                                                Descriptif : #{leProduit.description}
-                                            </c:otherwise>
-                                        </c:choose>
-                                        <div id ="ligneAjoutPanier">                                      
-                                            <h:form>
-                                                <p:commandButton id="boutonid_#{leProduit.id}" action="#{managerProduit.outcome}" actionListener="#{managerProduit.attrListener}" onclick= "dialogBoxShow_#{leProduit.id}.show();" value="ajouterPanier">
-                                                    <f:attribute name="username" value="#{leProduit.nom}" />
-                                                </p:commandButton> 
-                                            </h:form>
-                                        </div>
-                                        <p:dialog id="dialogBoxId_#{leProduit.id}"  header="Saisissez le nombre d'article souhaité " widgetVar="dialogBoxShow_#{leProduit.id}" modal="true" height="180" >
-                                            <h:form>
-                                                <div class ="row" style="margin-top:20px ">
-                                                    <h7 style="padding-left:10px;">      Combien voulez vous de : #{leProduit.nom} ?  </h7>  <br></br><br></br>
-                                                    <p:commandButton value="+" actionListener="#{counterBean.increment}" update="toto" style="margin-left : 80px;" />
-                                                    <p:commandButton value="-" actionListener="#{counterBean.decrement}" update="toto" />
-                                                    <h:outputText id="toto" value="Quantité :#{counterBean.count}" style="height :100;" /><br></br><br></br>
-                                                </div>
+                        <h:form id="formPageAchat">
+                            <p:commandButton value="Rechercher" type="button" onclick="formPage()"   >
+              
 
-                                                <h:commandButton action="#{currentCart.addProduit(leProduit, counterBean)}" value="Ajouter ces articles aux paniers" styleClass="btn btnConnexion" /> </h:form>
-                                        </p:dialog>
+                            </p:commandButton>
+                            <p:remoteCommand name="formPage" update="formPageAchat">
+                                <f:setPropertyActionListener value="#{true}" target="#{sliderBean.clickButton()}"/>
+                            </p:remoteCommand>
+
+                            <h:outputText  value="le bool#{sliderBean.number6}" />
+                            <h:outputText id="msgs" value="#{sliderBean.isButtonClick()}" />
+
+
+                            <c:choose>
+                                <c:when test="#{sliderBean.isButtonClick() == false}">
+                                    <ui:param name="myVar" value="#{managerProduit.listeProduit()}" />
+                                   Le test #{sliderBean.isButtonClick() == false}
+                                </c:when>
+                                <c:otherwise>
+                                    <ui:param name="myVar" value="#{managerProduit.triProduit(sliderBean.type, sliderBean.number6, sliderBean.number7, sliderBean.maSaison)}" />
+
+                                </c:otherwise>
+                            </c:choose>
+                            <ui:repeat var="leProduit" value="#{myVar}">
+                                <!--<ui:repeat  var="leProduit" value="{managerProduit.triProduit(sliderBean.type, sliderBean.number6, sliderBean.number7, sliderBean.maSaison)}">--> 
+                                 <!--<c:forEach id="mesProduits" var="leProduit" items="${managerProduit.listeProduit()}">-->
+                                <!--                        <ui:repeat var="leProduit" value="{managerProduit.listeProduit()}">-->
+                                <div class="col-md-4">
+                                    <div class="clearfix" >
+                                        <i class="fa fa-compress"></i>
+                                        <div class="desc">
+                                            <h4 id="titreMetier">#{leProduit.nom}</h4>
+                                            <c:choose>
+                                                <c:when test="#{leProduit.typeVente == false}">
+                                                    Vente au : Lot <br></br>
+                                                    Prix du lot : #{leProduit.prix}<br></br>
+                                                    QuantitÃ© restante : #{leProduit.quantiteFinale}<br></br>
+                                                    Descriptif : #{leProduit.description}
+                                                </c:when>
+                                                <c:otherwise>
+                                                    Vente au : Kilo  <br></br>
+                                                    Prix au kilo : #{leProduit.prix} <br></br>
+                                                    QuantitÃ© restante : #{leProduit.quantiteFinale}<br></br>
+                                                    Descriptif : #{leProduit.description}
+                                                </c:otherwise>
+                                            </c:choose>
+                                            <div id ="ligneAjoutPanier">                                      
+                                                <h:form>
+                                                    <p:commandButton id="boutonid_#{leProduit.id}" action="#{managerProduit.outcome}" actionListener="#{managerProduit.attrListener}" onclick= "dialogBoxShow_#{leProduit.id}.show();" value="ajouterPanier">
+                                                        <f:attribute name="username" value="#{leProduit.nom}" />
+                                                    </p:commandButton> 
+                                                </h:form>
+                                            </div>
+                                            <p:dialog id="dialogBoxId_#{leProduit.id}"  header="Saisissez le nombre d'article souhaitÃ© " widgetVar="dialogBoxShow_#{leProduit.id}" modal="true" height="180" >
+                                                <h:form>
+                                                    <div class ="row" style="margin-top:20px ">
+                                                        <h7 style="padding-left:10px;">      Combien voulez vous de : #{leProduit.nom} ?  </h7>  <br></br><br></br>
+                                                        <p:commandButton value="+" actionListener="#{counterBean.increment}" update="toto" style="margin-left : 80px;" />
+                                                        <p:commandButton value="-" actionListener="#{counterBean.decrement}" update="toto" />
+                                                        <h:outputText id="toto" value="QuantitÃ© :#{counterBean.count}" style="height :100;" /><br></br><br></br>
+                                                    </div>
+                                                    <h:commandButton action="#{currentCart.addProduit(leProduit, counterBean)}" value="Ajouter ces articles aux paniers" styleClass="btn btnConnexion" /> </h:form>
+                                            </p:dialog>
+                                        </div>
                                     </div>
-                                </div>
-                            </div> 
-                        </c:forEach>
-                        <hr></hr>
+                                </div> 
+                            </ui:repeat>
+                        </h:form>
+                        <!--</c:forEach>-->                     
                     </div>
                 </div>
             </div> 

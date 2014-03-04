@@ -1,10 +1,13 @@
 package org.primefaces.examples.view;
 
+import java.io.Serializable;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import modele.metier.Saison;
+import modele.metier.Type;
 import org.primefaces.event.SlideEndEvent;
 
-public class SliderBean {
+public class SliderBean implements Serializable{
 
     private int number1;
 
@@ -19,6 +22,34 @@ public class SliderBean {
     private int number6 = 30;
 
     private int number7 = 80;
+    private Saison maSaison;
+    private Type type;
+    private boolean buttonClick = false;
+
+    public Saison getMaSaison() {
+        return maSaison;
+    }
+
+    public void setMaSaison(Saison maSaison) {
+        this.maSaison = maSaison;
+    }
+
+    public Type getType() {
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
+    }
+
+    public boolean isButtonClick() {
+        return buttonClick;
+    }
+
+    public void setButtonClick(boolean buttonClick) {
+        this.buttonClick = buttonClick;
+    }
+    
 
     public int getNumber1() {
         return number1;
@@ -79,5 +110,9 @@ public class SliderBean {
     public void onSlideEnd(SlideEndEvent event) {
         FacesMessage msg = new FacesMessage("Slide Ended", "Value: " + event.getValue());
         FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+    
+    public void clickButton(){
+        buttonClick = true;
     }
 }

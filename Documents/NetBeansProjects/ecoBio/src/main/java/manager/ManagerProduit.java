@@ -6,6 +6,7 @@
 package manager;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +18,7 @@ import modele.dao.FactoryDao;
 import modele.dao.IDao;
 import modele.metier.Enchere;
 import modele.metier.Produit;
+import modele.metier.Saison;
 import modele.metier.Type;
 import modele.metier.User;
 
@@ -180,4 +182,18 @@ public class ManagerProduit implements IManager<Produit>, Serializable {
         this.selectedType = selectedType;
     }
     
+        public List<Produit> triProduit(Type type, Integer prixMin, Integer prixMax, Saison saison) {
+        DaoProduit daoProduit = (DaoProduit) FactoryDao.getDAO("Produit");
+        List<Produit> listeProduit = daoProduit.listeAllProduit();
+
+        List<Produit> maListeProduitFinale = new ArrayList<Produit>();
+
+        for (Produit monProduit : listeProduit) {
+            if (monProduit.getPrix() > prixMin && monProduit.getPrix() < prixMax && type.getCategorie().equals(monProduit.getType().getCategorie()) && type.getNom().equals(monProduit.getType().getNom())) {
+                maListeProduitFinale.add(monProduit);
+            }
+        }
+        return maListeProduitFinale;
+    }
+
 }

@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import modele.dao.DaoUser;
 import modele.dao.FactoryDao;
 import modele.dao.IDao;
@@ -27,7 +28,6 @@ public class ManagerUser implements IManager<User>, Serializable {
     private User user;
     //TODO C 
     private ManagerPanier monPanier;
-
     public ManagerUser() {}
 
     @Override
@@ -95,5 +95,9 @@ public class ManagerUser implements IManager<User>, Serializable {
     public void setMonPanier(ManagerPanier monPanier) {
         this.monPanier = monPanier;
     }
+     public List convertirSetEnList(Set set){
+        List list = new ArrayList(set);
+        return list;
+     }
 
 }

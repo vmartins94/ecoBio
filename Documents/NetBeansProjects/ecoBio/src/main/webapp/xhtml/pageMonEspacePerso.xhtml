@@ -12,117 +12,221 @@
         <ui:composition template="/xhtml/Layout.xhtml">
             <ui:define name="content">
                 <!-- Onglets-->
-     <div class="container">
+                <div class="container">
 
-                <p:tabView id="tabView">    
+                    <p:tabView id="tabView">    
 
-                    <!--****************************************************** PARTIE INFO PERSONNELLE ********************************************************-->
-                    <p:tab id="tab1" title="Information personnelle">  
-                        <h:form>
-                            <div id="collapseOne" class="panel-collapse collapse in">
-                                <div class="panel-body">
-                                    <div class="col-md-6">
-                                        <div class ="row">
-                                            <h:panelGrid columns="2" cellpadding="10"> 
-                                                <h:outputLabel value="Nom :"/>
-                                                <h:inputText value="#{managerUser.user.nom}"/>
-                                                <h:outputLabel value="Prénom:"/>
-                                                <h:inputText value="#{managerUser.user.prenom}"/>
-                                                <h:outputLabel value="Rue:"/>
-                                                <h:inputText value="#{managerUser.user.rue}"/>
-                                                <h:outputLabel value="Ville: "/>
-                                                <h:inputText value="#{managerUser.user.ville}"/>
-                                                <h:outputLabel value="Code postal:"/>
-                                                <h:inputText value="#{managerUser.user.cp}"/>
-                                            </h:panelGrid>
+                        <!--****************************************************** PARTIE INFO PERSONNELLE ********************************************************-->
+                        <p:tab id="tab1" title="Information personnelle">  
+                            <h:form>
+                                <div id="collapseOne" class="panel-collapse collapse in">
+                                    <div class="panel-body">
+                                        <div class="col-md-6">
+                                            <div class ="row">
+                                                <h:panelGrid columns="2" cellpadding="10"> 
+                                                    <h:outputLabel value="Nom :"/>
+                                                    <h:inputText value="#{managerUser.user.nom}"/>
+                                                    <h:outputLabel value="Prénom:"/>
+                                                    <h:inputText value="#{managerUser.user.prenom}"/>
+                                                    <h:outputLabel value="Rue:"/>
+                                                    <h:inputText value="#{managerUser.user.rue}"/>
+                                                    <h:outputLabel value="Ville: "/>
+                                                    <h:inputText value="#{managerUser.user.ville}"/>
+                                                    <h:outputLabel value="Code postal:"/>
+                                                    <h:inputText value="#{managerUser.user.cp}"/>
+                                                </h:panelGrid>
+                                            </div>
+
                                         </div>
-
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class ="row">
-                                            <h:panelGrid columns="2" cellpadding="10"> 
-                                                <h:outputLabel value="Mail:"/>
-                                                <h:inputText value="#{managerUser.user.email}"/>
-                                                <h:outputLabel value="Login:"/>
-                                                <h:inputText value="#{managerUser.user.login}"/>
-                                                <h:outputLabel value="Mot de passe:"/>
-                                                <h:inputText value="#{managerUser.user.password}"/>
-                                                <h:commandButton value="Modification" action="#{managerUser.update(managerUser.user)}"/>
-                                            </h:panelGrid>
+                                        <div class="col-md-6">
+                                            <div class ="row">
+                                                <h:panelGrid columns="2" cellpadding="10"> 
+                                                    <h:outputLabel value="Mail:"/>
+                                                    <h:inputText value="#{managerUser.user.email}"/>
+                                                    <h:outputLabel value="Login:"/>
+                                                    <h:inputText value="#{managerUser.user.login}"/>
+                                                    <h:outputLabel value="Mot de passe:"/>
+                                                    <h:inputText value="#{managerUser.user.password}"/>
+                                                    <h:commandButton value="Modification" action="#{managerUser.update(managerUser.user)}"/>
+                                                </h:panelGrid>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </h:form>
-                    </p:tab>  
+                            </h:form>
+                        </p:tab>  
 
-                    <!--****************************************************** PARTIE VISUALISER TOUTES LES COMMANDES ******************************************************-->
+                        <!--****************************************************** PARTIE VISUALISER TOUTES LES COMMANDES ******************************************************-->
 
-                    <p:tab id="tab2" title="Mes Commandes">  
-                        <h:panelGrid columns="2" cellpadding="10">  
-                            <h:form id="form">
-                                <!-- la liste des commandes pour l'utilisateur connecter-->
-                                <p:dataGrid var="cdUser" value="#{managerCommande.findAllCommandeByUser(managerUser.user)}" columns="3"  
+                        <p:tab id="tab2" title="Mes Commandes">  
+                            <h:panelGrid columns="2" cellpadding="10">  
+                                <h:form id="form">
+                                    <!-- la liste des commandes pour l'utilisateur connecter-->
+                                    <p:dataGrid var="cdUser" value="#{managerCommande.findAllCommandeByUser(managerUser.user)}" columns="3"  
+                                                rows="12" paginator="true"  
+                                                paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
+                                                rowsPerPageTemplate="9,12,15" style="width:100%">  
+                                        <p:panel header="Commande n° #{cdUser.id}" style="text-align:center">  
+                                            <h:panelGrid columns="2" style="width:100%">  
+                                                <h:outputLabel value="Date:" />  
+                                                <h:outputText value="#{cdUser.dateCreation}">
+                                                    <f:convertDateTime pattern="dd/MM/yyyy" type="date"/>
+                                                </h:outputText> 
+                                                <h:outputLabel value="Etat de la commande:"/><h:outputText value="#{cdUser.etat.nom}"/> 
+                                                <h:outputLabel value="Prix total:"/><h:outputText value="#{cdUser.prixTotal}"/> 
+                                                <h:outputLabel value="Détail:"/> 
+                                                <p:commandLink update=":tabView:form:commandeDetail" oncomplete="commandeDialog.show()" title="View Detail">  
+                                                    <h:outputText styleClass="ui-icon ui-icon-search" style="margin:0 auto;" />   
+                                                    <f:setPropertyActionListener value="#{cdUser}" target="#{managerCommande.selectedCommande}" />  
+                                                </p:commandLink>
+                                                <h:commandButton value="Générer votre facture"/>
+                                            </h:panelGrid>  
+                                        </p:panel>  
+                                    </p:dataGrid>  
+                                    <!-- dialogue liste des produits dans une commande -->
+                                    <p:dialog header="Détail de commande" widgetVar="commandeDialog" modal="true">  
+                                        <p:outputPanel id="commandeDetail" >
+                                            <h:dataTable var="leProduitCommande" value="#{managerCommande.selectedCommande.convertirSetEnList(managerCommande.selectedCommande.commandeHasProduits)}">
+                                                <h:column>
+                                                    <f:facet name="header"><h:outputLabel  value="Nom"/></f:facet>
+                                                    <h:outputText id="nomProduit" value="#{leProduitCommande.produit.nom}"/>
+                                                </h:column>
+                                                <h:column>
+                                                    <f:facet name="header"><h:outputLabel  value="Description"/></f:facet>
+                                                    <h:outputText id="descProduit" value="#{leProduitCommande.produit.description}"/>
+                                                </h:column>
+                                                <h:column>
+                                                    <f:facet name="header"><h:outputLabel for="typeProduit" value="Type" /></f:facet>
+                                                    <h:outputText id="typeProduit" value="#{leProduitCommande.produit.type.nom}"/>
+                                                </h:column>
+                                                <h:column>
+                                                    <f:facet name="header"><h:outputLabel for="typeProduit" value="Catégorie" /></f:facet>
+                                                    <h:outputText id="categorieProduit" value="#{leProduitCommande.produit.type.categorie}"/>
+                                                </h:column>
+                                                <h:column>
+                                                    <f:facet name="header"><h:outputLabel value="Prix unitaire" /></f:facet>
+                                                    <h:outputText id="prixProduit" value="#{leProduitCommande.produit.prix}"/>
+                                                </h:column>
+                                                <h:column>
+                                                    <f:facet name="header"><h:outputLabel for="qteProduit" value="Quantité" /></f:facet>
+                                                    <h:outputText id="qteProduit" value="#{leProduitCommande.quantite}"/>
+                                                </h:column>
+                                                <h:column>
+                                                    <f:facet name="header"><h:outputLabel  value="Prix " /></f:facet>
+                                                    <h:outputText id="PrixTotalProduit" value="#{leProduitCommande.quantite * leProduitCommande.produit.prix }"/>
+                                                </h:column>
+                                            </h:dataTable>
+                                        </p:outputPanel>  
+                                    </p:dialog>  
+                                </h:form>   
+                            </h:panelGrid>
+                        </p:tab> 
+                        <!--****************************************************** PARTIE EVENEMEMENT CREE ********************************************************-->
+                        <p:tab id="tab3" title="Mes événements Crées">  
+                            <h:panelGrid cellpadding="10">  
+                                <h:form id="formEvenCree">
+                                    <!-- la liste des evenements cree pour l'utilisateur connecter-->
+                                    <p:dataGrid var="EvenUserCree" value="#{managerEvenement.listeEvenementCreeByUser(managerUser.user)}" columns="3"  
+                                                rows="12" paginator="true"  
+                                                paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
+                                                rowsPerPageTemplate="9,12,15" style="width:100%">  
+                                        <p:panel header="Evenemengt : #{EvenUserCree.titre}" style="text-align:center">  
+                                            <h:panelGrid columns="2" style="width:100%"> 
+                                                <h:outputLabel value="Date" /> <h:outputText value="#{EvenUserCree.dateDebut}"><f:convertDateTime pattern="dd/MM/yyyy" type="date"/> </h:outputText><h:outputLabel value="au" /> <h:outputText value="#{EvenUserCree.dateFin}"><f:convertDateTime pattern="dd/MM/yyyy" type="date"/></h:outputText>
+                                                <h:outputLabel value="Nb participant:"/><h:outputText value="#{EvenUserCree.nbParticipant}"/> 
+                                                <h:outputLabel value="Prix:"/><h:outputText value="#{EvenUserCree.prix}"/> 
+                                                <h:outputLabel value="Détail:"/> 
+                                                <p:commandLink update=":tabView:formEvenCree:evenCreeDetail" oncomplete="evenCreeDialog.show()" title="View Detail">  
+                                                    <h:outputText styleClass="ui-icon ui-icon-search" style="margin:0 auto;" />   
+                                                    <f:setPropertyActionListener value="#{EvenUserCree}" target="#{managerEvenement.selectedEvenement}" />  
+                                                </p:commandLink>
+                                            </h:panelGrid>  
+                                        </p:panel>  
+                                    </p:dataGrid>  
+                                    <!-- dialogue : detail l'événement -->
+                                    <p:dialog header="Détail de l'événement" widgetVar="evenCreeDialog" modal="true">  
+                                        <p:outputPanel id="evenCreeDetail" >
+                                            <h:dataTable var="evenCree" value="#{managerEvenement.selectedEvenement}">
+                                                <h:column>
+                                                    <f:facet name="header"><h:outputLabel value="Description"/></f:facet>
+                                                    <h:outputText id="descEventCree" value="#{evenCree.description}"/>
+                                                </h:column>
+                                                <h:column>
+                                                    <f:facet name="header"><h:outputLabel value="Rue"/></f:facet>
+                                                    <h:outputText id="rueEventCree" value="#{evenCree.rue}"/>
+                                                </h:column>
+                                                <h:column>
+                                                    <f:facet name="header"><h:outputLabel value="Adresse" /></f:facet>
+                                                    <h:outputText id="adresseEventCree" value="#{evenCreee.adresse}"/>
+                                                </h:column>
+                                                <h:column>
+                                                    <f:facet name="header"><h:outputLabel value="Cp" /></f:facet>
+                                                    <h:outputText id="cpEventCree" value="#{evenCree.cp}"/>
+                                                </h:column>
+                                                <h:column>
+                                                    <f:facet name="header"><h:outputLabel value="Ville" /></f:facet>
+                                                    <h:outputText id="villeEventCree" value="#{evenCree.ville}"/>
+                                                </h:column>
+                                            </h:dataTable>
+                                        </p:outputPanel>  
+                                    </p:dialog>  
+                                </h:form>   
+                            </h:panelGrid>
+                        </p:tab> 
+                    <!--****************************************************** PARTIE EVENEMEMENT PARTICIPANT ********************************************************-->
+                    <p:tab id="tab4" title="Mes événements Participer">  
+                        <h:panelGrid cellpadding="10">  
+                            <h:form id="formEvenParti">
+                                <!-- la liste des evenements participer pour l'utilisateur-->
+                                <p:dataGrid var="EvenUserPart" value="#{managerUser.convertirSetEnList(managerUser.user.evenements_1)}" columns="3"  
                                             rows="12" paginator="true"  
                                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
                                             rowsPerPageTemplate="9,12,15" style="width:100%">  
-                                    <p:panel header="Commande n° #{cdUser.id}" style="text-align:center">  
-                                        <h:panelGrid columns="2" style="width:100%">  
-                                            <h:outputLabel value="Date:" />  
-                                            <h:outputText value="#{cdUser.dateCreation}">
-                                                <f:convertDateTime pattern="dd/MM/yyyy" type="date"/>
-                                            </h:outputText> 
-                                            <h:outputLabel value="Etat de la commande:"/><h:outputText value="#{cdUser.etat.nom}"/> 
-                                            <h:outputLabel value="Prix total:"/><h:outputText value="#{cdUser.prixTotal}"/> 
+                                    <p:panel header="Evenemengt : #{EvenUserPart.titre}" style="text-align:center">  
+                                        <h:panelGrid columns="2" style="width:100%"> 
+                                            <h:outputLabel value="Date" /><h:outputText value="#{EvenUserPart.dateDebut}"><f:convertDateTime pattern="dd/MM/yyyy" type="date"/></h:outputText><h:outputLabel value="au" /><h:outputText value="#{EvenUserPart.dateFin}"> <f:convertDateTime pattern="dd/MM/yyyy" type="date"/></h:outputText>
+                                            <h:outputLabel value="Nb participant:"/><h:outputText value="#{EvenUserPart.nbParticipant}"/> 
+                                            <h:outputLabel value="Prix:"/><h:outputText value="#{EvenUserPart.prix}"/> 
                                             <h:outputLabel value="Détail:"/> 
-                                            <p:commandLink update=":tabView:form:commandeDetail" oncomplete="commandeDialog.show()" title="View Detail">  
+                                            <p:commandLink update=":tabView:formEvenParti:evenParticipantDetail" oncomplete="evenPartDialog.show()" title="View Detail">  
                                                 <h:outputText styleClass="ui-icon ui-icon-search" style="margin:0 auto;" />   
-                                                <f:setPropertyActionListener value="#{cdUser}" target="#{managerCommande.selectedCommande}" />  
+                                                <f:setPropertyActionListener value="#{EvenUserPart}" target="#{managerEvenement.selectedEvenement}" />  
                                             </p:commandLink>
-                                            <h:commandButton value="Générer votre facture"/>
                                         </h:panelGrid>  
                                     </p:panel>  
                                 </p:dataGrid>  
-                                <!-- dialogue liste des produits dans une commande -->
-                                <p:dialog header="Détail de commande" widgetVar="commandeDialog" modal="true">  
-                                    <p:outputPanel id="commandeDetail" >
-                                        <h:dataTable var="leProduitCommande" value="#{managerCommande.selectedCommande.convertirSetEnList(managerCommande.selectedCommande.commandeHasProduits)}">
+                                <!-- dialogue: evenements -->
+                                <p:dialog header="Détail de l'événement" widgetVar="evenPartDialog" modal="true">  
+                                    <p:outputPanel id="evenParticipantDetail" >
+                                        <h:dataTable var="evenPart" value="#{managerEvenement.selectedEvenement}">
                                             <h:column>
-                                                <f:facet name="header"><h:outputLabel  value="Nom"/></f:facet>
-                                                <h:outputText id="nomProduit" value="#{leProduitCommande.produit.nom}"/>
+                                                <f:facet name="header"><h:outputLabel value="Description"/></f:facet>
+                                                <h:outputText id="descEventPart" value="#{evenPart.description}"/>
                                             </h:column>
                                             <h:column>
-                                                <f:facet name="header"><h:outputLabel  value="Description"/></f:facet>
-                                                <h:outputText id="descProduit" value="#{leProduitCommande.produit.description}"/>
+                                                <f:facet name="header"><h:outputLabel value="Rue"/></f:facet>
+                                                <h:outputText id="rueEventPart" value="#{evenPart.rue}"/>
                                             </h:column>
                                             <h:column>
-                                                <f:facet name="header"><h:outputLabel for="typeProduit" value="Type" /></f:facet>
-                                                <h:outputText id="typeProduit" value="#{leProduitCommande.produit.type.nom}"/>
+                                                <f:facet name="header"><h:outputLabel value="Adresse" /></f:facet>
+                                                <h:outputText id="adresseEventPart" value="#{evenPart.adresse}"/>
                                             </h:column>
                                             <h:column>
-                                                <f:facet name="header"><h:outputLabel for="typeProduit" value="Catégorie" /></f:facet>
-                                                <h:outputText id="categorieProduit" value="#{leProduitCommande.produit.type.categorie}"/>
+                                                <f:facet name="header"><h:outputLabel value="Cp" /></f:facet>
+                                                <h:outputText id="cpEventPart" value="#{evenPart.cp}"/>
                                             </h:column>
                                             <h:column>
-                                                <f:facet name="header"><h:outputLabel value="Prix unitaire" /></f:facet>
-                                                <h:outputText id="prixProduit" value="#{leProduitCommande.produit.prix}"/>
-                                            </h:column>
-                                            <h:column>
-                                                <f:facet name="header"><h:outputLabel for="qteProduit" value="Quantité" /></f:facet>
-                                                <h:outputText id="qteProduit" value="#{leProduitCommande.quantite}"/>
-                                            </h:column>
-                                            <h:column>
-                                                <f:facet name="header"><h:outputLabel  value="Prix " /></f:facet>
-                                                <h:outputText id="PrixTotalProduit" value="#{leProduitCommande.quantite * leProduitCommande.produit.prix }"/>
+                                                <f:facet name="header"><h:outputLabel value="Ville" /></f:facet>
+                                                <h:outputText id="villeEventPart" value="#{evenPart.ville}"/>
                                             </h:column>
                                         </h:dataTable>
                                     </p:outputPanel>  
                                 </p:dialog>  
                             </h:form>   
-                        </h:panelGrid>  
+                        </h:panelGrid>
                     </p:tab> 
-                </p:tabView>
-              </div>
+                    </p:tabView>
+                </div>
             </ui:define>
         </ui:composition>
     </h:body>
